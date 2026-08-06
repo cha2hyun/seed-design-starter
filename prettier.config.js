@@ -38,4 +38,12 @@ export default {
   importOrderSortSpecifiers: true,
   importOrderCaseInsensitive: true,
   importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
+
+  overrides: [
+    {
+      // Cursor rule files are markdown with YAML front matter; Prettier cannot infer that.
+      files: "*.mdc",
+      options: { parser: "markdown" },
+    },
+  ],
 };

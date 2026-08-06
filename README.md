@@ -64,21 +64,49 @@ bg-red-500   p-4   text-lg   rounded-md   shadow-md   max-w-3xl
 `.cursor/`가 레포에 커밋되어 있어서, **클론만 하면 MCP 서버가 자동으로 잡힙니다.** 수동 설정은
 없습니다. Cursor에서 열고 `/start`를 실행하세요.
 
-| 파일                             | 역할                                                       |
-| -------------------------------- | ---------------------------------------------------------- |
-| `.cursor/mcp.json`               | `seed-docs`(인증 불필요), `seed-figma`(Figma 토큰 있을 때) |
-| `.cursor/rules/*.mdc`            | 프로젝트·락인·FSD·i18n·MCP 사용법·코드 스타일              |
-| `.cursor/rules/_generated-*.mdc` | 설치된 SEED 버전의 실제 토큰 목록 (자동 생성)              |
-| `.cursor/commands/*.md`          | `/start` `/seed-sync` `/new-feature` `/audit-tokens`       |
-| `.cursor/skills/seed-design/`    | 당근 공식 SEED Agent Skill (vendoring)                     |
-| `AGENTS.md`                      | Cursor 외 에이전트용 동일 지침                             |
+| 파일                             | 역할                                                                           |
+| -------------------------------- | ------------------------------------------------------------------------------ |
+| `.cursor/mcp.json`               | `seed-docs`(인증 불필요), `seed-figma`(Figma 토큰 있을 때)                     |
+| `.cursor/rules/*.mdc`            | 프로젝트 · 락인 · FSD · i18n · MCP 사용법 · 코드 스타일 · git 워크플로         |
+| `.cursor/rules/_generated-*.mdc` | 설치된 SEED 버전의 실제 토큰 목록 (자동 생성)                                  |
+| `.cursor/commands/*.md`          | `/start` `/seed-sync` `/new-feature` `/audit-tokens` `/commit` `/pr` `/review` |
+| `.cursor/skills/seed-design/`    | 당근 공식 SEED Agent Skill (vendoring)                                         |
+| `AGENTS.md`                      | Cursor 외 에이전트용 동일 지침                                                 |
+| `CONTRIBUTING.md`                | 브랜치 · 커밋 · PR · 리뷰 계약                                                 |
 
 Cursor가 아니어도 됩니다. 이 프롬프트 하나로 충분해요.
 
 > 이 레포는 SEED Design에 락인된 Vite + React 스타터야. `@seed-design/*`를 따르고, className을
 > 쓰기 전에 `seed-docs` MCP로 토큰과 컴포넌트를 확인해. Tailwind 기본 토큰은 CSS가 아예 생성되지
 > 않으니 절대 쓰지 마. 패키지 업데이트나 컴포넌트 추가는 SEED 정본을 MCP로 대조한 뒤에 진행하고,
-> 끝나면 `pnpm verify`를 통과시켜.
+> 작업이 끝나면 브랜치를 파서 커밋하고 PR을 열어. 규칙은 CONTRIBUTING.md에 있어.
+
+### 에이전트가 코드를 올리는 방법
+
+커밋 → PR → 리뷰를 에이전트가 돌린다는 전제로 규칙을 실행 가능한 형태로 박아뒀습니다. 훅이 막을
+때는 **다음에 실행할 명령까지 함께 출력**하므로, 에이전트가 문서를 다시 읽지 않고 stderr만 보고
+복구할 수 있습니다.
+
+```bash
+git switch -c feat/price-offer-toggle   # main에는 커밋 자체가 막힘
+pnpm verify                             # CI와 완전히 같은 명령
+git commit                              # Conventional Commits 강제
+git push -u origin HEAD                 # pre-push가 pnpm verify를 다시 실행
+gh pr create                            # PR 제목도 같은 규칙 (squash 머지용)
+```
+
+강제되는 것들:
+
+- **브랜치** — `<type>/<kebab-summary>`. `main` 직접 커밋은 pre-commit이 거부합니다.
+- **커밋 메시지** — Conventional Commits. 제목 12–72자, `update`·`changes`·`wip` 같은
+  빈 껍데기 제목은 커스텀 commitlint 규칙이 걸러냅니다. scope는 선택이지만 쓴다면 실제 존재하는
+  영역이어야 합니다.
+- **푸시 전 검사** — pre-push가 `pnpm verify`를 돌립니다. CI와 같은 명령이라 로컬이 초록이면
+  PR도 초록입니다.
+- **PR 제목** — `pr-title` 워크플로가 commitlint로 검사합니다.
+
+`/commit` `/pr` `/review` 커맨드가 이 루프를 그대로 실행하고, `/review`에는 이 레포 전용 리뷰
+기준(조용히 실패하는 락인 위반 → FSD 경계 → i18n 누락 → 생성 파일 drift 순)이 들어 있습니다.
 
 ### SEED 최신화
 
@@ -149,6 +177,9 @@ import는 항상 아래 방향으로만 흐릅니다: `app → pages → widgets
 
 **Import 정렬** — Prettier `@trivago/prettier-plugin-sort-imports`의 그룹이 FSD 레이어 순서를
 그대로 따릅니다. import 블록만 봐도 그 파일이 어느 레이어에 기대는지 드러납니다.
+
+**훅 메시지** — husky 훅은 실패 원인만 알려주지 않고 다음에 칠 명령까지 출력합니다. 에이전트가
+루프 중간에 문서를 다시 읽지 않아도 되게 하려는 의도예요.
 
 **Git hooks** — pre-commit은 lint-staged, commit-msg는 Conventional Commits, pre-push는 타입체크와
 전체 린트를 돌립니다.

@@ -1,4 +1,19 @@
-pnpm typecheck
-pnpm lint
-pnpm lint:fsd
-pnpm seed:check
+#!/bin/sh
+# Deliberately the same command CI runs, so a green push cannot turn into a red pull request.
+if ! pnpm verify; then
+  cat >&2 <<'EOF'
+
+✖ pnpm verify failed. CI runs the identical command, so this push would open a red pull request.
+
+  Map the failing step to its fix:
+
+    typecheck     read the error; the types are describing a real mismatch
+    lint          pnpm lint:fix, then resolve what is left by hand
+    lint:fsd      the slice is in the wrong layer or missing its index.ts
+    format:check  pnpm format
+    seed:check    pnpm seed:sync, then commit the regenerated files
+    verify:lockin the theme reset in src/app/styles/global.css regressed
+
+EOF
+  exit 1
+fi

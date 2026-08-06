@@ -13,17 +13,17 @@ unreliable here; look it up.
 
 ## Reach for a tool when
 
-| Question                                    | Tool                                            |
-| ------------------------------------------- | ----------------------------------------------- |
-| Does a component for this exist?             | `list_react_components`                         |
-| What props does it take?                     | `get_react_component({ componentName })`        |
-| When should this component be used at all?   | `get_docs_component({ componentName })`         |
-| What is the exact token name?                | `get_rootage({ path: "/color.json" })`          |
-| What is this component's spec?               | `get_rootage({ path: "/components/<name>.json" })` |
-| Which icon shows a left arrow?               | `search_icons({ query: "화살표" })` — Korean works |
-| How do I import that icon?                   | `get_icon_details({ iconName })`                |
-| How is theming or Tailwind meant to be set up? | `get_react_getting_started({ path })`         |
-| What changed in the last release?            | `get_react_changelog`                           |
+| Question                                       | Tool                                               |
+| ---------------------------------------------- | -------------------------------------------------- |
+| Does a component for this exist?               | `list_react_components`                            |
+| What props does it take?                       | `get_react_component({ componentName })`           |
+| When should this component be used at all?     | `get_docs_component({ componentName })`            |
+| What is the exact token name?                  | `get_rootage({ path: "/color.json" })`             |
+| What is this component's spec?                 | `get_rootage({ path: "/components/<name>.json" })` |
+| Which icon shows a left arrow?                 | `search_icons({ query: "화살표" })` — Korean works |
+| How do I import that icon?                     | `get_icon_details({ iconName })`                   |
+| How is theming or Tailwind meant to be set up? | `get_react_getting_started({ path })`              |
+| What changed in the last release?              | `get_react_changelog`                              |
 
 Call `discover_tools` once at the start of a session if you are unsure what is available.
 

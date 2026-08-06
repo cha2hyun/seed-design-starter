@@ -50,6 +50,38 @@ Offline: `.seed/llms/` holds cached docs, and `pnpm seed:docs <component>` print
 6. **Server state is TanStack Query, client state is Zustand.** Never copy one into the other.
 7. **`pnpm verify` must pass** before you consider a task finished.
 
+## Landing a change
+
+Work goes through a pull request; `main` rejects direct commits. Full contract in
+[CONTRIBUTING.md](./CONTRIBUTING.md).
+
+```bash
+git switch -c feat/price-offer-toggle   # <type>/<kebab-summary>
+pnpm verify                             # identical to CI, so green here is green there
+git commit                              # Conventional Commits, see below
+git push -u origin HEAD
+gh pr create                            # title is Conventional Commits too — squash merge uses it
+```
+
+Commit format:
+
+```
+<type>(<scope>): <subject, imperative, lower case, no period, 12–72 chars>
+
+<body: why this was needed, wrapped at 100 columns>
+```
+
+Scope is optional and must be one of `app` `pages` `widgets` `features` `entities` `shared` `seed`
+`i18n` `styles` `ci` `deps` `ai` `repo`. Subjects like `update`, `changes` or `wip` are rejected.
+The body says why; the diff already says what. Do not mention the tooling that made the change.
+
+When a hook rejects you it prints the command that fixes it. Read that instead of reaching for
+`--no-verify`, which only moves the failure to CI. Never amend a commit a hook rejected — fix the
+cause and commit again.
+
+Reviewing a diff? The rubric is in `.cursor/commands/review.md`, and design-system violations come
+first because they fail silently.
+
 ## Commands
 
 ```bash

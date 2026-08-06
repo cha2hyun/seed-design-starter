@@ -19,17 +19,17 @@ silence into a message; do not disable it.
 
 ## Writing a className
 
-| You want        | You write                                                | Never          |
-| --------------- | -------------------------------------------------------- | -------------- |
-| Background      | `bg-bg-layer-default`, `bg-bg-brand-solid`                | `bg-white`     |
-| Text colour     | `text-fg-neutral`, `text-fg-neutral-muted`                | `text-gray-500`|
-| Border colour   | `border-stroke-neutral-muted`                             | `border-gray-200` |
-| Spacing         | `p-x4`, `px-x5`, `gap-x3`, `mt-x2`                        | `p-4`, `gap-2` |
-| Position        | `top-x2`, `inset-x0`                                      | `top-4`        |
-| Radius          | `rounded-r4`, `rounded-full`                              | `rounded-lg`   |
-| Shadow          | `shadow-s1`, `shadow-s2`                                  | `shadow-md`    |
-| Text style      | `t4-bold`, `t7-regular`, `screen-title`, `article-body`   | `text-lg font-bold` |
-| Breakpoint      | `sm:` 480, `md:` 768, `lg:` 1280, `xl:` 1440 (SEED scale) | —              |
+| You want      | You write                                                 | Never               |
+| ------------- | --------------------------------------------------------- | ------------------- |
+| Background    | `bg-bg-layer-default`, `bg-bg-brand-solid`                | `bg-white`          |
+| Text colour   | `text-fg-neutral`, `text-fg-neutral-muted`                | `text-gray-500`     |
+| Border colour | `border-stroke-neutral-muted`                             | `border-gray-200`   |
+| Spacing       | `p-x4`, `px-x5`, `gap-x3`, `mt-x2`                        | `p-4`, `gap-2`      |
+| Position      | `top-x2`, `inset-x0`                                      | `top-4`             |
+| Radius        | `rounded-r4`, `rounded-full`                              | `rounded-lg`        |
+| Shadow        | `shadow-s1`, `shadow-s2`                                  | `shadow-md`         |
+| Text style    | `t4-bold`, `t7-regular`, `screen-title`, `article-body`   | `text-lg font-bold` |
+| Breakpoint    | `sm:` 480, `md:` 768, `lg:` 1280, `xl:` 1440 (SEED scale) | —                   |
 
 Typography is one class, not a composition: use `t5-bold`, not `text-size-t5 font-bold`.
 

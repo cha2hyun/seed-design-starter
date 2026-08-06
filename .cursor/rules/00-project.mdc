@@ -11,16 +11,16 @@ architecture or i18n decisions.
 
 ## Stack
 
-| Concern          | Choice                                                     |
-| ---------------- | ---------------------------------------------------------- |
-| Build            | Vite 8, React 19, TypeScript 5.9                            |
-| Design system    | `@seed-design/react` + `@seed-design/css`, snippets via CLI |
-| Styling          | Tailwind CSS 4 with SEED tokens only                        |
-| Routing          | TanStack Router, file-based under `src/app/routes`          |
-| Server state     | TanStack Query                                              |
-| Client state     | Zustand                                                     |
-| i18n             | i18next + react-i18next, Korean and English                 |
-| Package manager  | pnpm, Node 22 or newer                                      |
+| Concern         | Choice                                                      |
+| --------------- | ----------------------------------------------------------- |
+| Build           | Vite 8, React 19, TypeScript 5.9                            |
+| Design system   | `@seed-design/react` + `@seed-design/css`, snippets via CLI |
+| Styling         | Tailwind CSS 4 with SEED tokens only                        |
+| Routing         | TanStack Router, file-based under `src/app/routes`          |
+| Server state    | TanStack Query                                              |
+| Client state    | Zustand                                                     |
+| i18n            | i18next + react-i18next, Korean and English                 |
+| Package manager | pnpm, Node 22 or newer                                      |
 
 ## Commands
 

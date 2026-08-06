@@ -1,1 +1,24 @@
-pnpm exec commitlint --edit "$1"
+#!/bin/sh
+if ! pnpm exec commitlint --edit "$1"; then
+  cat >&2 <<'EOF'
+
+✖ The commit message does not follow Conventional Commits.
+
+    <type>(<scope>): <subject, imperative, lower case, no trailing period>
+
+    <body: why this change was needed, wrapped at 100 columns>
+
+  type    feat fix docs refactor perf test build ci chore revert
+  scope   app pages widgets features entities shared seed i18n styles ci deps ai repo
+          (optional — omit it rather than inventing one)
+
+  feat(features): add a price-offer toggle to the listing form
+  fix(shared): stop formatRelativeTime rounding a fresh timestamp to "1 minute ago"
+  chore(seed): upgrade @seed-design/react to 2.2.0
+
+  Write the subject so a reviewer scanning `git log --oneline` knows what changed.
+  "update", "changes" and "wip" are rejected on purpose. See CONTRIBUTING.md.
+
+EOF
+  exit 1
+fi

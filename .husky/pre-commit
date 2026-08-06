@@ -1,1 +1,21 @@
-pnpm exec lint-staged
+#!/bin/sh
+. "$(dirname "$0")/lib/guard-branch.sh"
+
+if ! pnpm exec lint-staged; then
+  cat >&2 <<'EOF'
+
+✖ Staged files did not pass lint-staged.
+
+  ESLint and Prettier already applied every fix they could; what is left needs a decision.
+  Read the errors above, then:
+
+    seed-lockin/token-only      swap the class for the suggested SEED token
+    seed-lockin/no-stylesheets  express it with className instead of a stylesheet
+    seed-lockin/no-inline-style add `// seed-escape: <reason>` or use className
+    boundaries/dependencies     import through the slice's index.ts, or move the code
+
+  Fix, `git add`, and commit again. Do not reach for --no-verify.
+
+EOF
+  exit 1
+fi
