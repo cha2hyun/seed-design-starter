@@ -1,0 +1,4 @@
+pnpm typecheck
+pnpm lint
+pnpm lint:fsd
+pnpm seed:check

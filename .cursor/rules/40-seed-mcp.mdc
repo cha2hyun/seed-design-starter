@@ -1,0 +1,51 @@
+---
+description: Which seed-docs MCP tool answers which question, so you look SEED facts up instead of recalling them.
+alwaysApply: true
+---
+
+# Looking things up in SEED
+
+Two MCP servers are declared in `.cursor/mcp.json` and travel with the repository. `seed-docs` needs
+no credentials. `seed-figma` activates only when `FIGMA_PERSONAL_ACCESS_TOKEN` is set.
+
+SEED ships several packages that version independently and rename tokens between majors. Recall is
+unreliable here; look it up.
+
+## Reach for a tool when
+
+| Question                                    | Tool                                            |
+| ------------------------------------------- | ----------------------------------------------- |
+| Does a component for this exist?             | `list_react_components`                         |
+| What props does it take?                     | `get_react_component({ componentName })`        |
+| When should this component be used at all?   | `get_docs_component({ componentName })`         |
+| What is the exact token name?                | `get_rootage({ path: "/color.json" })`          |
+| What is this component's spec?               | `get_rootage({ path: "/components/<name>.json" })` |
+| Which icon shows a left arrow?               | `search_icons({ query: "화살표" })` — Korean works |
+| How do I import that icon?                   | `get_icon_details({ iconName })`                |
+| How is theming or Tailwind meant to be set up? | `get_react_getting_started({ path })`         |
+| What changed in the last release?            | `get_react_changelog`                           |
+
+Call `discover_tools` once at the start of a session if you are unsure what is available.
+
+## Offline fallbacks
+
+If the MCP server is unavailable:
+
+- `.seed/tokens.json` — the token catalog for the installed version, generated locally
+- `.seed/llms/` — cached SEED documentation, refreshed by `pnpm seed:sync`
+- `pnpm seed:docs <component>` — prints the doc, llms.txt and snippet URLs
+- `https://seed-design.io/llms/react/components/<name>.txt` — fetch directly
+
+## Keeping up with SEED
+
+`pnpm seed:sync` regenerates `.seed/tokens.json`, `.cursor/rules/_generated-seed-tokens.mdc` and the
+cached docs from the packages currently installed. `pnpm seed:compat` checks the vendored snippets in
+`src/shared/seed/` against those package versions. CI runs both, so a dependency bump that leaves
+them stale fails the build.
+
+After bumping any `@seed-design/*` version:
+
+1. `pnpm seed:sync`
+2. `pnpm seed:compat` — if it complains, re-add the affected snippets with `pnpm seed:add ui:<name>`
+3. `pnpm verify:lockin` — confirms the theme reset still removes Tailwind's own tokens
+4. Read `get_react_changelog` for anything that moved

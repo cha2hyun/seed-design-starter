@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "seed-design": {
+      "source": "daangn/seed-design",
+      "sourceType": "github",
+      "skillPath": "skills/seed-design/SKILL.md",
+      "computedHash": "7d4c0639954600d51a53f5919545800b8b60eac8c059b011c8e54863c30af479"
+    }
+  }
+}

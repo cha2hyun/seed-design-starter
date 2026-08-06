@@ -1,0 +1,230 @@
+# Theming
+URL: /react/getting-started/styling/theming
+Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/getting-started/styling/theming.mdx
+
+SEED의 테마 시스템을 이해하고 활용하는 방법을 알아봅니다.
+
+## 개요 \[#개요]
+
+SEED는 라이트 모드와 다크 모드를 지원하는 테마 시스템을 제공합니다.
+테마는 HTML 요소의 `data-seed-color-mode`와 `data-seed-user-color-scheme` 속성을 통해 제어됩니다.
+
+두 속성의 역할과 차이점을 이해하고, 전역 테마 설정 방법과 특정 영역에만 테마를 오버라이딩하는 방법을 알아봅니다.
+
+## 테마 속성 이해하기 \[#테마-속성-이해하기]
+
+SEED의 테마 시스템은 두 가지 `data-*` 속성을 사용합니다.
+
+### `data-seed-color-mode` \[#data-seed-color-mode]
+
+애플리케이션의 테마 정책을 설정하는 속성입니다. 세 가지 값을 가질 수 있습니다.
+
+- `system`: 사용자의 시스템 설정에 따라 자동으로 라이트/다크 모드를 전환합니다.
+- `light-only`: 항상 라이트 모드로 고정합니다.
+- `dark-only`: 항상 다크 모드로 고정합니다.
+
+```html
+<!-- 시스템 설정 따르기 -->
+<html data-seed-color-mode="system" />
+
+<!-- 라이트 모드로 고정 -->
+<html data-seed-color-mode="light-only" />
+
+<!-- 다크 모드로 고정 -->
+<html data-seed-color-mode="dark-only" />
+```
+
+### `data-seed-user-color-scheme` \[#data-seed-user-color-scheme]
+
+사용자 기기의 실제 컬러 스킴을 나타내는 속성입니다. 두 가지 값을 가집니다.
+
+- `light`: 사용자의 시스템이 라이트 모드로 설정되어 있음
+- `dark`: 사용자의 시스템이 다크 모드로 설정되어 있음
+
+이 값은 `data-seed-color-mode="system"`일 때만 의미를 가지며, `prefers-color-scheme` 미디어 쿼리를 통해 자동으로 업데이트됩니다.
+
+```html
+<!-- 시스템 설정을 따르도록 설정했으며, 현재 사용자는 라이트 모드를 사용 중 -->
+<html data-seed-color-mode="system" data-seed-user-color-scheme="light"></html>
+```
+
+### 작동 원리 \[#작동-원리]
+
+SEED CSS는 두 속성의 조합을 통해 적절한 색상 토큰을 적용합니다:
+
+```css
+/* 라이트 모드가 적용되는 경우 */
+:root,
+:root[data-seed-color-mode="system"][data-seed-user-color-scheme="light"],
+:root[data-seed-color-mode="light-only"],
+:root [data-seed-color-mode="light-only"] {
+  /* 라이트 모드 색상 토큰 */
+}
+
+/* 다크 모드가 적용되는 경우 */
+:root[data-seed-color-mode="system"][data-seed-user-color-scheme="dark"],
+:root[data-seed-color-mode="dark-only"],
+:root [data-seed-color-mode="dark-only"] {
+  /* 다크 모드 색상 토큰 */
+}
+```
+
+## 전역 테마 적용하기 \[#전역-테마-적용하기]
+
+애플리케이션 전체에 테마를 적용하는 방법은 Installation 문서를 참고하세요.
+
+- [Vite](/react/getting-started/installation/vite)
+- [Rsbuild](/react/getting-started/installation/rsbuild)
+- [Webpack](/react/getting-started/installation/webpack)
+- [Manual](/react/getting-started/installation/manual)
+
+번들러 플러그인을 사용하거나, HTML에 직접 속성과 스크립트를 추가하는 방법을 확인할 수 있습니다.
+
+## 일부 요소에만 테마 오버라이드하기 \[#일부-요소에만-테마-오버라이드하기]
+
+특정 영역이나 컴포넌트에만 다른 테마를 적용하고 싶을 때는 해당 요소에 `data-seed-color-mode`에 `light-only`, `dark-only` 또는 `system` 값을 설정합니다.
+
+```tsx
+import { ActionButton } from "seed-design/ui/action-button";
+import { actionButtonVariantMap } from "@seed-design/css/recipes/action-button";
+import { Text, VStack } from "@seed-design/react";
+
+function Demo() {
+  return (
+    <>
+      {actionButtonVariantMap.variant.map((variant) => (
+        <ActionButton key={variant} variant={variant}>
+          {variant}
+        </ActionButton>
+      ))}
+    </>
+  );
+}
+
+export default function ThemingColorModeOverride() {
+  return (
+    <div className="grid grid-cols-2 size-full">
+      <VStack
+        data-seed-color-mode="light-only"
+        bg="bg.layerDefault"
+        alignItems="center"
+        justify="center"
+        gap="spacingY.componentDefault"
+        p="x6"
+      >
+        <Text color="fg.neutral" textStyle="t4Bold">
+          라이트 모드
+        </Text>
+        <Demo />
+      </VStack>
+      <VStack
+        data-seed-color-mode="dark-only"
+        bg="bg.layerDefault"
+        alignItems="center"
+        justify="center"
+        gap="spacingY.componentDefault"
+        p="x6"
+      >
+        <Text color="fg.neutral" textStyle="t4Bold">
+          다크 모드
+        </Text>
+        <Demo />
+      </VStack>
+    </div>
+  );
+}
+```
+
+## 클라이언트에서 현재 테마 정보 감지하기 \[#클라이언트에서-현재-테마-정보-감지하기]
+
+컴포넌트에서 현재 테마 설정에 따라 다른 동작을 수행해야 할 때가 있습니다.
+이런 경우 `data-seed-color-mode`와 `data-seed-user-color-scheme` 속성을 감지하여 사용할 수 있습니다.
+
+다음은 커스텀 훅을 만들어 현재 테마 정보를 감지하는 예제입니다:
+
+```tsx
+"use client";
+
+import { useEffect, useState } from "react";
+
+export type ColorMode = "system" | "light-only" | "dark-only";
+export type UserColorScheme = "light" | "dark";
+
+export interface ThemeInfo {
+  colorMode: ColorMode;
+  userColorScheme: UserColorScheme;
+}
+
+function readThemeInfo(): ThemeInfo {
+  if (typeof document === "undefined") {
+    return {
+      colorMode: "system",
+      userColorScheme: "light",
+    };
+  }
+
+  const colorMode = document.documentElement.getAttribute(
+    "data-seed-color-mode"
+  ) as ColorMode;
+  const userColorScheme = document.documentElement.getAttribute(
+    "data-seed-user-color-scheme"
+  );
+
+  return {
+    colorMode: colorMode || "system",
+    userColorScheme: userColorScheme === "dark" ? "dark" : "light",
+  };
+}
+
+export function useTheme(): ThemeInfo {
+  const [themeInfo, setThemeInfo] = useState<ThemeInfo>(readThemeInfo);
+
+  useEffect(() => {
+    if (typeof document === "undefined") {
+      return;
+    }
+
+    const observer = new MutationObserver(() => {
+      setThemeInfo(readThemeInfo());
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-seed-color-mode", "data-seed-user-color-scheme"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return themeInfo;
+}
+```
+
+이 훅은 다음과 같이 사용할 수 있습니다:
+
+```tsx
+"use client";
+
+function MyComponent() {
+  const { colorMode, userColorScheme } = useTheme();
+
+  return (
+    <div>
+      <p>테마 정책: {colorMode}</p>
+      <p>현재 컬러 스킴: {userColorScheme}</p>
+      {userColorScheme === "dark" ? (
+        <DarkModeSpecificComponent />
+      ) : (
+        <LightModeSpecificComponent />
+      )}
+    </div>
+  );
+}
+```
+
+### 작동 원리 \[#작동-원리-1]
+
+- `MutationObserver`를 사용하여 `data-seed-color-mode`와 `data-seed-user-color-scheme` 속성의 변경을 감지합니다.
+- `colorMode`는 애플리케이션의 테마 정책(`system`, `light-only`, `dark-only`)을 나타냅니다.
+- `userColorScheme`는 현재 적용된 실제 컬러 스킴(`light` 또는 `dark`)을 나타냅니다.
+- 시스템 설정이 변경되거나 테마가 전환될 때 자동으로 상태가 업데이트됩니다.

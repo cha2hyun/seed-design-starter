@@ -1,0 +1,49 @@
+---
+description: TypeScript and React conventions used throughout src/.
+globs: ["src/**/*.ts", "src/**/*.tsx"]
+alwaysApply: false
+---
+
+# Conventions
+
+## Files and names
+
+- Files are `kebab-case.tsx`; the component inside is `PascalCase`.
+- One component per file, plus its props interface.
+- Barrels are only `index.ts` at a slice root, and they list exports explicitly.
+
+## TypeScript
+
+`strict`, `noUncheckedIndexedAccess` and `erasableSyntaxOnly` are on. Practically:
+
+- Indexing an array gives `T | undefined`. Handle it; do not assert it away.
+- No `enum`, no parameter properties — they are not erasable syntax.
+- `import type` for types, enforced by `verbatimModuleSyntax`.
+- `as` casts need a reason. `as never` and `any` do not belong in this codebase.
+
+Derive union types from a `const` array so the values and the type stay in sync:
+
+```ts
+export const PRODUCT_STATUSES = ["onSale", "reserved", "sold"] as const;
+export type ProductStatus = (typeof PRODUCT_STATUSES)[number];
+```
+
+## Components
+
+- Function declarations, not `const` arrow components, for anything exported.
+- Props interface named `<Component>Props` and exported.
+- Compose class names with `cn()` from `@/shared/lib`. It is `clsx`, not `tailwind-merge`: SEED
+  replaces Tailwind's scales, so merge heuristics would mis-resolve `p-x2 p-x4`. Order matters —
+  the later class wins.
+- Handlers are `handleX`; props that take them are `onX`.
+
+## Comments
+
+Write one when the code cannot say it: a constraint, a trade-off, a reason. Not to narrate what the
+next line does, and never to explain a change you just made.
+
+## Errors and loading
+
+Use the shared shells rather than inventing new ones: `LoadingBlock` and `StateMessage` from
+`@/shared/ui`, or SEED's `Callout` for inline messages. Every query surface handles pending, error
+and empty.

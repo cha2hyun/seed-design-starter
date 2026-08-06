@@ -1,0 +1,52 @@
+---
+description: How to add or change user-facing text, in Korean and English.
+globs: ["src/**/*.tsx", "src/shared/i18n/**/*"]
+alwaysApply: false
+---
+
+# Copy and translation
+
+## Never hardcode a string
+
+Every string a user can read goes through i18next.
+
+```tsx
+const { t } = useTranslation("product");
+return <h1 className="screen-title text-fg-neutral">{t("list.title")}</h1>;
+```
+
+Namespaces live in `src/shared/i18n/locales/{ko,en}/`: `common`, `product`, `settings`. Korean is
+the source of truth for the key shape and English must mirror it exactly — `src/shared/i18n/i18next.d.ts`
+types `t()` from the Korean resource, so a missing English key is a silent gap while a missing
+Korean key is a compile error.
+
+Reach across namespaces with a prefix: `t("common:action.retry")`.
+
+## Adding a key
+
+1. Add it to `locales/ko/<namespace>.json`.
+2. Add the same key to `locales/en/<namespace>.json`.
+3. Use it. TypeScript will confirm the key exists.
+
+Create a new namespace only when a slice owns a substantial vocabulary of its own; register it in
+`src/shared/i18n/resources.ts`.
+
+## Writing Korean copy
+
+SEED is a Korean-first design system and its voice is specific:
+
+- Use the polite `-요` ending, not `-습니다`. "저장했어요", not "저장하였습니다".
+- Speak plainly and in the second person about what happened, not about the system.
+  "불러오지 못했어요", not "데이터 로드 실패".
+- Buttons are verbs: "등록하기", "다시 시도".
+- Errors say what to do next: "잠시 후 다시 시도해 주세요".
+- No exclamation marks, no emoji.
+
+English copy is sentence case, direct, and equally free of jargon: "Couldn't load this", not
+"Error: fetch failed".
+
+## Formatting values
+
+Dates, numbers and currency go through `formatCurrency` / `formatRelativeTime` in `@/shared/lib`,
+which take the active language. Never concatenate a formatted value into a translated sentence;
+interpolate it: `t("list.count", { count })`.

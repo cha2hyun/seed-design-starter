@@ -1,0 +1,105 @@
+/*
+ * The one and only stylesheet in this project.
+ *
+ * Hard rules, enforced by `eslint-rules/rules/no-stylesheets.js`:
+ *   1. No other .css / .scss / .module.css file may exist or be imported.
+ *   2. This file declares configuration only — never a selector, never a rule for
+ *      a concrete element. Everything visual is expressed with SEED tokens in JSX.
+ *
+ * Layer order must stay in sync with SEED_LAYER_ORDER in vite.config.ts.
+ */
+@layer theme, base, seed-base, components, seed-components, utilities;
+
+@import "@seed-design/css/base.layered.css";
+@import "tailwindcss";
+
+/*
+ * ── SEED lock-in, step 1 ────────────────────────────────────────────────────
+ * Delete every built-in Tailwind design token so that non-SEED utilities such as
+ * `bg-red-500`, `text-lg`, `rounded-xl`, `shadow-md` or `max-w-3xl` resolve to
+ * nothing at all. Nothing is kept: SEED or this file supplies every replacement.
+ */
+@theme {
+  --*: initial;
+}
+
+/*
+ * ── SEED lock-in, step 2 ────────────────────────────────────────────────────
+ * Register the SEED token set. This also redefines `p-*`, `m-*`, `w-*`, `h-*`,
+ * `size-*` and `gap-*` to accept SEED dimensions only.
+ */
+@import "@seed-design/tailwind4-theme";
+
+/*
+ * ── SEED lock-in, step 3 ────────────────────────────────────────────────────
+ * Utilities that Tailwind derives from `--spacing`, which SEED does not override.
+ * Removing `--spacing` above would leave them with no scale at all, so they are
+ * re-pointed at `--dimension-*`: `top-x4` works, `top-4` does not.
+ */
+@utility top-* {
+  top: --value(--dimension-*);
+}
+@utility right-* {
+  right: --value(--dimension-*);
+}
+@utility bottom-* {
+  bottom: --value(--dimension-*);
+}
+@utility left-* {
+  left: --value(--dimension-*);
+}
+@utility inset-* {
+  inset: --value(--dimension-*);
+}
+@utility inset-x-* {
+  inset-inline: --value(--dimension-*);
+}
+@utility inset-y-* {
+  inset-block: --value(--dimension-*);
+}
+@utility translate-x-* {
+  --tw-translate-x: --value(--dimension-*);
+  translate: var(--tw-translate-x) var(--tw-translate-y);
+}
+@utility translate-y-* {
+  --tw-translate-y: --value(--dimension-*);
+  translate: var(--tw-translate-x) var(--tw-translate-y);
+}
+@utility space-x-* {
+  :where(& > :not(:last-child)) {
+    margin-inline-start: --value(--dimension-*);
+  }
+}
+@utility space-y-* {
+  :where(& > :not(:last-child)) {
+    margin-block-start: --value(--dimension-*);
+  }
+}
+
+/*
+ * ── Project theme ───────────────────────────────────────────────────────────
+ * The only tokens in the project that do not come from SEED. Each one exists
+ * because SEED has no equivalent; keep this block as small as it is.
+ */
+@theme {
+  /* Mirrors `@seed-design/css/breakpoints` so `md:` means SEED's 768px. */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1280px;
+  --breakpoint-xl: 1440px;
+
+  /* SEED ships typography tokens but never a font-family. */
+  --font-sans:
+    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Reading width of the app shell, replacing Tailwind's `max-w-*` scale. */
+  --container-content: 48rem;
+}
+
+@layer base {
+  :root {
+    font-family: var(--font-sans);
+  }
+}

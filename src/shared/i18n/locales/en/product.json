@@ -1,0 +1,51 @@
+{
+  "list": {
+    "title": "Neighborhood marketplace",
+    "description": "A list screen built entirely from SEED tokens.",
+    "count": "{{count}} items",
+    "empty": {
+      "title": "No items yet",
+      "description": "Post the first one."
+    }
+  },
+  "filter": {
+    "all": "All",
+    "onSale": "On sale",
+    "sold": "Sold"
+  },
+  "status": {
+    "onSale": "On sale",
+    "reserved": "Reserved",
+    "sold": "Sold"
+  },
+  "detail": {
+    "sellerLabel": "Seller",
+    "descriptionLabel": "Description",
+    "chatAction": "Start a chat"
+  },
+  "create": {
+    "title": "New listing",
+    "titleField": "Title",
+    "titlePlaceholder": "e.g. Camping chair, 3 years old",
+    "priceField": "Price",
+    "pricePlaceholder": "Numbers only",
+    "descriptionField": "Description",
+    "descriptionPlaceholder": "Describe the condition in detail",
+    "categoryField": "Category",
+    "negotiableField": "Accept price offers",
+    "submit": "Post listing",
+    "successMessage": "Your listing is live."
+  },
+  "validation": {
+    "titleRequired": "Enter a title.",
+    "titleTooLong": "Keep the title under 40 characters.",
+    "priceRequired": "Enter a price.",
+    "priceInvalid": "Enter a number of 0 or more."
+  },
+  "category": {
+    "digital": "Electronics",
+    "furniture": "Furniture",
+    "outdoor": "Outdoors",
+    "book": "Books"
+  }
+}

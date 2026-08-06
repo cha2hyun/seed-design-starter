@@ -1,0 +1,68 @@
+---
+description: Where a file belongs in the Feature-Sliced Design tree and which imports are legal.
+globs: ["src/**/*.ts", "src/**/*.tsx"]
+alwaysApply: false
+---
+
+# Feature-Sliced Design
+
+## Layers
+
+Imports only ever point downwards in this list.
+
+| Layer      | Holds                                                    | Example                        |
+| ---------- | -------------------------------------------------------- | ------------------------------ |
+| `app`      | Bootstrap: providers, router, the single stylesheet       | `src/app/providers`            |
+| `pages`    | One screen, composing widgets and features                | `src/pages/product-detail`     |
+| `widgets`  | A self-contained block combining several features         | `src/widgets/product-list`     |
+| `features` | One user action                                           | `src/features/create-product`  |
+| `entities` | A business object: its type, API and presentation         | `src/entities/product`         |
+| `shared`   | Everything domain-agnostic                                | `src/shared/lib`               |
+
+`shared` is not sliced; it is split into segments (`api`, `config`, `lib`, `ui`, `i18n`, `seed`) and
+any segment may be imported directly. Every other layer is split into slices, and a slice is only
+reachable through its `index.ts`.
+
+```ts
+import { ProductCard } from "@/entities/product";              // correct
+import { ProductCard } from "@/entities/product/ui/product-card"; // ESLint error
+```
+
+## Inside a slice
+
+```
+src/features/create-product/
+├── index.ts          public API — the only file others may import
+├── model/            state, hooks, validation
+├── ui/               components
+└── api/              requests specific to this slice
+```
+
+`index.ts` re-exports named symbols explicitly. No `export *`.
+
+## Adding a new feature
+
+1. Decide the layer by asking what the code is *about*. A business object is an entity; a thing the
+   user *does* is a feature; a screen is a page.
+2. Create `src/<layer>/<slice>/` with `ui/`, `model/` as needed and an `index.ts`.
+3. Add the route in `src/app/routes/` if it needs a URL. Route files stay thin: they import a page
+   component and nothing else.
+4. Put translations in `src/shared/i18n/locales/{ko,en}/`.
+5. Run `pnpm verify`.
+
+## Routing
+
+Routes are file-based, generated into `src/app/routeTree.gen.ts` by `pnpm routes:gen` (which
+`pnpm build` and `pnpm typecheck` run for you). Never edit the generated file.
+
+Data loading belongs to TanStack Query. A route may prefetch with
+`queryClient.ensureQueryData(...)` in its `loader`; the component still calls `useQuery` so it stays
+usable outside that route.
+
+Query keys live in `src/shared/api/query-keys.ts` so invalidation stays predictable.
+
+## State
+
+- Server data → TanStack Query. Never mirror it into Zustand.
+- Shared client state → a Zustand store in the owning slice's `model/`.
+- Anything local → `useState`.

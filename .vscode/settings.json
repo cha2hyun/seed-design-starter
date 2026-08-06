@@ -1,0 +1,22 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  "tailwindCSS.experimental.configFile": "src/app/styles/global.css",
+  "tailwindCSS.classFunctions": ["cn", "clsx"],
+  "css.validate": false,
+
+  "i18n-ally.localesPaths": ["src/shared/i18n/locales"],
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.sourceLanguage": "ko",
+  "i18n-ally.displayLanguage": "ko",
+
+  "files.associations": {
+    "*.mdc": "markdown"
+  }
+}

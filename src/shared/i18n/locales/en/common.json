@@ -1,0 +1,26 @@
+{
+  "appName": "SEED Starter",
+  "nav": {
+    "home": "Home",
+    "settings": "Settings"
+  },
+  "action": {
+    "retry": "Try again",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "back": "Back",
+    "goHome": "Go home"
+  },
+  "state": {
+    "loading": "Loading",
+    "error": {
+      "title": "Couldn't load this",
+      "description": "Please try again in a moment."
+    },
+    "notFound": {
+      "title": "Page not found",
+      "description": "The address may have changed or the page was removed."
+    }
+  }
+}

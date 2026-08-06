@@ -1,0 +1,16 @@
+{
+  "title": "설정",
+  "description": "테마와 언어는 브라우저에 저장돼요.",
+  "language": {
+    "label": "언어",
+    "ko": "한국어",
+    "en": "English"
+  },
+  "colorMode": {
+    "label": "화면 모드",
+    "system": "시스템 설정",
+    "light-only": "라이트",
+    "dark-only": "다크",
+    "hint": "시스템 설정을 고르면 기기 설정을 그대로 따라가요."
+  }
+}

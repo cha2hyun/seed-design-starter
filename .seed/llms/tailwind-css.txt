@@ -1,0 +1,276 @@
+# Tailwind CSS
+URL: /react/getting-started/styling/tailwind-css
+Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/getting-started/styling/tailwind-css.mdx
+
+Tailwind CSS 프로젝트에서 SEED를 사용하는 방법을 알아봅니다.
+
+SEED에서 제공하는 토큰을 Tailwind CSS 3과 4 유틸리티 클래스를 통해 쉽게 사용하고, SEED React 컴포넌트의 스타일을 오버라이드할 수 있습니다.
+
+## 설정 \[#설정]
+
+<Tabs items="['Tailwind CSS 4', 'Tailwind CSS 3']">
+  <Tab value="Tailwind CSS 4">
+    <Steps>
+      <Step>
+        ### 의존성 설치 \[#의존성-설치]
+
+        - npm: npm install @seed-design/css @seed-design/tailwind4-theme
+        - pnpm: pnpm add @seed-design/css @seed-design/tailwind4-theme
+        - yarn: yarn add @seed-design/css @seed-design/tailwind4-theme
+        - bun: bun add @seed-design/css @seed-design/tailwind4-theme
+      </Step>
+
+      <Step>
+        ### CSS 파일 설정 \[#css-파일-설정]
+
+        ```css title="style.css"
+        @layer theme, base, seed-base, components, seed-components, utilities;
+        @import "@seed-design/css/base.layered.css";
+        @import "tailwindcss";
+        @import "@seed-design/tailwind4-theme";
+        ```
+
+        <Callout>
+          `@layer` directive를 통해 SEED CSS와 Tailwind 간의 스타일 우선순위를
+          결정합니다. 자세한 내용은 [Cascade
+          Layers](/react/getting-started/styling/cascade-layers) 문서를 참고하세요.
+        </Callout>
+      </Step>
+
+      <Step>
+        ### 번들러 설정 \[#번들러-설정]
+
+        SEED React 컴포넌트가 layered CSS 파일을 사용하도록 번들러의 module resolution 설정에 `seed-layered` condition을 추가하세요.
+
+        번들러별 설정 방법은 [Cascade Layers](/react/getting-started/styling/cascade-layers#번들러-설정) 문서를 참고하세요.
+      </Step>
+
+      <Step>
+        ### Theming 설정 \[#theming-설정]
+
+        Tailwind CSS 스타일시트는 theming 스크립트와 별개로 작동합니다. 아래 가이드를 참고하여 테마 설정을 진행하세요.
+
+        - [Vite](/react/getting-started/installation/vite)
+        - [Rsbuild](/react/getting-started/installation/rsbuild)
+        - [Webpack](/react/getting-started/installation/webpack)
+        - [Manual](/react/getting-started/installation/manual)
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab value="Tailwind CSS 3">
+    <Steps>
+      <Step>
+        ### 의존성 설치 \[#의존성-설치-1]
+
+        - npm: npm install @seed-design/css @seed-design/tailwind3-plugin
+        - pnpm: pnpm add @seed-design/css @seed-design/tailwind3-plugin
+        - yarn: yarn add @seed-design/css @seed-design/tailwind3-plugin
+        - bun: bun add @seed-design/css @seed-design/tailwind3-plugin
+      </Step>
+
+      <Step>
+        ### base.css import \[#basecss-import]
+
+        ```ts title="index.tsx"
+        import "@seed-design/css/base.css";
+        ```
+      </Step>
+
+      <Step>
+        ### Tailwind 설정 파일 수정 \[#tailwind-설정-파일-수정]
+
+        ```js title="tailwind.config.js"
+        import seedPlugin from "@seed-design/tailwind3-plugin"; // [!code highlight]
+
+        /** @type {import('tailwindcss').Config} */
+        export default {
+          content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+          theme: {
+            extend: {},
+          },
+          plugins: [seedPlugin], // [!code highlight]
+        };
+        ```
+      </Step>
+
+      <Step>
+        ### Theming 설정 \[#theming-설정-1]
+
+        Tailwind CSS 스타일시트는 theming 스크립트와 별개로 작동합니다. 아래 가이드를 참고하여 테마 설정을 진행하세요.
+
+        - [Vite](/react/getting-started/installation/vite)
+        - [Rsbuild](/react/getting-started/installation/rsbuild)
+        - [Webpack](/react/getting-started/installation/webpack)
+        - [Manual](/react/getting-started/installation/manual)
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## 유틸리티 클래스 \[#유틸리티-클래스]
+
+SEED의 모든 디자인 토큰을 Tailwind 유틸리티 클래스로 사용할 수 있습니다.
+
+### 색상 \[#색상]
+
+```tsx
+import { VStack, Text } from "@seed-design/react";
+
+export default function TailwindColors() {
+  return (
+    <VStack gap="x4">
+      {/* 텍스트 색상 */}
+      <VStack gap="x2">
+        <div className="p-x3 rounded-r2">
+          <p className="text-fg-brand t4-bold">text-fg-brand</p>
+        </div>
+        <div className="p-x3 rounded-r2">
+          <p className="text-fg-neutral t4-bold">text-fg-neutral</p>
+        </div>
+        <div className="p-x3 rounded-r2">
+          <p className="text-palette-blue-500 t4-bold">text-palette-blue-500</p>
+        </div>
+      </VStack>
+
+      {/* 배경 색상 */}
+      <VStack gap="x2">
+        <div className="bg-bg-informative-weak p-x3 rounded-r2">
+          <Text>bg-bg-informative-weak</Text>
+        </div>
+        <div className="bg-palette-gray-200 p-x3 rounded-r2">
+          <Text>bg-palette-gray-200</Text>
+        </div>
+      </VStack>
+
+      {/* 테두리 색상 */}
+      <VStack gap="x2">
+        <div className="border-2 border-stroke-brand-solid p-x3 rounded-r2">
+          <Text>border-stroke-brand-solid</Text>
+        </div>
+        <div className="border-2 border-palette-red-500 p-x3 rounded-r2">
+          <Text>border-palette-red-500</Text>
+        </div>
+      </VStack>
+    </VStack>
+  );
+}
+```
+
+### 타이포그래피 \[#타이포그래피]
+
+```tsx
+import { VStack } from "@seed-design/react";
+
+export default function TailwindTypography() {
+  return (
+    <VStack gap="x3">
+      <h1 className="screen-title text-fg-neutral">screen-title</h1>
+      <p className="t3-regular text-fg-neutral">t3-regular</p>
+      <p className="t3-bold text-fg-neutral">t3-bold</p>
+      <p className="t4-medium text-fg-neutral">t4-medium</p>
+      <p className="article-body text-fg-neutral">article-body</p>
+    </VStack>
+  );
+}
+```
+
+### 크기 및 여백 \[#크기-및-여백]
+
+```tsx
+import { VStack, HStack, Text } from "@seed-design/react";
+
+export default function TailwindSpacing() {
+  return (
+    <VStack gap="x4">
+      {/* 크기 유틸리티 */}
+      <HStack gap="x3" align="center">
+        <div className="size-x6 bg-palette-gray-400 rounded-r1" />
+        <Text>size-x6</Text>
+      </HStack>
+      <HStack gap="x3" align="center">
+        <div className="w-x8 h-x4 bg-palette-gray-400 rounded-r1" />
+        <Text>w-x8 h-x4</Text>
+      </HStack>
+
+      {/* 패딩 유틸리티 */}
+      <HStack gap="x3" align="center">
+        <div className="p-x2 bg-palette-gray-600 rounded-r3">
+          <div className="size-x6 bg-palette-gray-400 rounded-r1" />
+        </div>
+        <Text>p-x2</Text>
+      </HStack>
+      <HStack gap="x3" align="center">
+        <div className="px-x4 py-x2 bg-palette-gray-600 rounded-r3">
+          <div className="size-x6 bg-palette-gray-400 rounded-r1" />
+        </div>
+        <Text>px-x4 py-x2</Text>
+      </HStack>
+
+      {/* 간격 유틸리티 */}
+      <HStack gap="x3" align="center">
+        <div className="flex gap-x3 p-x2 bg-palette-gray-600 rounded-r3">
+          <div className="size-x6 bg-palette-gray-400 rounded-r1" />
+          <div className="size-x6 bg-palette-gray-400 rounded-r1" />
+          <div className="size-x6 bg-palette-gray-400 rounded-r1" />
+        </div>
+        <Text>p-x2 gap-x3</Text>
+      </HStack>
+    </VStack>
+  );
+}
+```
+
+### 테두리 반경 \[#테두리-반경]
+
+```tsx
+import { HStack, VStack, Text } from "@seed-design/react";
+
+export default function TailwindBorderRadius() {
+  return (
+    <HStack gap="x4" align="center">
+      <VStack gap="x3" align="center">
+        <div className="size-x10 bg-bg-neutral-solid rounded-r2" />
+        <Text textStyle="t4Regular">rounded-r2</Text>
+      </VStack>
+      <VStack gap="x3" align="center">
+        <div className="size-x10 bg-bg-neutral-solid rounded-r4" />
+        <Text textStyle="t4Regular">rounded-r4</Text>
+      </VStack>
+      <VStack gap="x3" align="center">
+        <div className="size-x10 bg-bg-neutral-solid rounded-full" />
+        <Text textStyle="t4Regular">rounded-full</Text>
+      </VStack>
+    </HStack>
+  );
+}
+```
+
+### 그라디언트 \[#그라디언트]
+
+```tsx
+import { VStack, Text } from "@seed-design/react";
+
+export default function TailwindGradient() {
+  return (
+    <VStack gap="x4">
+      <VStack gap="x2">
+        <div className="h-x10 bg-gradient-glow-magic-[90deg] rounded-r2" />
+        <Text>bg-gradient-glow-magic-[90deg]</Text>
+      </VStack>
+      <VStack gap="x2">
+        <div className="h-x10 bg-gradient-highlight-magic-[90deg] rounded-r2" />
+        <Text>bg-gradient-highlight-magic-[90deg]</Text>
+      </VStack>
+    </VStack>
+  );
+}
+```
+
+## 관련 문서 \[#관련-문서]
+
+Tailwind CSS를 사용하지 않아도 SEED 토큰을 쉽게 사용할 수 있습니다.
+
+<Card href="/react/components/layout/box" title="Box">
+  레이아웃 컴포넌트에서 SEED 토큰을 사용하는 방법을 알아봅니다.
+</Card>

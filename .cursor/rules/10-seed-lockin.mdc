@@ -1,0 +1,73 @@
+---
+description: How styling works in this repository and why non-SEED Tailwind classes silently fail.
+alwaysApply: true
+---
+
+# SEED lock-in
+
+## The mechanism
+
+`src/app/styles/global.css` runs `@theme { --*: initial; }` after importing Tailwind, which deletes
+every built-in Tailwind design token. It then imports `@seed-design/tailwind4-theme`, which
+re-populates the theme with SEED's tokens and redefines `p-*`, `m-*`, `w-*`, `h-*`, `size-*` and
+`gap-*` to accept SEED dimensions only.
+
+The consequence you must internalise: **a non-SEED utility is not an error, it is a no-op.**
+`bg-red-500`, `p-4`, `text-lg`, `rounded-md`, `shadow-md` and `max-w-3xl` all compile to nothing and
+the element simply renders unstyled. The `seed-lockin/token-only` ESLint rule exists to turn that
+silence into a message; do not disable it.
+
+## Writing a className
+
+| You want        | You write                                                | Never          |
+| --------------- | -------------------------------------------------------- | -------------- |
+| Background      | `bg-bg-layer-default`, `bg-bg-brand-solid`                | `bg-white`     |
+| Text colour     | `text-fg-neutral`, `text-fg-neutral-muted`                | `text-gray-500`|
+| Border colour   | `border-stroke-neutral-muted`                             | `border-gray-200` |
+| Spacing         | `p-x4`, `px-x5`, `gap-x3`, `mt-x2`                        | `p-4`, `gap-2` |
+| Position        | `top-x2`, `inset-x0`                                      | `top-4`        |
+| Radius          | `rounded-r4`, `rounded-full`                              | `rounded-lg`   |
+| Shadow          | `shadow-s1`, `shadow-s2`                                  | `shadow-md`    |
+| Text style      | `t4-bold`, `t7-regular`, `screen-title`, `article-body`   | `text-lg font-bold` |
+| Breakpoint      | `sm:` 480, `md:` 768, `lg:` 1280, `xl:` 1440 (SEED scale) | —              |
+
+Typography is one class, not a composition: use `t5-bold`, not `text-size-t5 font-bold`.
+
+**The text scale counts upwards.** `t1` is 11px and `t14` is 48px, which is the opposite of the
+heading conventions most CSS frameworks use. Body copy sits around `t4` (14px) or `t5` (16px);
+captions at `t2`–`t3`; a section heading at `t6`–`t7`. For a screen title prefer the named
+`screen-title` (t10, bold), and for long-form prose `article-body` (t5, regular). Getting this
+backwards produces a page that renders but reads inside out, so check the scale rather than
+assuming.
+
+The full list of valid tokens for the installed version lives in
+`.cursor/rules/_generated-seed-tokens.mdc` and `.seed/tokens.json`. When you are unsure, call
+`get_rootage` or `get_react_component` on the `seed-docs` MCP server rather than guessing.
+
+## Components
+
+Import SEED components from `seed-design/ui/*`, which maps to `src/shared/seed/ui/`:
+
+```tsx
+import { ActionButton } from "seed-design/ui/action-button";
+import { TextField, TextFieldInput } from "seed-design/ui/text-field";
+```
+
+These files are snippets fetched by `@seed-design/cli`. If the component you need is missing, add it
+with `pnpm seed:add ui:<name>` instead of hand-rolling one. Only `src/shared/seed/**` and
+`src/shared/ui/**` may import `@seed-design/react` directly.
+
+Icons come from `@karrotmarket/react-monochrome-icon` and `@karrotmarket/react-multicolor-icon`. Find
+the right one with `search_icons` on the MCP server; it understands Korean queries.
+
+## Escape hatches
+
+There are two, and both are deliberate friction:
+
+- An inline `style` attribute needs a `// seed-escape: <reason>` comment directly above it.
+- A genuinely missing token goes into the project `@theme` block in `src/app/styles/global.css`,
+  with a comment explaining why SEED has no equivalent. Today that block holds only the breakpoints,
+  the Pretendard font stack and one content width.
+
+Reach for these rarely. If you find yourself wanting a third one, the design is probably fighting
+the design system.

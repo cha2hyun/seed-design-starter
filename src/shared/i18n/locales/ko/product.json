@@ -1,0 +1,51 @@
+{
+  "list": {
+    "title": "동네 중고 거래",
+    "description": "SEED 토큰만으로 구성한 목록 화면이에요.",
+    "count": "상품 {{count}}개",
+    "empty": {
+      "title": "아직 등록된 상품이 없어요",
+      "description": "첫 상품을 등록해 보세요."
+    }
+  },
+  "filter": {
+    "all": "전체",
+    "onSale": "판매중",
+    "sold": "판매완료"
+  },
+  "status": {
+    "onSale": "판매중",
+    "reserved": "예약중",
+    "sold": "판매완료"
+  },
+  "detail": {
+    "sellerLabel": "판매자",
+    "descriptionLabel": "상품 설명",
+    "chatAction": "채팅하기"
+  },
+  "create": {
+    "title": "상품 등록",
+    "titleField": "제목",
+    "titlePlaceholder": "예) 3년 쓴 캠핑 의자",
+    "priceField": "가격",
+    "pricePlaceholder": "숫자만 입력해 주세요",
+    "descriptionField": "설명",
+    "descriptionPlaceholder": "상품 상태를 자세히 적어 주세요",
+    "categoryField": "카테고리",
+    "negotiableField": "가격 제안 받기",
+    "submit": "등록하기",
+    "successMessage": "상품을 등록했어요."
+  },
+  "validation": {
+    "titleRequired": "제목을 입력해 주세요.",
+    "titleTooLong": "제목은 40자 이내로 입력해 주세요.",
+    "priceRequired": "가격을 입력해 주세요.",
+    "priceInvalid": "0 이상의 숫자를 입력해 주세요."
+  },
+  "category": {
+    "digital": "디지털기기",
+    "furniture": "가구/인테리어",
+    "outdoor": "캠핑/아웃도어",
+    "book": "도서"
+  }
+}

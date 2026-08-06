@@ -1,0 +1,26 @@
+{
+  "appName": "SEED 스타터",
+  "nav": {
+    "home": "홈",
+    "settings": "설정"
+  },
+  "action": {
+    "retry": "다시 시도",
+    "cancel": "취소",
+    "confirm": "확인",
+    "save": "저장",
+    "back": "뒤로",
+    "goHome": "홈으로 가기"
+  },
+  "state": {
+    "loading": "불러오는 중이에요",
+    "error": {
+      "title": "불러오지 못했어요",
+      "description": "잠시 후 다시 시도해 주세요."
+    },
+    "notFound": {
+      "title": "페이지를 찾을 수 없어요",
+      "description": "주소가 바뀌었거나 삭제된 페이지예요."
+    }
+  }
+}
