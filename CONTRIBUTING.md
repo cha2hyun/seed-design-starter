@@ -35,11 +35,11 @@ stderr만 읽고 복구하면 됩니다.
 `package.json`의 `version`이 단일 출처입니다. [SemVer](https://semver.org/)를 쓰고, 직전
 `v*` 태그(없으면 `main` 팁) 이후 Conventional Commits로 범프를 고릅니다.
 
-| 커밋이 포함하면                         | 범프  |
-| --------------------------------------- | ----- |
-| `BREAKING CHANGE` 또는 `type!:`         | major |
-| `feat` (breaking 없음)                  | minor |
-| `fix` / `perf` / 그 외만               | patch |
+| 커밋이 포함하면                 | 범프  |
+| ------------------------------- | ----- |
+| `BREAKING CHANGE` 또는 `type!:` | major |
+| `feat` (breaking 없음)          | minor |
+| `fix` / `perf` / 그 외만        | patch |
 
 태그는 항상 `v` 접두사입니다 (`v0.2.0`). `package.json`의 `0.2.0`과 짝입니다.
 
