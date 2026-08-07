@@ -2,8 +2,9 @@
 
 Open a pull request for the current branch.
 
-The base branch is `develop`, unless this is a release, in which case it is `main` and the branch
-is `develop` itself.
+## Feature / fix PR (default)
+
+Base is `develop`. Head is a `<type>/<kebab-summary>` branch.
 
 1. Gather the full picture, not just the last commit. In parallel: `git status`,
    `git log develop..HEAD --oneline`, `git diff develop...HEAD --stat` and the diff itself. A pull
@@ -30,3 +31,16 @@ is `develop` itself.
 
 If the diff turns out to cover several unrelated concerns, say so and offer to split it rather than
 opening one pull request nobody can review in a sitting.
+
+## Release PR (`develop` → `main`)
+
+Follow [CONTRIBUTING.md § 릴리스](../../CONTRIBUTING.md#릴리스) before opening the PR.
+
+1. On `develop`, bump `package.json` and update `CHANGELOG.md`, then commit
+   `chore(repo): release vX.Y.Z`.
+2. `pnpm verify`, push `develop`.
+3. `gh pr create --base main --head develop` with the same Conventional Commits title.
+4. In the body: state the SemVer bump rationale, summarise the CHANGELOG section, note that the
+   merge must be a **merge commit** (not squash), and that the `release` workflow will tag
+   `vX.Y.Z` on `main`.
+5. Return the pull request URL. Do not merge unless the user asked you to.

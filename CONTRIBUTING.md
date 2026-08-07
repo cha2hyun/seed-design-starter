@@ -20,7 +20,60 @@ stderr만 읽고 복구하면 됩니다.
 작은 변경은 `develop`에 바로 커밋해도 됩니다. 리뷰가 필요할 만큼의 변경, 되돌릴 여지가 있는
 변경, 여러 커밋으로 나뉘는 변경은 작업 브랜치를 파서 PR로 올립니다. PR의 base는 `develop`입니다.
 
-릴리스는 `develop` → `main` PR 하나로 처리합니다.
+릴리스는 아래 [릴리스](#릴리스)를 따릅니다. 요약하면 `develop`에서 버전을 올린 뒤
+`develop` → `main` PR 하나로 처리합니다.
+
+---
+
+## 릴리스
+
+`main`에 머지하는 것은 배포 가능한 버전을 찍는 일입니다. 버전·태그·GitHub Release가 함께
+맞아야 하고, 기능 PR처럼 squash하지 않습니다.
+
+### 버전
+
+`package.json`의 `version`이 단일 출처입니다. [SemVer](https://semver.org/)를 쓰고, 직전
+`v*` 태그(없으면 `main` 팁) 이후 Conventional Commits로 범프를 고릅니다.
+
+| 커밋이 포함하면                         | 범프  |
+| --------------------------------------- | ----- |
+| `BREAKING CHANGE` 또는 `type!:`         | major |
+| `feat` (breaking 없음)                  | minor |
+| `fix` / `perf` / 그 외만               | patch |
+
+태그는 항상 `v` 접두사입니다 (`v0.2.0`). `package.json`의 `0.2.0`과 짝입니다.
+
+### 절차
+
+1. `develop`에서 `pnpm verify`가 초록인지 확인합니다.
+2. `package.json`의 `version`을 올립니다.
+3. `CHANGELOG.md` 맨 위에 `## [X.Y.Z] - YYYY-MM-DD` 섹션을 추가합니다. 동작 변화 위주로
+   쓰고, 커밋 나열을 그대로 붙이지 않습니다.
+4. 커밋합니다.
+
+   ```
+   chore(repo): release vX.Y.Z
+   ```
+
+5. `develop`을 푸시한 뒤 base=`main`, head=`develop` PR을 엽니다. 제목은 커밋과 같습니다.
+6. CI가 초록이면 **Create a merge commit**으로 머지합니다. squash·rebase는 쓰지 않습니다.
+   `main`의 히스토리와 태그가 가리킬 커밋을 흐리지 않기 위함입니다.
+7. `main` 푸시 시 `release` 워크플로가 `package.json` 버전을 읽어 `vX.Y.Z` 태그와 GitHub
+   Release를 만듭니다. 태그가 이미 있으면 건너뜁니다.
+
+버전을 올리지 않은 채 `main`에 머지하지 마세요. 태그가 이전 버전에 묶이거나, 워크플로가
+이미 존재하는 태그를 보고 아무 것도 하지 않습니다.
+
+### 핫픽스
+
+가능하면 `develop`에 고치고 패치 릴리스를 냅니다. `main`만 급히 고쳐야 하면 `main`에서
+브랜치를 따 `main`으로 PR한 뒤, 머지 커밋을 `develop`에 다시 머지해 분기되지 않게 합니다.
+
+### 하지 말 것
+
+- 기능 브랜치에서 `package.json` 버전만 미리 올리지 않습니다. 릴리스 커밋의 일입니다.
+- `develop`에 `v*` 태그를 달지 않습니다. 태그는 `main` (워크플로)에서만 생깁니다.
+- 릴리스 PR을 squash 머지하지 않습니다.
 
 ---
 
@@ -45,8 +98,9 @@ stderr만 읽고 복구하면 됩니다.
 
 4. **커밋합니다.** 훅이 브랜치 이름, 스테이징된 파일, 커밋 메시지를 순서대로 검사합니다.
 
-5. **PR을 엽니다.** base는 `develop`입니다. 템플릿을 채웁니다. 체크박스는 장식이 아니라
-   리뷰어(사람이든 에이전트든)가 무엇을 확인해야 하는지 알려주는 신호입니다.
+5. **PR을 엽니다.** 기능·수정 PR의 base는 `develop`입니다. 릴리스만 base를 `main`으로
+   둡니다. 템플릿을 채웁니다. 체크박스는 장식이 아니라 리뷰어(사람이든 에이전트든)가 무엇을
+   확인해야 하는지 알려주는 신호입니다.
 
 6. **리뷰합니다.** 아래 [리뷰 기준](#리뷰-기준)을 그대로 적용합니다.
 
@@ -186,6 +240,7 @@ Cursor의 `/split-to-prs`가 도와줍니다.
 - **`--no-verify`로 훅을 건너뛰지 않습니다.** 훅이 막는다면 막을 이유가 있는 것이고, 우회하면
   CI에서 똑같이 막힙니다.
 - **`main`에 직접 커밋하거나 `main`·`develop`에 force push 하지 않습니다.**
+- **릴리스 PR(`develop` → `main`)을 squash·rebase 머지하지 않습니다.** merge commit만 씁니다.
 - **`seed-lockin/*` 규칙을 `eslint-disable`로 끄지 않습니다.** 정말 예외가 필요하면 문서화된
   탈출구(`// seed-escape:` 또는 `global.css`의 프로젝트 `@theme`)를 쓰세요.
 - **생성 파일을 손으로 고치지 않습니다.** `src/app/routeTree.gen.ts`, `.seed/tokens.json`,

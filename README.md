@@ -107,6 +107,11 @@ gh pr create --base develop             # PR 제목도 같은 규칙 (squash 머
 브랜치로 작은 변경은 바로 커밋해도 됩니다. 리뷰가 필요한 변경은 `<type>/<kebab-summary>`
 브랜치를 따서 `develop`으로 PR을 올립니다.
 
+**릴리스**는 `develop`에서 `package.json` 버전과 `CHANGELOG.md`를 올린 뒤 `develop` → `main`
+PR을 **merge commit**으로 머지합니다 (squash 금지). `main` 푸시 시 `release` 워크플로가
+`vX.Y.Z` 태그와 GitHub Release를 만듭니다. 자세한 규칙은 [CONTRIBUTING.md](./CONTRIBUTING.md#릴리스)에
+있습니다.
+
 강제되는 것들:
 
 - **브랜치** — `develop` 또는 `<type>/<kebab-summary>`. `main` 직접 커밋은 pre-commit이 거부합니다.

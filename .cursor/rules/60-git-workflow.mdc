@@ -54,6 +54,17 @@ Base is `develop`. The title is a Conventional Commits line describing the whole
 squash merge turns it into a single commit. Fill `.github/PULL_REQUEST_TEMPLATE.md`: why, what
 changed as behaviour, how it was verified, and anything a reviewer would otherwise have to infer.
 
+## Release (`develop` → `main`)
+
+Merging into `main` is a release. Full contract in [CONTRIBUTING.md](../../CONTRIBUTING.md#릴리스).
+
+1. On `develop`, bump `package.json` `version` (SemVer from Conventional Commits since the last
+   `v*` tag) and add a `CHANGELOG.md` section.
+2. Commit `chore(repo): release vX.Y.Z`, push `develop`, open a PR with base `main`.
+3. Merge with a **merge commit** — never squash or rebase a release PR.
+4. The `release` workflow on `main` creates the `vX.Y.Z` tag and GitHub Release from
+   `package.json`. Do not tag on `develop`.
+
 ## Reviewing
 
 Use the rubric in `.cursor/commands/review.md`. The order matters: design-system violations come
@@ -66,3 +77,4 @@ and nothing errors.
 - committing to `main`, or force-pushing `main` or `develop`
 - amending a commit that a hook rejected — fix the cause and make a new one
 - hand-editing `src/app/routeTree.gen.ts`, `.seed/tokens.json`, or the generated token rule
+- squash-merging a release PR, or creating `v*` tags on `develop`

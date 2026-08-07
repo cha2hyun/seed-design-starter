@@ -70,6 +70,10 @@ small self-contained changes may land there directly. Anything that wants review
 `<type>/<kebab-summary>` branch off `develop` and a pull request back into it. Full contract in
 [CONTRIBUTING.md](./CONTRIBUTING.md).
 
+A release is a SemVer bump on `develop` (`package.json` + `CHANGELOG.md`), then a
+`develop` → `main` PR merged with a **merge commit**. The `release` workflow tags `vX.Y.Z` and
+opens the GitHub Release. Never squash a release PR or tag on `develop`.
+
 ```bash
 git switch develop
 git switch -c feat/price-offer-toggle   # <type>/<kebab-summary>
