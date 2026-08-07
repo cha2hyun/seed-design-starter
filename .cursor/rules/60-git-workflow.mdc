@@ -5,17 +5,27 @@ alwaysApply: true
 
 # Landing a change
 
-Work lands through a pull request. `main` rejects direct commits, and the hooks that enforce this
-tell you the next command when they fire — read their output rather than working around them.
+The hooks that enforce all of this print the next command when they fire — read their output
+rather than working around them.
 
-## Branch
+## Branches
 
-`<type>/<kebab-summary>`, where the type is the Conventional Commits set: `feat` `fix` `docs`
-`refactor` `perf` `test` `build` `ci` `chore` `revert`.
+| Branch             | Role                                            | Direct commits |
+| ------------------ | ----------------------------------------------- | -------------- |
+| `main`             | Release. Only ever merged into, from `develop`. | No             |
+| `develop`          | Integration, and the default place to work.     | Yes            |
+| `<type>/<summary>` | Short-lived, opened from `develop`.             | Yes            |
+
+A small, self-contained change can go straight onto `develop`. Anything that wants review, spans
+several commits, or might need reverting gets a branch and a pull request into `develop`.
 
 ```bash
+git switch develop
 git switch -c feat/price-offer-toggle
 ```
+
+The type is the Conventional Commits set: `feat` `fix` `docs` `refactor` `perf` `test` `build`
+`ci` `chore` `revert`. The summary is lower-case kebab-case.
 
 ## Commit
 
@@ -40,9 +50,9 @@ debugging in six months, not by someone watching you work.
 
 ## Pull request
 
-The title is a Conventional Commits line describing the whole branch, because squash merge turns it
-into the commit on `main`. Fill `.github/PULL_REQUEST_TEMPLATE.md`: why, what changed as behaviour,
-how it was verified, and anything a reviewer would otherwise have to infer.
+Base is `develop`. The title is a Conventional Commits line describing the whole branch, because
+squash merge turns it into a single commit. Fill `.github/PULL_REQUEST_TEMPLATE.md`: why, what
+changed as behaviour, how it was verified, and anything a reviewer would otherwise have to infer.
 
 ## Reviewing
 
@@ -53,6 +63,6 @@ and nothing errors.
 ## Never
 
 - `--no-verify`, or `eslint-disable` on a `seed-lockin/*` rule
-- committing to `main`, or force-pushing it
+- committing to `main`, or force-pushing `main` or `develop`
 - amending a commit that a hook rejected — fix the cause and make a new one
 - hand-editing `src/app/routeTree.gen.ts`, `.seed/tokens.json`, or the generated token rule

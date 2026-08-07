@@ -9,15 +9,31 @@ stderr만 읽고 복구하면 됩니다.
 
 ---
 
+## 브랜치 모델
+
+| 브랜치          | 역할                                             | 직접 커밋 |
+| --------------- | ------------------------------------------------ | --------- |
+| `main`          | 릴리스 브랜치. `develop`에서 머지만 받습니다.    | 불가      |
+| `develop`       | 통합 브랜치. 기본 작업 대상입니다.               | 가능      |
+| `<type>/<요약>` | 작업 브랜치. `develop`에서 따고 PR로 되돌립니다. | 가능      |
+
+작은 변경은 `develop`에 바로 커밋해도 됩니다. 리뷰가 필요할 만큼의 변경, 되돌릴 여지가 있는
+변경, 여러 커밋으로 나뉘는 변경은 작업 브랜치를 파서 PR로 올립니다. PR의 base는 `develop`입니다.
+
+릴리스는 `develop` → `main` PR 하나로 처리합니다.
+
+---
+
 ## 작업 루프
 
 ```
 브랜치 → 변경 → pnpm verify → 커밋 → 푸시 → PR → 리뷰 → 머지
 ```
 
-1. **브랜치를 만듭니다.** `main`에는 직접 커밋할 수 없습니다.
+1. **브랜치를 만듭니다.** `develop`에서 땁니다. `main`에는 직접 커밋할 수 없습니다.
 
    ```bash
+   git switch develop
    git switch -c feat/price-offer-toggle
    ```
 
@@ -29,8 +45,8 @@ stderr만 읽고 복구하면 됩니다.
 
 4. **커밋합니다.** 훅이 브랜치 이름, 스테이징된 파일, 커밋 메시지를 순서대로 검사합니다.
 
-5. **PR을 엽니다.** 템플릿을 채웁니다. 체크박스는 장식이 아니라 리뷰어(사람이든 에이전트든)가
-   무엇을 확인해야 하는지 알려주는 신호입니다.
+5. **PR을 엽니다.** base는 `develop`입니다. 템플릿을 채웁니다. 체크박스는 장식이 아니라
+   리뷰어(사람이든 에이전트든)가 무엇을 확인해야 하는지 알려주는 신호입니다.
 
 6. **리뷰합니다.** 아래 [리뷰 기준](#리뷰-기준)을 그대로 적용합니다.
 
@@ -154,8 +170,8 @@ Cursor의 `/split-to-prs`가 도와줍니다.
 
 | 증상                         | 원인                          | 다음 명령                               |
 | ---------------------------- | ----------------------------- | --------------------------------------- |
-| `main is protected`          | main에서 커밋 시도            | `git switch -c <type>/<summary>`        |
-| `Branch ... does not follow` | 브랜치 이름 규칙 위반         | `git branch -m <type>/<summary>`        |
+| `main is the release branch` | main에서 커밋 시도            | `git switch develop`                    |
+| `Branch ... is neither`      | 브랜치 이름 규칙 위반         | `git branch -m <type>/<summary>`        |
 | `seed-lockin/token-only`     | SEED 밖 토큰                  | 메시지가 제안하는 토큰으로 교체         |
 | `boundaries/dependencies`    | FSD import 방향/공개 API 위반 | `index.ts`로 import하거나 코드를 이동   |
 | commitlint 실패              | 커밋 메시지 형식              | 위 [커밋 메시지](#커밋-메시지) 형식으로 |
@@ -169,7 +185,7 @@ Cursor의 `/split-to-prs`가 도와줍니다.
 
 - **`--no-verify`로 훅을 건너뛰지 않습니다.** 훅이 막는다면 막을 이유가 있는 것이고, 우회하면
   CI에서 똑같이 막힙니다.
-- **`main`에 직접 커밋하거나 force push 하지 않습니다.**
+- **`main`에 직접 커밋하거나 `main`·`develop`에 force push 하지 않습니다.**
 - **`seed-lockin/*` 규칙을 `eslint-disable`로 끄지 않습니다.** 정말 예외가 필요하면 문서화된
   탈출구(`// seed-escape:` 또는 `global.css`의 프로젝트 `@theme`)를 쓰세요.
 - **생성 파일을 손으로 고치지 않습니다.** `src/app/routeTree.gen.ts`, `.seed/tokens.json`,

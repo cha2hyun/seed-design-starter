@@ -2,18 +2,22 @@
 
 Open a pull request for the current branch.
 
+The base branch is `develop`, unless this is a release, in which case it is `main` and the branch
+is `develop` itself.
+
 1. Gather the full picture, not just the last commit. In parallel: `git status`,
-   `git log main..HEAD --oneline`, `git diff main...HEAD --stat` and the diff itself. A pull request
-   describes every commit on the branch.
-2. Confirm you are not on `main`, and that the branch follows `<type>/<kebab-summary>`.
+   `git log develop..HEAD --oneline`, `git diff develop...HEAD --stat` and the diff itself. A pull
+   request describes every commit on the branch.
+2. Confirm you are on a `<type>/<kebab-summary>` branch off `develop`, not on `develop` or `main`.
 3. Run `pnpm verify`. CI runs the same command; opening a red pull request wastes a review cycle.
 4. Review your own diff first with the rubric in `.cursor/commands/review.md`. Fix what you find
    before anyone else reads it.
 5. Push: `git push -u origin HEAD`.
-6. Create the pull request with `gh pr create`, filling `.github/PULL_REQUEST_TEMPLATE.md`:
+6. Create the pull request with `gh pr create --base develop`, filling
+   `.github/PULL_REQUEST_TEMPLATE.md`:
 
-   - **Title** — Conventional Commits, because squash merge turns it into the commit on `main`.
-     It describes the branch as a whole, not the last commit.
+   - **Title** — Conventional Commits, because squash merge turns it into a single commit. It
+     describes the branch as a whole, not the last commit.
    - **Why** — the problem this answers.
    - **What changed** — behaviour, not a file listing.
    - **How it was verified** — the commands you ran and the screens you actually opened.

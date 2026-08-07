@@ -52,15 +52,18 @@ Offline: `.seed/llms/` holds cached docs, and `pnpm seed:docs <component>` print
 
 ## Landing a change
 
-Work goes through a pull request; `main` rejects direct commits. Full contract in
+`main` is the release branch and rejects direct commits. `develop` is where work integrates, and
+small self-contained changes may land there directly. Anything that wants review gets a
+`<type>/<kebab-summary>` branch off `develop` and a pull request back into it. Full contract in
 [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ```bash
+git switch develop
 git switch -c feat/price-offer-toggle   # <type>/<kebab-summary>
 pnpm verify                             # identical to CI, so green here is green there
 git commit                              # Conventional Commits, see below
 git push -u origin HEAD
-gh pr create                            # title is Conventional Commits too — squash merge uses it
+gh pr create --base develop             # title is Conventional Commits too — squash merge uses it
 ```
 
 Commit format:

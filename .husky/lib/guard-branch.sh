@@ -1,9 +1,13 @@
 #!/bin/sh
 # Sourced by .husky/pre-commit.
 #
-# Two invariants that matter more than usual when an agent is driving the loop:
-#   1. Every change lands through a pull request, so main is never committed to directly.
-#   2. Branch names stay parseable, so a reviewer can tell what a branch is for without reading it.
+# Branch model:
+#   main       release branch. Only ever receives a merge from develop, never a direct commit.
+#   develop    integration branch. Small changes may land here directly.
+#   <type>/... short-lived work branch, opened from develop and merged back through a pull request.
+#
+# The guard exists because an agent commits far more often than it reads this file, so the
+# invariants have to be enforced where the mistake happens.
 
 branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 
@@ -18,10 +22,11 @@ if [ "$branch" = "main" ]; then
   fi
   cat >&2 <<'EOF'
 
-✖ main is protected. Work happens on a branch and lands through a pull request.
+✖ main is the release branch. It only receives merges from develop.
 
-  Move what you have onto a branch and commit there:
+  Commit on develop, or on a branch off it:
 
+    git switch develop
     git switch -c feat/<what-this-does>
 
   Already staged? The staged files come along with the switch.
@@ -31,12 +36,17 @@ EOF
   exit 1
 fi
 
+# develop is the integration branch and takes commits directly.
+if [ "$branch" = "develop" ]; then
+  exit 0
+fi
+
 case "$branch" in
   feat/* | fix/* | docs/* | refactor/* | perf/* | test/* | build/* | ci/* | chore/* | revert/*) ;;
   *)
     cat >&2 <<EOF
 
-✖ Branch "$branch" does not follow <type>/<summary>.
+✖ Branch "$branch" is neither develop nor <type>/<summary>.
 
   The type is the same set Conventional Commits uses:
   feat fix docs refactor perf test build ci chore revert

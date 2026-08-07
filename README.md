@@ -88,16 +88,21 @@ Cursor가 아니어도 됩니다. 이 프롬프트 하나로 충분해요.
 복구할 수 있습니다.
 
 ```bash
-git switch -c feat/price-offer-toggle   # main에는 커밋 자체가 막힘
+git switch develop                      # main은 릴리스 브랜치라 커밋 자체가 막힘
+git switch -c feat/price-offer-toggle   # 리뷰가 필요한 변경이면 브랜치를 팜
 pnpm verify                             # CI와 완전히 같은 명령
 git commit                              # Conventional Commits 강제
 git push -u origin HEAD                 # pre-push가 pnpm verify를 다시 실행
-gh pr create                            # PR 제목도 같은 규칙 (squash 머지용)
+gh pr create --base develop             # PR 제목도 같은 규칙 (squash 머지용)
 ```
+
+브랜치는 세 종류입니다. `main`은 릴리스 전용이라 `develop`에서 머지만 받고, `develop`은 통합
+브랜치로 작은 변경은 바로 커밋해도 됩니다. 리뷰가 필요한 변경은 `<type>/<kebab-summary>`
+브랜치를 따서 `develop`으로 PR을 올립니다.
 
 강제되는 것들:
 
-- **브랜치** — `<type>/<kebab-summary>`. `main` 직접 커밋은 pre-commit이 거부합니다.
+- **브랜치** — `develop` 또는 `<type>/<kebab-summary>`. `main` 직접 커밋은 pre-commit이 거부합니다.
 - **커밋 메시지** — Conventional Commits. 제목 12–72자, `update`·`changes`·`wip` 같은
   빈 껍데기 제목은 커스텀 commitlint 규칙이 걸러냅니다. scope는 선택이지만 쓴다면 실제 존재하는
   영역이어야 합니다.

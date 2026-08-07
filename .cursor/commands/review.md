@@ -2,7 +2,8 @@
 
 Review a pull request, or the current branch if none is named.
 
-Get the diff first: `gh pr diff <number>` for a pull request, otherwise `git diff main...HEAD`.
+Get the diff first: `gh pr diff <number>` for a pull request, otherwise `git diff develop...HEAD`
+(or `git diff main...HEAD` when reviewing `develop` itself ahead of a release).
 Read the whole thing before writing anything. Then work through the passes below in order — the
 early ones catch failures that render silently, which are the expensive ones here.
 

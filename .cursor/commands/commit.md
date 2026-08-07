@@ -4,8 +4,9 @@ Commit the current work the way this repository expects.
 
 1. Look before you write. Run `git status`, `git diff`, `git diff --staged` and `git log --oneline -5`
    in parallel so you know what changed and what the recent messages read like.
-2. Check the branch. `git rev-parse --abbrev-ref HEAD`. If it is `main`, create one now:
-   `git switch -c <type>/<kebab-summary>` — staged changes come along.
+2. Check the branch. `git rev-parse --abbrev-ref HEAD`. `main` is the release branch and rejects
+   commits: `git switch develop` first — staged changes come along. Small self-contained work can
+   stay on `develop`; anything that wants review gets `git switch -c <type>/<kebab-summary>`.
 3. Decide whether this is one commit or several. If the diff mixes a refactor with a behaviour
    change, stage and commit them separately so each one can be reviewed on its own.
 4. Run `pnpm verify`. Fixing a failure now costs less than fixing it after the push hook rejects it.
