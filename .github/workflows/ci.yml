@@ -40,7 +40,7 @@ jobs:
       - name: Check SEED token catalog is current
         run: pnpm seed:check
 
-      - name: Check brand.config.json is applied
+      - name: Check config/brand.config.json is applied
         run: pnpm brand:check
 
       - name: Check SEED snippet compatibility

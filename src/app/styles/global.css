@@ -106,7 +106,7 @@
 
 /* <brand-generated> */
 /*
- * Generated from brand.config.json — do not edit by hand.
+ * Generated from config/brand.config.json — do not edit by hand.
  * Run `pnpm brand:sync` after changing the config.
  * Remaps --seed-color-palette-carrot-* so SEED brand semantics (fg-brand,
  * bg-brand-solid, ActionButton brandSolid, …) follow the product palette.

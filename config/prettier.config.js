@@ -1,7 +1,12 @@
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+
 /**
  * `prettier-plugin-tailwindcss` must stay last: it wraps whatever plugin precedes it.
- * `tailwindStylesheet` points at the SEED-locked entry so class sorting knows about
- * SEED's custom utilities (`t4-bold`, `p-x4`, …) instead of Tailwind's defaults.
+ * `tailwindStylesheet` must be absolute — the plugin resolves relative paths from the
+ * file being formatted, not from this config.
  *
  * @type {import("prettier").Config}
  */
@@ -13,7 +18,7 @@ export default {
   arrowParens: "always",
 
   plugins: ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
-  tailwindStylesheet: "./src/app/styles/global.css",
+  tailwindStylesheet: join(ROOT, "src/app/styles/global.css"),
   tailwindFunctions: ["cn", "clsx"],
 
   /**

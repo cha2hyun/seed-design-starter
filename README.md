@@ -54,7 +54,7 @@ bg-red-500   p-4   text-lg   rounded-md   shadow-md   max-w-3xl
 
 예외는 의도적으로 번거롭습니다. 인라인 스타일은 바로 위에 `// seed-escape: <이유>` 주석이 있어야
 하고, SEED에 없는 토큰은 `global.css`의 프로젝트 `@theme` 블록에 사유와 함께 추가합니다. **제품
-브랜드 색**은 예외가 아니라 `brand.config.json`을 고친 뒤 `pnpm brand:sync`로만 바꿉니다
+브랜드 색**은 예외가 아니라 `config/brand.config.json`을 고친 뒤 `pnpm brand:sync`로만 바꿉니다
 (SEED carrot 스케일 → brand 시맨틱).
 
 ---
@@ -71,7 +71,9 @@ bg-red-500   p-4   text-lg   rounded-md   shadow-md   max-w-3xl
 | 파일                             | 역할                                                                           |
 | -------------------------------- | ------------------------------------------------------------------------------ |
 | `.cursor/mcp.json`               | `seed-docs` (인증 불필요)                                                      |
-| `brand.config.json`              | 제품 brand 팔레트 (carrot 스케일 재매핑). 수정 후 `pnpm brand:sync`            |
+| `config/brand.config.json`       | 제품 brand 팔레트 (carrot 스케일 재매핑). 수정 후 `pnpm brand:sync`            |
+| `config/`                        | ESLint · Prettier · Vite · commitlint · brand 등 툴링 설정                     |
+| `env/`                           | Vite 환경변수 (`VITE_*`). `env/.env.example` 참고, 로컬 비밀은 `.env.local`    |
 | `.cursor/rules/*.mdc`            | 프로젝트 · 락인 · FSD · i18n · MCP 사용법 · 코드 스타일 · git 워크플로         |
 | `.cursor/rules/_generated-*.mdc` | 설치된 SEED 버전의 실제 토큰 목록 (자동 생성)                                  |
 | `.cursor/commands/*.md`          | `/start` `/seed-sync` `/new-feature` `/audit-tokens` `/commit` `/pr` `/review` |
@@ -157,21 +159,21 @@ import는 항상 아래 방향으로만 흐릅니다: `app → pages → widgets
 
 ## 명령어
 
-| 명령어               | 하는 일                                                |
-| -------------------- | ------------------------------------------------------ |
-| `pnpm bootstrap`     | 최초 실행: 설치 · 라우트 생성 · SEED 동기화 · 타입체크 |
-| `pnpm dev`           | 개발 서버                                              |
-| `pnpm build`         | 라우트 생성 → 타입체크 → 프로덕션 빌드                 |
-| `pnpm verify`        | CI가 도는 모든 검사                                    |
-| `pnpm verify:lockin` | 락인 회귀 테스트                                       |
-| `pnpm brand:sync`    | `brand.config.json` → `global.css` brand 오버라이드    |
-| `pnpm brand:check`   | brand 생성물이 config와 일치하는지 확인                |
-| `pnpm lint` / `:fix` | ESLint (SEED 락인 + FSD 경계)                          |
-| `pnpm lint:fsd`      | steiger로 FSD 구조 검사                                |
-| `pnpm seed:add`      | SEED 스니펫 추가 — `pnpm seed:add ui:tabs`             |
-| `pnpm seed:sync`     | 토큰 카탈로그 · 생성 룰 · 문서 캐시 재생성             |
-| `pnpm seed:compat`   | 스니펫과 설치된 SEED 버전 호환성 검사                  |
-| `pnpm seed:docs`     | 컴포넌트의 문서 · llms.txt · 스니펫 URL 출력           |
+| 명령어               | 하는 일                                                    |
+| -------------------- | ---------------------------------------------------------- |
+| `pnpm bootstrap`     | 최초 실행: 설치 · 라우트 생성 · SEED 동기화 · 타입체크     |
+| `pnpm dev`           | 개발 서버                                                  |
+| `pnpm build`         | 라우트 생성 → 타입체크 → 프로덕션 빌드                     |
+| `pnpm verify`        | CI가 도는 모든 검사                                        |
+| `pnpm verify:lockin` | 락인 회귀 테스트                                           |
+| `pnpm brand:sync`    | `config/brand.config.json` → `global.css` brand 오버라이드 |
+| `pnpm brand:check`   | brand 생성물이 config와 일치하는지 확인                    |
+| `pnpm lint` / `:fix` | ESLint (SEED 락인 + FSD 경계)                              |
+| `pnpm lint:fsd`      | steiger로 FSD 구조 검사                                    |
+| `pnpm seed:add`      | SEED 스니펫 추가 — `pnpm seed:add ui:tabs`                 |
+| `pnpm seed:sync`     | 토큰 카탈로그 · 생성 룰 · 문서 캐시 재생성                 |
+| `pnpm seed:compat`   | 스니펫과 설치된 SEED 버전 호환성 검사                      |
+| `pnpm seed:docs`     | 컴포넌트의 문서 · llms.txt · 스니펫 URL 출력               |
 
 ---
 

@@ -63,7 +63,7 @@ and `pnpm verify:lockin` refuse them, including inside vendored `src/shared/seed
 
 ## Brand
 
-Product brand lives in `brand.config.json` (schema: `brand.config.schema.json`). It remaps SEED's
+Product brand lives in `config/brand.config.json` (schema: `config/brand.config.schema.json`). It remaps SEED's
 `palette-carrot-*` scale so semantic brand tokens (`fg-brand`, `bg-brand-solid`, …) and components
 like `ActionButton` `brandSolid` follow the product. After editing the config run
 `pnpm brand:sync`. Never hand-edit the `/* <brand-generated> */` block in `global.css`, and never

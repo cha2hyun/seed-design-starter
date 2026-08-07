@@ -1,5 +1,5 @@
 #!/bin/sh
-if ! pnpm exec commitlint --edit "$1"; then
+if ! pnpm exec commitlint --config config/commitlint.config.js --edit "$1"; then
   cat >&2 <<'EOF'
 
 ✖ The commit message does not follow Conventional Commits.

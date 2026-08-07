@@ -10,16 +10,16 @@
   },
   "scripts": {
     "bootstrap": "tsx scripts/bootstrap.ts",
-    "dev": "vite",
-    "build": "pnpm routes:gen && tsc -b && vite build",
-    "preview": "vite preview",
+    "dev": "vite --config config/vite.config.ts",
+    "build": "pnpm routes:gen && tsc -b && vite build --config config/vite.config.ts",
+    "preview": "vite preview --config config/vite.config.ts",
     "routes:gen": "tsr generate",
     "typecheck": "pnpm routes:gen && tsc -b --noEmit",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint -c config/eslint.config.js .",
+    "lint:fix": "eslint -c config/eslint.config.js . --fix",
     "lint:fsd": "steiger ./src",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "prettier --config config/prettier.config.js --write .",
+    "format:check": "prettier --config config/prettier.config.js --check .",
     "seed:sync": "tsx scripts/sync-seed.ts",
     "seed:check": "tsx scripts/sync-seed.ts --check",
     "seed:compat": "seed-design compat",
@@ -87,11 +87,11 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
+      "eslint -c config/eslint.config.js --fix",
+      "prettier --config config/prettier.config.js --write"
     ],
     "*.{json,md,mdc,css,html,yml,yaml}": [
-      "prettier --write"
+      "prettier --config config/prettier.config.js --write"
     ]
   }
 }

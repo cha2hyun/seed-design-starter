@@ -3,7 +3,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const CONFIG_FILE = join(ROOT, "brand.config.json");
+const CONFIG_FILE = join(ROOT, "config/brand.config.json");
 const GLOBAL_CSS = join(ROOT, "src/app/styles/global.css");
 
 const STEPS = ["100", "200", "300", "400", "500", "600", "700", "800", "900", "1000"] as const;
@@ -30,7 +30,9 @@ async function main(): Promise<void> {
 
   if (check) {
     if (next !== css) {
-      console.error("Brand CSS is out of date with brand.config.json. Run `pnpm brand:sync`.");
+      console.error(
+        "Brand CSS is out of date with config/brand.config.json. Run `pnpm brand:sync`.",
+      );
       process.exit(1);
     }
     console.log(`Brand palette "${config.name}" is in sync.`);
@@ -49,16 +51,16 @@ async function main(): Promise<void> {
 function parseConfig(raw: string): BrandConfig {
   const parsed = JSON.parse(raw) as BrandConfig;
   if (!parsed?.name || typeof parsed.name !== "string") {
-    throw new Error("brand.config.json: `name` must be a non-empty string");
+    throw new Error("config/brand.config.json: `name` must be a non-empty string");
   }
   for (const mode of ["light", "dark"] as const) {
     const scale = parsed.palette?.[mode];
-    if (!scale) throw new Error(`brand.config.json: missing palette.${mode}`);
+    if (!scale) throw new Error(`config/brand.config.json: missing palette.${mode}`);
     for (const step of STEPS) {
       const value = scale[step];
       if (typeof value !== "string" || !HEX.test(value)) {
         throw new Error(
-          `brand.config.json: palette.${mode}.${step} must be a hex color, got ${JSON.stringify(value)}`,
+          `config/brand.config.json: palette.${mode}.${step} must be a hex color, got ${JSON.stringify(value)}`,
         );
       }
     }
@@ -72,7 +74,7 @@ function renderBrandBlock(config: BrandConfig): string {
 
   return `${BEGIN}
 /*
- * Generated from brand.config.json — do not edit by hand.
+ * Generated from config/brand.config.json — do not edit by hand.
  * Run \`pnpm brand:sync\` after changing the config.
  * Remaps --seed-color-palette-carrot-* so SEED brand semantics (fg-brand,
  * bg-brand-solid, ActionButton brandSolid, …) follow the product palette.

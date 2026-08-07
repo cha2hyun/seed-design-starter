@@ -19,7 +19,7 @@ Use SEED tokens: `bg-bg-layer-default`, `p-x4`, `t4-bold`, `rounded-r4`, `shadow
 The valid set for the installed version is in `.seed/tokens.json` and
 `.cursor/rules/_generated-seed-tokens.mdc`.
 
-Product brand colors are not free-form Tailwind colors. Edit `brand.config.json` (light/dark
+Product brand colors are not free-form Tailwind colors. Edit `config/brand.config.json` (light/dark
 carrot-scale hex values), then run `pnpm brand:sync`. That remaps `--seed-color-palette-carrot-*`
 so `bg-bg-brand-solid`, `text-fg-brand`, and SEED `brandSolid` variants follow the product.
 Do not invent `bg-#hex` utilities or hand-edit the generated brand block in `global.css`.
@@ -49,10 +49,10 @@ Offline: `.seed/llms/` holds cached docs, and `pnpm seed:docs <component>` print
 
 1. **SEED tokens only.** Escape hatches are an inline `style` with a `// seed-escape: <reason>`
    comment above it, or a new token in the project `@theme` block of `global.css` with a comment
-   explaining what SEED lacks. Brand recoloring goes through `brand.config.json`, not new tokens.
+   explaining what SEED lacks. Brand recoloring goes through `config/brand.config.json`, not new tokens.
 2. **No new stylesheets.** `src/app/styles/global.css` is the only CSS file and holds configuration
    only, never a selector (except the generated brand CSS-variable block).
-3. **Brand via config.** Change product colors only in `brand.config.json`, then `pnpm brand:sync`.
+3. **Brand via config.** Change product colors only in `config/brand.config.json`, then `pnpm brand:sync`.
 4. **FSD import direction:** `app → pages → widgets → features → entities → shared`. Import a slice
    through its `index.ts`. `shared` is segment-based and may be imported directly.
 5. **Import SEED components from `seed-design/ui/*`**, not `@seed-design/react`. Missing one? Run
@@ -106,13 +106,15 @@ pnpm dev
 pnpm verify           # identical to CI: typecheck…brand…compat…lockin…build
 pnpm seed:add ui:tabs # add a SEED snippet
 pnpm seed:sync        # regenerate the token catalog and cached docs
-pnpm brand:sync       # apply brand.config.json into global.css
+pnpm brand:sync       # apply config/brand.config.json into global.css
 pnpm seed:compat      # check snippets against installed SEED versions
 ```
 
 ## Where things live
 
 ```
+config/          tooling configs (eslint, prettier, vite, commitlint, brand, …)
+env/             Vite env files — copy env/.env.example → env/.env.local for secrets
 src/
 ├── app/         providers, routes, router, the single stylesheet
 ├── pages/       one screen per slice
@@ -121,6 +123,8 @@ src/
 ├── entities/    business objects: types, api, presentation
 └── shared/      api, config, lib, ui, i18n, seed (CLI snippets)
 ```
+
+Only `VITE_*` keys from `env/` reach client code (`import.meta.env` / `@/shared/config` `ENV`).
 
 ## After bumping a @seed-design/* dependency
 
