@@ -5,7 +5,7 @@ Bring the repository up to date with the latest SEED release.
 1. Check what is current. Ask npm for the latest versions of `@seed-design/react`,
    `@seed-design/css`, `@seed-design/tailwind4-theme`, `@seed-design/vite-plugin` and
    `@seed-design/cli`, and compare them with `package.json`. Do the same for
-   `@seed-design/docs-mcp` and `@seed-design/mcp` against the pinned versions in `.cursor/mcp.json`.
+   `@seed-design/docs-mcp` against the pinned version in `.cursor/mcp.json`.
 2. If nothing moved, say so and stop.
 3. Read `get_react_changelog` from the `seed-docs` MCP server for every version being crossed, and
    summarise anything that renames a token, changes a component's props, or removes an export.

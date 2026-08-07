@@ -1,5 +1,4 @@
 import { spawnSync } from "node:child_process";
-import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -65,12 +64,6 @@ function main(): void {
   console.log("  pnpm dev            start the app on http://localhost:5173");
   console.log("  pnpm verify         run every check this repository enforces");
   console.log("  pnpm seed:add       add a SEED component snippet");
-
-  if (!existsSync(join(ROOT, ".env"))) {
-    console.log(
-      "\nOptional: copy .env.example to .env and add a Figma token to enable the seed-figma MCP server.",
-    );
-  }
 
   console.log(
     "\nWorking with an AI agent? Open this repository in Cursor and run `/start`.\n" +

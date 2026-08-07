@@ -70,7 +70,7 @@ bg-red-500   p-4   text-lg   rounded-md   shadow-md   max-w-3xl
 
 | 파일                             | 역할                                                                           |
 | -------------------------------- | ------------------------------------------------------------------------------ |
-| `.cursor/mcp.json`               | `seed-docs`(인증 불필요), `seed-figma`(Figma 토큰 있을 때)                     |
+| `.cursor/mcp.json`               | `seed-docs` (인증 불필요)                                                     |
 | `.cursor/rules/*.mdc`            | 프로젝트 · 락인 · FSD · i18n · MCP 사용법 · 코드 스타일 · git 워크플로         |
 | `.cursor/rules/_generated-*.mdc` | 설치된 SEED 버전의 실제 토큰 목록 (자동 생성)                                  |
 | `.cursor/commands/*.md`          | `/start` `/seed-sync` `/new-feature` `/audit-tokens` `/commit` `/pr` `/review` |
