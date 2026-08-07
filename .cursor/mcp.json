@@ -1,10 +1,12 @@
 {
   "mcpServers": {
     "seed-docs": {
+      "type": "stdio",
       "command": "npx",
       "args": ["-y", "@seed-design/docs-mcp@0.7.0"]
     },
     "seed-figma": {
+      "type": "stdio",
       "command": "npx",
       "args": ["-y", "@seed-design/mcp@3.0.0"],
       "env": {
