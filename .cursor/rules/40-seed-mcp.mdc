@@ -8,6 +8,16 @@ alwaysApply: true
 Two MCP servers are declared in `.cursor/mcp.json` and travel with the repository. `seed-docs` needs
 no credentials. `seed-figma` activates only when `FIGMA_PERSONAL_ACCESS_TOKEN` is set.
 
+Both are launched through `.cursor/mcp-node.sh`. Cursor spawns MCP servers from the desktop
+environment, where `PATH` is only `/usr/bin:/bin:/usr/sbin:/sbin`, so a bare `npx` is invisible to
+anyone whose Node comes from nvm, fnm, Volta or Homebrew. The shim finds Node first. If a server is
+missing from Cursor's MCP list, run the shim by hand before suspecting anything else:
+
+```bash
+env -i HOME="$HOME" PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+  /bin/sh .cursor/mcp-node.sh @seed-design/docs-mcp@0.7.0
+```
+
 SEED ships several packages that version independently and rename tokens between majors. Recall is
 unreliable here; look it up.
 

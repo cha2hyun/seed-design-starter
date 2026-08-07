@@ -50,8 +50,13 @@ This repository vendors SEED-related material under Apache-2.0:
 
 ---------------------------------------------------------------------------
 Seed Icon
-https://github.com/daangn/seed-icon-v3
 Apache License 2.0
+
+Published packages (source of LICENSE/NOTICE; the upstream GitHub repo named
+in package metadata, daangn/seed-icon-v3, is not publicly available):
+- https://www.npmjs.com/package/@karrotmarket/react-monochrome-icon
+- https://www.npmjs.com/package/@karrotmarket/react-multicolor-icon
+Docs: https://seed-design.io/react/components/iconography/library
 
 Seed Icon
 Copyright 2025 주식회사 당근마켓

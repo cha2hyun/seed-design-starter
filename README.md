@@ -64,6 +64,10 @@ bg-red-500   p-4   text-lg   rounded-md   shadow-md   max-w-3xl
 `.cursor/`가 레포에 커밋되어 있어서, **클론만 하면 MCP 서버가 자동으로 잡힙니다.** 수동 설정은
 없습니다. Cursor에서 열고 `/start`를 실행하세요.
 
+> MCP 서버는 `.cursor/mcp-node.sh`를 거쳐 실행됩니다. Cursor는 데스크톱 환경에서 서버를 띄우는데
+> 그 PATH가 `/usr/bin:/bin:/usr/sbin:/sbin`뿐이라, nvm·fnm·Volta·Homebrew로 설치한 Node는 보이지
+> 않아 `npx`가 그냥 실패합니다. shim이 Node를 먼저 찾아줍니다.
+
 | 파일                             | 역할                                                                           |
 | -------------------------------- | ------------------------------------------------------------------------------ |
 | `.cursor/mcp.json`               | `seed-docs`(인증 불필요), `seed-figma`(Figma 토큰 있을 때)                     |
