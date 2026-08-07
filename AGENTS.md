@@ -23,13 +23,16 @@ The valid set for the installed version is in `.seed/tokens.json` and
 
 Ask the `seed-docs` MCP server. It is declared in `.cursor/mcp.json` and needs no credentials.
 
-- `list_react_components` / `get_react_component({ componentName })` — what exists, what props
+- `discover_seed_docs()` — the section and category map, if you are unsure where to look
+- `list_docs({ section: "react", category: "components" })` — what exists, and the `path` for each
+- `get_doc({ section: "react", path: "components/action-button" })` — props and usage
+- `get_doc({ section: "docs", path: "components/action-button" })` — when to use it at all
 - `get_rootage({ path: "/color.json" })` — exact token names
 - `search_icons({ query })` — icons, Korean queries work
-- `get_docs_component({ componentName })` — when a component should be used
 
 SEED packages version independently and rename tokens between majors, so recalling names from
-memory is unreliable. Look them up.
+memory is unreliable. Look them up. The MCP tool surface has shifted between minor versions too, so
+call `discover_seed_docs` rather than guessing a tool name if a call fails.
 
 Offline: `.seed/llms/` holds cached docs, and `pnpm seed:docs <component>` prints the URLs.
 
