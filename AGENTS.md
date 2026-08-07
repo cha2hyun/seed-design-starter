@@ -103,7 +103,7 @@ first because they fail silently.
 ```bash
 pnpm bootstrap        # first run: install, generate routes, sync SEED, typecheck
 pnpm dev
-pnpm verify           # typecheck, lint, FSD lint, format, SEED drift, brand, lock-in
+pnpm verify           # identical to CI: typecheck…brand…compat…lockin…build
 pnpm seed:add ui:tabs # add a SEED snippet
 pnpm seed:sync        # regenerate the token catalog and cached docs
 pnpm brand:sync       # apply brand.config.json into global.css

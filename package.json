@@ -28,7 +28,7 @@
     "brand:sync": "tsx scripts/sync-brand.ts",
     "brand:check": "tsx scripts/sync-brand.ts --check",
     "verify:lockin": "tsx scripts/verify-lockin.ts",
-    "verify": "pnpm typecheck && pnpm lint && pnpm lint:fsd && pnpm format:check && pnpm seed:check && pnpm brand:check && pnpm verify:lockin",
+    "verify": "pnpm typecheck && pnpm lint && pnpm lint:fsd && pnpm format:check && pnpm seed:check && pnpm brand:check && pnpm seed:compat && pnpm verify:lockin && pnpm build",
     "prepare": "husky"
   },
   "dependencies": {

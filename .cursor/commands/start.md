@@ -29,7 +29,7 @@ from `@seed-design/*`. Tailwind's own theme has been deleted, so a non-SEED util
 ## Do this now
 
 1. Report the SEED versions from `.seed/tokens.json` and whether they match `package.json`.
-2. Call `discover_tools` on the `seed-docs` MCP server and confirm it responds. If it does not,
+2. Call `discover_seed_docs` on the `seed-docs` MCP server and confirm it responds. If it does not,
    tell the user to enable it in Cursor's MCP settings and stop.
 3. Run `pnpm verify` and report the result.
 4. Summarise, in three or four sentences, what the blueprint app does and which files a new

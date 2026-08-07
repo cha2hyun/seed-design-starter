@@ -46,7 +46,7 @@ This repository vendors SEED-related material under Apache-2.0:
 - npm packages such as @seed-design/react and @seed-design/css
 - CLI-generated snippets under src/shared/seed/ (icon imports in those
   snippets are patched to lucide-react for this starter)
-- the seed-design skill under .agents/skills/seed-design/ (and any Cursor
-  mirror of that skill)
+- the seed-design skill under `.agents/skills/seed-design/` (`.cursor/skills/seed-design` is a
+  symlink to that copy)
 
 App icons use lucide-react (ISC), not Karrot/SEED icon packages.

@@ -28,6 +28,7 @@ attribution (SEED Design) and licenses/Apache-2.0.txt for the Apache License
 
 - src/shared/seed/ — snippets from @seed-design/cli (Apache-2.0; icons patched
   to lucide-react in this starter)
-- .agents/skills/seed-design/ — vendored from daangn/seed-design (Apache-2.0)
+- .agents/skills/seed-design/ — vendored from daangn/seed-design (Apache-2.0);
+  .cursor/skills/seed-design is a symlink to that copy
 - @seed-design/* — Apache-2.0 dependencies
 - lucide-react — ISC

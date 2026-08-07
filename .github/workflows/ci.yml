@@ -24,6 +24,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      # Identical to local `pnpm verify` / pre-push — keep the step list in sync with package.json.
       - name: Typecheck
         run: pnpm typecheck
 
@@ -38,6 +39,9 @@ jobs:
 
       - name: Check SEED token catalog is current
         run: pnpm seed:check
+
+      - name: Check brand.config.json is applied
+        run: pnpm brand:check
 
       - name: Check SEED snippet compatibility
         run: pnpm seed:compat

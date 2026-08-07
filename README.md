@@ -75,7 +75,7 @@ bg-red-500   p-4   text-lg   rounded-md   shadow-md   max-w-3xl
 | `.cursor/rules/*.mdc`            | 프로젝트 · 락인 · FSD · i18n · MCP 사용법 · 코드 스타일 · git 워크플로         |
 | `.cursor/rules/_generated-*.mdc` | 설치된 SEED 버전의 실제 토큰 목록 (자동 생성)                                  |
 | `.cursor/commands/*.md`          | `/start` `/seed-sync` `/new-feature` `/audit-tokens` `/commit` `/pr` `/review` |
-| `.cursor/skills/seed-design/`    | 당근 공식 SEED Agent Skill (vendoring)                                         |
+| `.cursor/skills/seed-design/`    | `.agents/skills/seed-design` 심링크 (SEED Agent Skill)                         |
 | `AGENTS.md`                      | Cursor 외 에이전트용 동일 지침                                                 |
 | `CONTRIBUTING.md`                | 브랜치 · 커밋 · PR · 리뷰 계약                                                 |
 

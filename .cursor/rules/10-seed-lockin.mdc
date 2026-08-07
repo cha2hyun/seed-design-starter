@@ -42,7 +42,7 @@ assuming.
 
 The full list of valid tokens for the installed version lives in
 `.cursor/rules/_generated-seed-tokens.mdc` and `.seed/tokens.json`. When you are unsure, call
-`get_rootage` or `get_react_component` on the `seed-docs` MCP server rather than guessing.
+`get_rootage` or `get_doc` on the `seed-docs` MCP server rather than guessing.
 
 ## Components
 

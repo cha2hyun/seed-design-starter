@@ -7,8 +7,10 @@ Bring the repository up to date with the latest SEED release.
    `@seed-design/cli`, and compare them with `package.json`. Do the same for
    `@seed-design/docs-mcp` against the pinned version in `.cursor/mcp.json`.
 2. If nothing moved, say so and stop.
-3. Read `get_react_changelog` from the `seed-docs` MCP server for every version being crossed, and
-   summarise anything that renames a token, changes a component's props, or removes an export.
+3. Read recent updates via the `seed-docs` MCP server —
+   `list_docs({ section: "react", category: "updates" })` then `get_doc` for each version being
+   crossed — and summarise anything that renames a token, changes a component's props, or removes
+   an export.
 4. Upgrade with `pnpm add`, keeping `@seed-design/css` and `@seed-design/tailwind4-theme` on the
    same minor — they are peers.
 5. Run `pnpm seed:sync` to regenerate `.seed/tokens.json`, the generated token rule and the cached

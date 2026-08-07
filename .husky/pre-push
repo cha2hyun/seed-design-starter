@@ -12,7 +12,10 @@ if ! pnpm verify; then
     lint:fsd      the slice is in the wrong layer or missing its index.ts
     format:check  pnpm format
     seed:check    pnpm seed:sync, then commit the regenerated files
+    brand:check   pnpm brand:sync, then commit global.css
+    seed:compat   re-add outdated snippets with pnpm seed:add ui:<name>
     verify:lockin the theme reset in src/app/styles/global.css regressed
+    build         fix the Vite/TypeScript error the compile printed
 
 EOF
   exit 1

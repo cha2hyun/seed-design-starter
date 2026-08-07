@@ -6,9 +6,10 @@ Ask for the feature's name and what the user does with it, if that is not alread
 
 1. Decide the layer first. If it is a business object, it belongs in `entities`. If it is a screen,
    `pages`. A feature is one thing the user _does_.
-2. Look up the SEED components you will need before writing any JSX: `list_react_components`, then
-   `get_react_component` for the props. If a snippet is missing from `src/shared/seed/ui/`, add it
-   with `pnpm seed:add ui:<name>`.
+2. Look up the SEED components you will need before writing any JSX:
+   `list_docs({ section: "react", category: "components" })`, then
+   `get_doc({ section: "react", path: "components/<name>" })` for the props. If a snippet is missing
+   from `src/shared/seed/ui/`, add it with `pnpm seed:add ui:<name>`.
 3. Create the slice:
 
    ```
