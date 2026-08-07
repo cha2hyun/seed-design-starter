@@ -199,6 +199,7 @@ import는 항상 아래 방향으로만 흐릅니다: `app → pages → widgets
 
 이 저장소의 코드는 [MIT](./LICENSE)입니다.
 
-SEED Design·Seed Icon 등 Apache-2.0 구성요소의 귀속 고지는 [NOTICE](./NOTICE)에,
+SEED Design 등 Apache-2.0 구성요소의 귀속 고지는 [NOTICE](./NOTICE)에,
 라이선스 전문은 [licenses/Apache-2.0.txt](./licenses/Apache-2.0.txt)에 있습니다.
-당근 로고·상호·캐릭터 같은 브랜드 리소스는 NOTICE의 상표 안내를 따릅니다.
+앱 아이콘은 `lucide-react`(ISC)를 쓰고, 당근 로고·상호·캐릭터 같은 브랜드 리소스는
+NOTICE의 상표 안내를 따릅니다.

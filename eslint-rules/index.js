@@ -1,4 +1,5 @@
 import noInlineStyle from "./rules/no-inline-style.js";
+import noKarrotIcons from "./rules/no-karrot-icons.js";
 import noStylesheets from "./rules/no-stylesheets.js";
 import seedTokenOnly from "./rules/seed-token-only.js";
 
@@ -15,6 +16,7 @@ export const seedLockin = {
     "token-only": seedTokenOnly,
     "no-stylesheets": noStylesheets,
     "no-inline-style": noInlineStyle,
+    "no-karrot-icons": noKarrotIcons,
   },
 };
 

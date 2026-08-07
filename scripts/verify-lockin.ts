@@ -118,7 +118,36 @@ async function partition(candidates: string[]): Promise<{ emitting: string[]; si
   return { emitting, silent };
 }
 
+/** Icon packages this starter refuses; app icons come from lucide-react. */
+const BANNED_ICON_PACKAGES = [
+  "@karrotmarket/react-monochrome-icon",
+  "@karrotmarket/react-multicolor-icon",
+  "@daangn/react-monochrome-icon",
+  "@daangn/react-multicolor-icon",
+];
+
+async function assertNoBannedIconDeps(): Promise<void> {
+  const pkg = JSON.parse(await readFile(join(ROOT, "package.json"), "utf8")) as {
+    dependencies?: Record<string, string>;
+    devDependencies?: Record<string, string>;
+  };
+  const declared = new Set([
+    ...Object.keys(pkg.dependencies ?? {}),
+    ...Object.keys(pkg.devDependencies ?? {}),
+  ]);
+  const found = BANNED_ICON_PACKAGES.filter((name) => declared.has(name));
+  if (found.length === 0) return;
+
+  console.error(
+    "Karrot/SEED icon packages are banned; use lucide-react instead.\n" +
+      `Remove from package.json: ${found.join(", ")}`,
+  );
+  process.exit(1);
+}
+
 async function main(): Promise<void> {
+  await assertNoBannedIconDeps();
+
   const [dead, alive] = await Promise.all([partition(MUST_BE_DEAD), partition(MUST_BE_ALIVE)]);
   const leaked = dead.emitting;
   const missing = alive.silent;
@@ -126,7 +155,7 @@ async function main(): Promise<void> {
   if (leaked.length === 0 && missing.length === 0) {
     console.log(
       `Lock-in holds: ${MUST_BE_DEAD.length} non-SEED utilities emit nothing, ` +
-        `${MUST_BE_ALIVE.length} SEED utilities still compile.`,
+        `${MUST_BE_ALIVE.length} SEED utilities still compile. Karrot icon packages absent.`,
     );
     return;
   }

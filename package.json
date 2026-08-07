@@ -30,8 +30,6 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@karrotmarket/react-monochrome-icon": "^1.25.0",
-    "@karrotmarket/react-multicolor-icon": "^1.25.0",
     "@seed-design/css": "^2.3.0",
     "@seed-design/react": "^2.1.0",
     "@tanstack/react-query": "^5.101.4",
@@ -39,6 +37,7 @@
     "clsx": "^2.1.1",
     "i18next": "^26.3.6",
     "i18next-browser-languagedetector": "^8.2.1",
+    "lucide-react": "^1.29.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-i18next": "^17.0.11",

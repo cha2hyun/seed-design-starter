@@ -28,7 +28,11 @@ Ask the `seed-docs` MCP server. It is declared in `.cursor/mcp.json` and needs n
 - `get_doc({ section: "react", path: "components/action-button" })` — props and usage
 - `get_doc({ section: "docs", path: "components/action-button" })` — when to use it at all
 - `get_rootage({ path: "/color.json" })` — exact token names
-- `search_icons({ query })` — icons, Korean queries work
+
+App icons use `lucide-react`, not SEED/Karrot icon packages. `seed-lockin/no-karrot-icons`
+and `pnpm verify:lockin` refuse `@karrotmarket/react-*-icon` / `@daangn/react-*-icon`, including
+inside vendored snippets. The MCP `search_icons` tool is SEED reference only — do not install
+those packages.
 
 SEED packages version independently and rename tokens between majors, so recalling names from
 memory is unreliable. Look them up. The MCP tool surface has shifted between minor versions too, so

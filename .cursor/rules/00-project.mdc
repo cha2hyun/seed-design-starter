@@ -15,6 +15,7 @@ architecture or i18n decisions.
 | --------------- | ----------------------------------------------------------- |
 | Build           | Vite 8, React 19, TypeScript 5.9                            |
 | Design system   | `@seed-design/react` + `@seed-design/css`, snippets via CLI |
+| Icons           | `lucide-react` (not Karrot/SEED icon packages)              |
 | Styling         | Tailwind CSS 4 with SEED tokens only                        |
 | Routing         | TanStack Router, file-based under `src/app/routes`          |
 | Server state    | TanStack Query                                              |

@@ -24,7 +24,7 @@ export default {
     "^react(-dom)?(/.*)?$",
     "<THIRD_PARTY_MODULES>",
     "^@seed-design/(.*)$",
-    "^@karrotmarket/(.*)$",
+    "^lucide-react(/.*)?$",
     "^seed-design/(.*)$",
     "^@/app/(.*)$",
     "^@/pages/(.*)$",

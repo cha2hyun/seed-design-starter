@@ -57,8 +57,9 @@ These files are snippets fetched by `@seed-design/cli`. If the component you nee
 with `pnpm seed:add ui:<name>` instead of hand-rolling one. Only `src/shared/seed/**` and
 `src/shared/ui/**` may import `@seed-design/react` directly.
 
-Icons come from `@karrotmarket/react-monochrome-icon` and `@karrotmarket/react-multicolor-icon`. Find
-the right one with `search_icons` on the MCP server; it understands Korean queries.
+Icons come from `lucide-react`. Prefer named imports (`import { ChevronRight } from "lucide-react"`).
+Do not add `@karrotmarket/react-*-icon` or `@daangn/react-*-icon` — `seed-lockin/no-karrot-icons`
+and `pnpm verify:lockin` refuse them, including inside vendored `src/shared/seed/**` snippets.
 
 ## Escape hatches
 

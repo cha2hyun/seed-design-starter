@@ -13,8 +13,9 @@ from `@seed-design/*`. Tailwind's own theme has been deleted, so a non-SEED util
 
 1. **SEED is the source of truth.** Before writing a `className` or reaching for a component,
    confirm the token or component exists by calling the `seed-docs` MCP server
-   (`list_react_components`, `get_react_component`, `get_rootage`, `search_icons`). Do not guess
-   token names from memory: they change between versions.
+   (`discover_seed_docs`, `list_docs`, `get_doc`, `get_rootage`). Do not guess
+   token names from memory: they change between versions. App icons use
+   `lucide-react`, not Karrot/SEED icon packages.
 2. **The installed version is the version that matters.** `.seed/tokens.json` and
    `.cursor/rules/_generated-seed-tokens.mdc` are generated from the packages actually installed
    here. When they disagree with the documentation, they win.

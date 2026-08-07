@@ -23,9 +23,11 @@ SOFTWARE.
 ---
 
 Third-party components remain under their original licenses. See NOTICE for
-attribution (SEED Design, Seed Icon) and licenses/Apache-2.0.txt for the Apache
-License 2.0 text. In particular:
+attribution (SEED Design) and licenses/Apache-2.0.txt for the Apache License
+2.0 text. In particular:
 
-- src/shared/seed/ — snippets from @seed-design/cli (Apache-2.0)
+- src/shared/seed/ — snippets from @seed-design/cli (Apache-2.0; icons patched
+  to lucide-react in this starter)
 - .agents/skills/seed-design/ — vendored from daangn/seed-design (Apache-2.0)
-- @seed-design/* and @karrotmarket/react-*-icon — Apache-2.0 dependencies
+- @seed-design/* — Apache-2.0 dependencies
+- lucide-react — ISC

@@ -26,16 +26,16 @@ unreliable here; look it up.
 `@seed-design/docs-mcp` exposes eight tools. Documentation is addressed as a `section` plus a
 `path`, not as one tool per topic.
 
-| Tool                                     | Use it for                                           |
-| ---------------------------------------- | ---------------------------------------------------- |
-| `discover_seed_docs()`                   | The section and category map. Call once when unsure. |
-| `list_docs({ section, category })`       | What documents exist, with the `path` to request.    |
-| `get_doc({ section, path })`             | One document in full.                                |
-| `get_full_docs({ section })`             | A whole section at once. Large — prefer `get_doc`.   |
-| `get_rootage({ path })`                  | Raw token and component spec JSON.                   |
-| `search_icons({ query, type, limit })`   | Find an icon. Korean queries work.                   |
-| `list_icons({ type, variant, service })` | Browse icons by category.                            |
-| `get_icon_details({ iconName })`         | An icon's metadata and its React import statement.   |
+| Tool                                     | Use it for                                              |
+| ---------------------------------------- | ------------------------------------------------------- |
+| `discover_seed_docs()`                   | The section and category map. Call once when unsure.    |
+| `list_docs({ section, category })`       | What documents exist, with the `path` to request.       |
+| `get_doc({ section, path })`             | One document in full.                                   |
+| `get_full_docs({ section })`             | A whole section at once. Large — prefer `get_doc`.      |
+| `get_rootage({ path })`                  | Raw token and component spec JSON.                      |
+| `search_icons({ query, type, limit })`   | SEED iconography reference only (this app uses Lucide). |
+| `list_icons({ type, variant, service })` | Browse SEED icons by category (reference only).         |
+| `get_icon_details({ iconName })`         | SEED icon metadata (reference only — do not install).   |
 
 Sections and their categories:
 
@@ -57,8 +57,7 @@ Sections and their categories:
 | How do colour or spacing foundations work?     | `get_doc({ section: "docs", path: "foundation/color" })`                      |
 | What is the exact token name?                  | `get_rootage({ path: "/color.json" })`                                        |
 | What is this component's spec?                 | `get_rootage({ path: "/components/action-button.json" })`                     |
-| Which icon shows a left arrow?                 | `search_icons({ query: "화살표" })`                                           |
-| How do I import that icon?                     | `get_icon_details({ iconName: "icon_arrow_left_line" })`                      |
+| Which icon shows a left arrow?                 | Use `lucide-react` (e.g. `ChevronLeft`); do not add Karrot icon packages      |
 | How is theming or Tailwind meant to be set up? | `get_doc({ section: "react", path: "getting-started/styling/tailwind-css" })` |
 | What changed in the last release?              | `list_docs({ section: "react", category: "updates" })`                        |
 
