@@ -1,7 +1,7 @@
 {
   "name": "seed-design-starter",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "AI-first Vite + React starter locked in to the SEED Design System, structured with Feature-Sliced Design.",
   "packageManager": "pnpm@10.33.0",
@@ -10,28 +10,28 @@
   },
   "scripts": {
     "bootstrap": "tsx scripts/bootstrap.ts",
-    "dev": "vite",
-    "build": "pnpm routes:gen && tsc -b && vite build",
-    "preview": "vite preview",
+    "dev": "vite --config config/vite.config.ts",
+    "build": "pnpm routes:gen && tsc -b && vite build --config config/vite.config.ts",
+    "preview": "vite preview --config config/vite.config.ts",
     "routes:gen": "tsr generate",
     "typecheck": "pnpm routes:gen && tsc -b --noEmit",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint -c config/eslint.config.js .",
+    "lint:fix": "eslint -c config/eslint.config.js . --fix",
     "lint:fsd": "steiger ./src",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "prettier --config config/prettier.config.js --write .",
+    "format:check": "prettier --config config/prettier.config.js --check .",
     "seed:sync": "tsx scripts/sync-seed.ts",
     "seed:check": "tsx scripts/sync-seed.ts --check",
     "seed:compat": "seed-design compat",
     "seed:add": "seed-design add",
     "seed:docs": "seed-design docs",
+    "brand:sync": "tsx scripts/sync-brand.ts",
+    "brand:check": "tsx scripts/sync-brand.ts --check",
     "verify:lockin": "tsx scripts/verify-lockin.ts",
-    "verify": "pnpm typecheck && pnpm lint && pnpm lint:fsd && pnpm format:check && pnpm seed:check && pnpm verify:lockin",
+    "verify": "pnpm typecheck && pnpm lint && pnpm lint:fsd && pnpm format:check && pnpm seed:check && pnpm brand:check && pnpm seed:compat && pnpm verify:lockin && pnpm build",
     "prepare": "husky"
   },
   "dependencies": {
-    "@karrotmarket/react-monochrome-icon": "^1.25.0",
-    "@karrotmarket/react-multicolor-icon": "^1.25.0",
     "@seed-design/css": "^2.3.0",
     "@seed-design/react": "^2.1.0",
     "@tanstack/react-query": "^5.101.4",
@@ -39,6 +39,7 @@
     "clsx": "^2.1.1",
     "i18next": "^26.3.6",
     "i18next-browser-languagedetector": "^8.2.1",
+    "lucide-react": "^1.29.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-i18next": "^17.0.11",
@@ -86,11 +87,11 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
+      "eslint -c config/eslint.config.js --fix",
+      "prettier --config config/prettier.config.js --write"
     ],
     "*.{json,md,mdc,css,html,yml,yaml}": [
-      "prettier --write"
+      "prettier --config config/prettier.config.js --write"
     ]
   }
 }

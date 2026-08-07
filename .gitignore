@@ -12,6 +12,12 @@ coverage
 *.sln
 *.sw?
 
-.env
-.env.*
-!.env.example
+# Env files — committed templates live under env/; secrets stay local.
+/.env
+/.env.*
+/env/.env
+/env/.env.local
+/env/.env.*.local
+!/env/.env.example
+!/env/.env.development
+!/env/.env.production

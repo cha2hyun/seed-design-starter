@@ -1,0 +1,80 @@
+---
+description: Branch, commit, pull request and review conventions. Every session ends here.
+alwaysApply: true
+---
+
+# Landing a change
+
+The hooks that enforce all of this print the next command when they fire — read their output
+rather than working around them.
+
+## Branches
+
+| Branch             | Role                                            | Direct commits |
+| ------------------ | ----------------------------------------------- | -------------- |
+| `main`             | Release. Only ever merged into, from `develop`. | No             |
+| `develop`          | Integration, and the default place to work.     | Yes            |
+| `<type>/<summary>` | Short-lived, opened from `develop`.             | Yes            |
+
+A small, self-contained change can go straight onto `develop`. Anything that wants review, spans
+several commits, or might need reverting gets a branch and a pull request into `develop`.
+
+```bash
+git switch develop
+git switch -c feat/price-offer-toggle
+```
+
+The type is the Conventional Commits set: `feat` `fix` `docs` `refactor` `perf` `test` `build`
+`ci` `chore` `revert`. The summary is lower-case kebab-case.
+
+## Commit
+
+```
+<type>(<scope>): <subject, imperative, lower case, no period, 12–72 chars>
+
+<body: why this was needed, wrapped at 100 columns>
+```
+
+Scope is optional but must come from `app` `pages` `widgets` `entities` `features` `shared` `seed`
+`i18n` `styles` `ci` `deps` `ai` `repo`. Omit it rather than inventing one.
+
+The body explains why; the diff already shows what. Placeholder subjects — `update`, `changes`,
+`wip`, `apply feedback` — are rejected by commitlint. Keep one concern per commit.
+
+Never write about the tooling that produced a change. A commit message is read by someone
+debugging in six months, not by someone watching you work.
+
+## Before pushing
+
+`pnpm verify` is exactly what CI runs. Green locally means green on the pull request.
+
+## Pull request
+
+Base is `develop`. The title is a Conventional Commits line describing the whole branch, because
+squash merge turns it into a single commit. Fill `.github/PULL_REQUEST_TEMPLATE.md`: why, what
+changed as behaviour, how it was verified, and anything a reviewer would otherwise have to infer.
+
+## Release (`develop` → `main`)
+
+Merging into `main` is a release. Full contract in [CONTRIBUTING.md](../../CONTRIBUTING.md#릴리스).
+
+1. On `develop`, bump `package.json` `version` (SemVer from Conventional Commits since the last
+   `v*` tag) and add a `CHANGELOG.md` section.
+2. Commit `chore(repo): release vX.Y.Z`, push `develop`, open a PR with base `main`.
+3. Merge with a **merge commit** — never squash or rebase a release PR.
+4. The `release` workflow on `main` creates the `vX.Y.Z` tag and GitHub Release from
+   `package.json`. Do not tag on `develop`.
+
+## Reviewing
+
+Use the rubric in `.cursor/commands/review.md`. The order matters: design-system violations come
+first because they fail silently — a non-SEED utility emits no CSS, so the page renders unstyled
+and nothing errors.
+
+## Never
+
+- `--no-verify`, or `eslint-disable` on a `seed-lockin/*` rule
+- committing to `main`, or force-pushing `main` or `develop`
+- amending a commit that a hook rejected — fix the cause and make a new one
+- hand-editing `src/app/routeTree.gen.ts`, `.seed/tokens.json`, or the generated token rule
+- squash-merging a release PR, or creating `v*` tags on `develop`

@@ -13,8 +13,9 @@ from `@seed-design/*`. Tailwind's own theme has been deleted, so a non-SEED util
 
 1. **SEED is the source of truth.** Before writing a `className` or reaching for a component,
    confirm the token or component exists by calling the `seed-docs` MCP server
-   (`list_react_components`, `get_react_component`, `get_rootage`, `search_icons`). Do not guess
-   token names from memory: they change between versions.
+   (`discover_seed_docs`, `list_docs`, `get_doc`, `get_rootage`). Do not guess
+   token names from memory: they change between versions. App icons use
+   `lucide-react`, not Karrot/SEED icon packages.
 2. **The installed version is the version that matters.** `.seed/tokens.json` and
    `.cursor/rules/_generated-seed-tokens.mdc` are generated from the packages actually installed
    here. When they disagree with the documentation, they win.
@@ -28,7 +29,7 @@ from `@seed-design/*`. Tailwind's own theme has been deleted, so a non-SEED util
 ## Do this now
 
 1. Report the SEED versions from `.seed/tokens.json` and whether they match `package.json`.
-2. Call `discover_tools` on the `seed-docs` MCP server and confirm it responds. If it does not,
+2. Call `discover_seed_docs` on the `seed-docs` MCP server and confirm it responds. If it does not,
    tell the user to enable it in Cursor's MCP settings and stop.
 3. Run `pnpm verify` and report the result.
 4. Summarise, in three or four sentences, what the blueprint app does and which files a new

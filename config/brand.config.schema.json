@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://seed-design-starter.local/brand.config.schema.json",
+  "title": "BrandConfig",
+  "description": "Product brand palette for seed-design-starter. Remaps SEED carrot → brand semantics.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "palette"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Short product / brand name for humans and agents."
+    },
+    "description": {
+      "type": "string",
+      "description": "Guidance for agents editing this file."
+    },
+    "palette": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["light", "dark"],
+      "properties": {
+        "light": { "$ref": "#/$defs/scale" },
+        "dark": { "$ref": "#/$defs/scale" }
+      }
+    }
+  },
+  "$defs": {
+    "scale": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["100", "200", "300", "400", "500", "600", "700", "800", "900", "1000"],
+      "properties": {
+        "100": { "$ref": "#/$defs/hex" },
+        "200": { "$ref": "#/$defs/hex" },
+        "300": { "$ref": "#/$defs/hex" },
+        "400": { "$ref": "#/$defs/hex" },
+        "500": { "$ref": "#/$defs/hex" },
+        "600": { "$ref": "#/$defs/hex" },
+        "700": { "$ref": "#/$defs/hex" },
+        "800": { "$ref": "#/$defs/hex" },
+        "900": { "$ref": "#/$defs/hex" },
+        "1000": { "$ref": "#/$defs/hex" }
+      }
+    },
+    "hex": {
+      "type": "string",
+      "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+      "description": "CSS hex color (#rgb, #rrggbb, or #rrggbbaa)."
+    }
+  }
+}

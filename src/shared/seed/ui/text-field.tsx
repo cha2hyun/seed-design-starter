@@ -15,7 +15,7 @@ import {
   VisuallyHidden,
 } from "@seed-design/react";
 
-import { IconExclamationmarkCircleFill } from "@karrotmarket/react-monochrome-icon";
+import { CircleAlert } from "lucide-react";
 
 export interface TextFieldProps extends Omit<
   SeedTextField.RootProps,
@@ -140,7 +140,7 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
               ))}
             {renderErrorMessage && (
               <SeedField.ErrorMessage>
-                <PrefixIcon svg={<IconExclamationmarkCircleFill />} />
+                <PrefixIcon svg={<CircleAlert />} />
                 {errorMessage}
               </SeedField.ErrorMessage>
             )}

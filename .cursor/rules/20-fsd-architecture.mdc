@@ -10,14 +10,14 @@ alwaysApply: false
 
 Imports only ever point downwards in this list.
 
-| Layer      | Holds                                                    | Example                        |
-| ---------- | -------------------------------------------------------- | ------------------------------ |
-| `app`      | Bootstrap: providers, router, the single stylesheet       | `src/app/providers`            |
-| `pages`    | One screen, composing widgets and features                | `src/pages/product-detail`     |
-| `widgets`  | A self-contained block combining several features         | `src/widgets/product-list`     |
-| `features` | One user action                                           | `src/features/create-product`  |
-| `entities` | A business object: its type, API and presentation         | `src/entities/product`         |
-| `shared`   | Everything domain-agnostic                                | `src/shared/lib`               |
+| Layer      | Holds                                               | Example                       |
+| ---------- | --------------------------------------------------- | ----------------------------- |
+| `app`      | Bootstrap: providers, router, the single stylesheet | `src/app/providers`           |
+| `pages`    | One screen, composing widgets and features          | `src/pages/product-detail`    |
+| `widgets`  | A self-contained block combining several features   | `src/widgets/product-list`    |
+| `features` | One user action                                     | `src/features/create-product` |
+| `entities` | A business object: its type, API and presentation   | `src/entities/product`        |
+| `shared`   | Everything domain-agnostic                          | `src/shared/lib`              |
 
 `shared` is not sliced; it is split into segments (`api`, `config`, `lib`, `ui`, `i18n`, `seed`) and
 any segment may be imported directly. Every other layer is split into slices, and a slice is only
@@ -42,8 +42,8 @@ src/features/create-product/
 
 ## Adding a new feature
 
-1. Decide the layer by asking what the code is *about*. A business object is an entity; a thing the
-   user *does* is a feature; a screen is a page.
+1. Decide the layer by asking what the code is _about_. A business object is an entity; a thing the
+   user _does_ is a feature; a screen is a page.
 2. Create `src/<layer>/<slice>/` with `ui/`, `model/` as needed and an `index.ts`.
 3. Add the route in `src/app/routes/` if it needs a URL. Route files stay thin: they import a page
    component and nothing else.

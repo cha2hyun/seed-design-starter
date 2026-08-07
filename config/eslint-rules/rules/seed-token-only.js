@@ -2,8 +2,8 @@ import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
 
-/** @type {import("../../.seed/tokens.json")} */
-const catalog = require("../../.seed/tokens.json");
+/** @type {import("../../../.seed/tokens.json")} */
+const catalog = require("../../../.seed/tokens.json");
 
 const SIDES = ["t", "r", "b", "l", "x", "y", "s", "e"];
 const CORNERS = ["tl", "tr", "br", "bl", "ss", "se", "es", "ee"];

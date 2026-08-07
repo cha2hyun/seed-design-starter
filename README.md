@@ -52,10 +52,10 @@ bg-red-500   p-4   text-lg   rounded-md   shadow-md   max-w-3xl
 3. **회귀 테스트** — `pnpm verify:lockin`이 Tailwind를 실제로 컴파일해서, 비-SEED 유틸리티 27개가
    여전히 죽어 있고 SEED 유틸리티 25개가 살아 있는지 확인합니다. CI에서 돌아갑니다.
 
-예외는 둘뿐이고 둘 다 의도적으로 번거롭습니다. 인라인 스타일은 바로 위에
-`// seed-escape: <이유>` 주석이 있어야 하고, 새 토큰은 `global.css`의 프로젝트 `@theme` 블록에
-사유와 함께 추가해야 합니다. 현재 그 블록에는 breakpoint, Pretendard 폰트 스택, 본문 최대 폭
-하나뿐입니다.
+예외는 의도적으로 번거롭습니다. 인라인 스타일은 바로 위에 `// seed-escape: <이유>` 주석이 있어야
+하고, SEED에 없는 토큰은 `global.css`의 프로젝트 `@theme` 블록에 사유와 함께 추가합니다. **제품
+브랜드 색**은 예외가 아니라 `config/brand.config.json`을 고친 뒤 `pnpm brand:sync`로만 바꿉니다
+(SEED carrot 스케일 → brand 시맨틱).
 
 ---
 
@@ -64,21 +64,66 @@ bg-red-500   p-4   text-lg   rounded-md   shadow-md   max-w-3xl
 `.cursor/`가 레포에 커밋되어 있어서, **클론만 하면 MCP 서버가 자동으로 잡힙니다.** 수동 설정은
 없습니다. Cursor에서 열고 `/start`를 실행하세요.
 
-| 파일                             | 역할                                                       |
-| -------------------------------- | ---------------------------------------------------------- |
-| `.cursor/mcp.json`               | `seed-docs`(인증 불필요), `seed-figma`(Figma 토큰 있을 때) |
-| `.cursor/rules/*.mdc`            | 프로젝트·락인·FSD·i18n·MCP 사용법·코드 스타일              |
-| `.cursor/rules/_generated-*.mdc` | 설치된 SEED 버전의 실제 토큰 목록 (자동 생성)              |
-| `.cursor/commands/*.md`          | `/start` `/seed-sync` `/new-feature` `/audit-tokens`       |
-| `.cursor/skills/seed-design/`    | 당근 공식 SEED Agent Skill (vendoring)                     |
-| `AGENTS.md`                      | Cursor 외 에이전트용 동일 지침                             |
+> MCP 서버는 `.cursor/mcp-node.sh`를 거쳐 실행됩니다. Cursor는 데스크톱 환경에서 서버를 띄우는데
+> 그 PATH가 `/usr/bin:/bin:/usr/sbin:/sbin`뿐이라, nvm·fnm·Volta·Homebrew로 설치한 Node는 보이지
+> 않아 `npx`가 그냥 실패합니다. shim이 Node를 먼저 찾아줍니다.
+
+| 파일                             | 역할                                                                           |
+| -------------------------------- | ------------------------------------------------------------------------------ |
+| `.cursor/mcp.json`               | `seed-docs` (인증 불필요)                                                      |
+| `config/brand.config.json`       | 제품 brand 팔레트 (carrot 스케일 재매핑). 수정 후 `pnpm brand:sync`            |
+| `config/`                        | ESLint · Prettier · Vite · commitlint · brand 등 툴링 설정                     |
+| `env/`                           | Vite 환경변수 (`VITE_*`). `env/.env.example` 참고, 로컬 비밀은 `.env.local`    |
+| `.cursor/rules/*.mdc`            | 프로젝트 · 락인 · FSD · i18n · MCP 사용법 · 코드 스타일 · git 워크플로         |
+| `.cursor/rules/_generated-*.mdc` | 설치된 SEED 버전의 실제 토큰 목록 (자동 생성)                                  |
+| `.cursor/commands/*.md`          | `/start` `/seed-sync` `/new-feature` `/audit-tokens` `/commit` `/pr` `/review` |
+| `.cursor/skills/seed-design/`    | `.agents/skills/seed-design` 심링크 (SEED Agent Skill)                         |
+| `AGENTS.md`                      | Cursor 외 에이전트용 동일 지침                                                 |
+| `CONTRIBUTING.md`                | 브랜치 · 커밋 · PR · 리뷰 계약                                                 |
 
 Cursor가 아니어도 됩니다. 이 프롬프트 하나로 충분해요.
 
 > 이 레포는 SEED Design에 락인된 Vite + React 스타터야. `@seed-design/*`를 따르고, className을
 > 쓰기 전에 `seed-docs` MCP로 토큰과 컴포넌트를 확인해. Tailwind 기본 토큰은 CSS가 아예 생성되지
 > 않으니 절대 쓰지 마. 패키지 업데이트나 컴포넌트 추가는 SEED 정본을 MCP로 대조한 뒤에 진행하고,
-> 끝나면 `pnpm verify`를 통과시켜.
+> 작업이 끝나면 브랜치를 파서 커밋하고 PR을 열어. 규칙은 CONTRIBUTING.md에 있어.
+
+### 에이전트가 코드를 올리는 방법
+
+커밋 → PR → 리뷰를 에이전트가 돌린다는 전제로 규칙을 실행 가능한 형태로 박아뒀습니다. 훅이 막을
+때는 **다음에 실행할 명령까지 함께 출력**하므로, 에이전트가 문서를 다시 읽지 않고 stderr만 보고
+복구할 수 있습니다.
+
+```bash
+git switch develop                      # main은 릴리스 브랜치라 커밋 자체가 막힘
+git switch -c feat/price-offer-toggle   # 리뷰가 필요한 변경이면 브랜치를 팜
+pnpm verify                             # CI와 완전히 같은 명령
+git commit                              # Conventional Commits 강제
+git push -u origin HEAD                 # pre-push가 pnpm verify를 다시 실행
+gh pr create --base develop             # PR 제목도 같은 규칙 (squash 머지용)
+```
+
+브랜치는 세 종류입니다. `main`은 릴리스 전용이라 `develop`에서 머지만 받고, `develop`은 통합
+브랜치로 작은 변경은 바로 커밋해도 됩니다. 리뷰가 필요한 변경은 `<type>/<kebab-summary>`
+브랜치를 따서 `develop`으로 PR을 올립니다.
+
+**릴리스**는 `develop`에서 `package.json` 버전과 `CHANGELOG.md`를 올린 뒤 `develop` → `main`
+PR을 **merge commit**으로 머지합니다 (squash 금지). `main` 푸시 시 `release` 워크플로가
+`vX.Y.Z` 태그와 GitHub Release를 만듭니다. 자세한 규칙은 [CONTRIBUTING.md](./CONTRIBUTING.md#릴리스)에
+있습니다.
+
+강제되는 것들:
+
+- **브랜치** — `develop` 또는 `<type>/<kebab-summary>`. `main` 직접 커밋은 pre-commit이 거부합니다.
+- **커밋 메시지** — Conventional Commits. 제목 12–72자, `update`·`changes`·`wip` 같은
+  빈 껍데기 제목은 커스텀 commitlint 규칙이 걸러냅니다. scope는 선택이지만 쓴다면 실제 존재하는
+  영역이어야 합니다.
+- **푸시 전 검사** — pre-push가 `pnpm verify`를 돌립니다. CI와 같은 명령이라 로컬이 초록이면
+  PR도 초록입니다.
+- **PR 제목** — `pr-title` 워크플로가 commitlint로 검사합니다.
+
+`/commit` `/pr` `/review` 커맨드가 이 루프를 그대로 실행하고, `/review`에는 이 레포 전용 리뷰
+기준(조용히 실패하는 락인 위반 → FSD 경계 → i18n 누락 → 생성 파일 drift 순)이 들어 있습니다.
 
 ### SEED 최신화
 
@@ -119,19 +164,21 @@ import는 항상 아래 방향으로만 흐릅니다: `app → pages → widgets
 
 ## 명령어
 
-| 명령어               | 하는 일                                                |
-| -------------------- | ------------------------------------------------------ |
-| `pnpm bootstrap`     | 최초 실행: 설치 · 라우트 생성 · SEED 동기화 · 타입체크 |
-| `pnpm dev`           | 개발 서버                                              |
-| `pnpm build`         | 라우트 생성 → 타입체크 → 프로덕션 빌드                 |
-| `pnpm verify`        | CI가 도는 모든 검사                                    |
-| `pnpm verify:lockin` | 락인 회귀 테스트                                       |
-| `pnpm lint` / `:fix` | ESLint (SEED 락인 + FSD 경계)                          |
-| `pnpm lint:fsd`      | steiger로 FSD 구조 검사                                |
-| `pnpm seed:add`      | SEED 스니펫 추가 — `pnpm seed:add ui:tabs`             |
-| `pnpm seed:sync`     | 토큰 카탈로그 · 생성 룰 · 문서 캐시 재생성             |
-| `pnpm seed:compat`   | 스니펫과 설치된 SEED 버전 호환성 검사                  |
-| `pnpm seed:docs`     | 컴포넌트의 문서 · llms.txt · 스니펫 URL 출력           |
+| 명령어               | 하는 일                                                    |
+| -------------------- | ---------------------------------------------------------- |
+| `pnpm bootstrap`     | 최초 실행: 설치 · 라우트 생성 · SEED 동기화 · 타입체크     |
+| `pnpm dev`           | 개발 서버                                                  |
+| `pnpm build`         | 라우트 생성 → 타입체크 → 프로덕션 빌드                     |
+| `pnpm verify`        | CI가 도는 모든 검사                                        |
+| `pnpm verify:lockin` | 락인 회귀 테스트                                           |
+| `pnpm brand:sync`    | `config/brand.config.json` → `global.css` brand 오버라이드 |
+| `pnpm brand:check`   | brand 생성물이 config와 일치하는지 확인                    |
+| `pnpm lint` / `:fix` | ESLint (SEED 락인 + FSD 경계)                              |
+| `pnpm lint:fsd`      | steiger로 FSD 구조 검사                                    |
+| `pnpm seed:add`      | SEED 스니펫 추가 — `pnpm seed:add ui:tabs`                 |
+| `pnpm seed:sync`     | 토큰 카탈로그 · 생성 룰 · 문서 캐시 재생성                 |
+| `pnpm seed:compat`   | 스니펫과 설치된 SEED 버전 호환성 검사                      |
+| `pnpm seed:docs`     | 컴포넌트의 문서 · llms.txt · 스니펫 URL 출력               |
 
 ---
 
@@ -150,6 +197,9 @@ import는 항상 아래 방향으로만 흐릅니다: `app → pages → widgets
 **Import 정렬** — Prettier `@trivago/prettier-plugin-sort-imports`의 그룹이 FSD 레이어 순서를
 그대로 따릅니다. import 블록만 봐도 그 파일이 어느 레이어에 기대는지 드러납니다.
 
+**훅 메시지** — husky 훅은 실패 원인만 알려주지 않고 다음에 칠 명령까지 출력합니다. 에이전트가
+루프 중간에 문서를 다시 읽지 않아도 되게 하려는 의도예요.
+
 **Git hooks** — pre-commit은 lint-staged, commit-msg는 Conventional Commits, pre-push는 타입체크와
 전체 린트를 돌립니다.
 
@@ -157,4 +207,9 @@ import는 항상 아래 방향으로만 흐릅니다: `app → pages → widgets
 
 ## 라이선스
 
-MIT
+이 저장소의 코드는 [MIT](./LICENSE)입니다.
+
+SEED Design 등 Apache-2.0 구성요소의 귀속 고지는 [NOTICE](./NOTICE)에,
+라이선스 전문은 [licenses/Apache-2.0.txt](./licenses/Apache-2.0.txt)에 있습니다.
+앱 아이콘은 `lucide-react`(ISC)를 쓰고, 당근 로고·상호·캐릭터 같은 브랜드 리소스는
+NOTICE의 상표 안내를 따릅니다.

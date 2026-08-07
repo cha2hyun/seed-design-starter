@@ -7,9 +7,7 @@ import * as React from "react";
 
 import { PrefixIcon, Callout as SeedCallout, SuffixIcon } from "@seed-design/react";
 
-import { IconChevronRightLine, IconXmarkLine } from "@karrotmarket/react-monochrome-icon";
-
-// "@daangn/react-monochrome-icon"과 동일합니다.
+import { ChevronRight, X } from "lucide-react";
 
 export interface CalloutProps extends Omit<
   SeedCallout.RootProps,
@@ -69,7 +67,7 @@ export const ActionableCallout = React.forwardRef<
           {title && <SeedCallout.Title>{title}</SeedCallout.Title>}
           <SeedCallout.Description>{description}</SeedCallout.Description>
         </SeedCallout.Content>
-        <SuffixIcon svg={<IconChevronRightLine />} />
+        <SuffixIcon svg={<ChevronRight />} />
       </button>
     </SeedCallout.Root>
   );
@@ -106,7 +104,7 @@ export const DismissibleCallout = React.forwardRef<
       </SeedCallout.Content>
       {/* You may implement your own i18n for dismiss label */}
       <SeedCallout.CloseButton aria-label="닫기">
-        <SuffixIcon svg={<IconXmarkLine />} />
+        <SuffixIcon svg={<X />} />
       </SeedCallout.CloseButton>
     </SeedCallout.Root>
   );

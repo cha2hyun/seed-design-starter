@@ -5,27 +5,65 @@ alwaysApply: true
 
 # Looking things up in SEED
 
-Two MCP servers are declared in `.cursor/mcp.json` and travel with the repository. `seed-docs` needs
-no credentials. `seed-figma` activates only when `FIGMA_PERSONAL_ACCESS_TOKEN` is set.
+One MCP server is declared in `.cursor/mcp.json` and travels with the repository. `seed-docs` needs
+no credentials.
+
+It is launched through `.cursor/mcp-node.sh`. Cursor spawns MCP servers from the desktop
+environment, where `PATH` is only `/usr/bin:/bin:/usr/sbin:/sbin`, so a bare `npx` is invisible to
+anyone whose Node comes from nvm, fnm, Volta or Homebrew. The shim finds Node first. If a server is
+missing from Cursor's MCP list, run the shim by hand before suspecting anything else:
+
+```bash
+env -i HOME="$HOME" PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+  /bin/sh .cursor/mcp-node.sh @seed-design/docs-mcp@0.7.0
+```
 
 SEED ships several packages that version independently and rename tokens between majors. Recall is
 unreliable here; look it up.
 
+## The tools
+
+`@seed-design/docs-mcp` exposes eight tools. Documentation is addressed as a `section` plus a
+`path`, not as one tool per topic.
+
+| Tool                                     | Use it for                                              |
+| ---------------------------------------- | ------------------------------------------------------- |
+| `discover_seed_docs()`                   | The section and category map. Call once when unsure.    |
+| `list_docs({ section, category })`       | What documents exist, with the `path` to request.       |
+| `get_doc({ section, path })`             | One document in full.                                   |
+| `get_full_docs({ section })`             | A whole section at once. Large — prefer `get_doc`.      |
+| `get_rootage({ path })`                  | Raw token and component spec JSON.                      |
+| `search_icons({ query, type, limit })`   | SEED iconography reference only (this app uses Lucide). |
+| `list_icons({ type, variant, service })` | Browse SEED icons by category (reference only).         |
+| `get_icon_details({ iconName })`         | SEED icon metadata (reference only — do not install).   |
+
+Sections and their categories:
+
+| Section          | Categories                                                                            |
+| ---------------- | ------------------------------------------------------------------------------------- |
+| `react`          | components, getting-started, stackflow, developer-tools, migration, updates, patterns |
+| `docs`           | components, foundation, guidelines                                                    |
+| `breeze`         | components                                                                            |
+| `ai-integration` | —                                                                                     |
+| `lynx`           | —                                                                                     |
+
 ## Reach for a tool when
 
-| Question                                    | Tool                                            |
-| ------------------------------------------- | ----------------------------------------------- |
-| Does a component for this exist?             | `list_react_components`                         |
-| What props does it take?                     | `get_react_component({ componentName })`        |
-| When should this component be used at all?   | `get_docs_component({ componentName })`         |
-| What is the exact token name?                | `get_rootage({ path: "/color.json" })`          |
-| What is this component's spec?               | `get_rootage({ path: "/components/<name>.json" })` |
-| Which icon shows a left arrow?               | `search_icons({ query: "화살표" })` — Korean works |
-| How do I import that icon?                   | `get_icon_details({ iconName })`                |
-| How is theming or Tailwind meant to be set up? | `get_react_getting_started({ path })`         |
-| What changed in the last release?            | `get_react_changelog`                           |
+| Question                                       | Call                                                                          |
+| ---------------------------------------------- | ----------------------------------------------------------------------------- |
+| Does a component for this exist?               | `list_docs({ section: "react", category: "components" })`                     |
+| What props does it take?                       | `get_doc({ section: "react", path: "components/action-button" })`             |
+| When should this component be used at all?     | `get_doc({ section: "docs", path: "components/action-button" })`              |
+| How do colour or spacing foundations work?     | `get_doc({ section: "docs", path: "foundation/color" })`                      |
+| What is the exact token name?                  | `get_rootage({ path: "/color.json" })`                                        |
+| What is this component's spec?                 | `get_rootage({ path: "/components/action-button.json" })`                     |
+| Which icon shows a left arrow?                 | Use `lucide-react` (e.g. `ChevronLeft`); do not add Karrot icon packages      |
+| How is theming or Tailwind meant to be set up? | `get_doc({ section: "react", path: "getting-started/styling/tailwind-css" })` |
+| What changed in the last release?              | `list_docs({ section: "react", category: "updates" })`                        |
 
-Call `discover_tools` once at the start of a session if you are unsure what is available.
+The tool surface has changed between minor versions of `@seed-design/docs-mcp` before. If a call
+fails with an unknown-tool error, run `discover_seed_docs` and re-read what is actually there rather
+than trusting this table.
 
 ## Offline fallbacks
 
@@ -48,4 +86,4 @@ After bumping any `@seed-design/*` version:
 1. `pnpm seed:sync`
 2. `pnpm seed:compat` — if it complains, re-add the affected snippets with `pnpm seed:add ui:<name>`
 3. `pnpm verify:lockin` — confirms the theme reset still removes Tailwind's own tokens
-4. Read `get_react_changelog` for anything that moved
+4. Read the changelog under `list_docs({ section: "react", category: "updates" })`

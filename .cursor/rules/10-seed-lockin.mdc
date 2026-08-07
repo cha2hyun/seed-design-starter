@@ -19,17 +19,17 @@ silence into a message; do not disable it.
 
 ## Writing a className
 
-| You want        | You write                                                | Never          |
-| --------------- | -------------------------------------------------------- | -------------- |
-| Background      | `bg-bg-layer-default`, `bg-bg-brand-solid`                | `bg-white`     |
-| Text colour     | `text-fg-neutral`, `text-fg-neutral-muted`                | `text-gray-500`|
-| Border colour   | `border-stroke-neutral-muted`                             | `border-gray-200` |
-| Spacing         | `p-x4`, `px-x5`, `gap-x3`, `mt-x2`                        | `p-4`, `gap-2` |
-| Position        | `top-x2`, `inset-x0`                                      | `top-4`        |
-| Radius          | `rounded-r4`, `rounded-full`                              | `rounded-lg`   |
-| Shadow          | `shadow-s1`, `shadow-s2`                                  | `shadow-md`    |
-| Text style      | `t4-bold`, `t7-regular`, `screen-title`, `article-body`   | `text-lg font-bold` |
-| Breakpoint      | `sm:` 480, `md:` 768, `lg:` 1280, `xl:` 1440 (SEED scale) | —              |
+| You want      | You write                                                 | Never               |
+| ------------- | --------------------------------------------------------- | ------------------- |
+| Background    | `bg-bg-layer-default`, `bg-bg-brand-solid`                | `bg-white`          |
+| Text colour   | `text-fg-neutral`, `text-fg-neutral-muted`                | `text-gray-500`     |
+| Border colour | `border-stroke-neutral-muted`                             | `border-gray-200`   |
+| Spacing       | `p-x4`, `px-x5`, `gap-x3`, `mt-x2`                        | `p-4`, `gap-2`      |
+| Position      | `top-x2`, `inset-x0`                                      | `top-4`             |
+| Radius        | `rounded-r4`, `rounded-full`                              | `rounded-lg`        |
+| Shadow        | `shadow-s1`, `shadow-s2`                                  | `shadow-md`         |
+| Text style    | `t4-bold`, `t7-regular`, `screen-title`, `article-body`   | `text-lg font-bold` |
+| Breakpoint    | `sm:` 480, `md:` 768, `lg:` 1280, `xl:` 1440 (SEED scale) | —                   |
 
 Typography is one class, not a composition: use `t5-bold`, not `text-size-t5 font-bold`.
 
@@ -42,7 +42,7 @@ assuming.
 
 The full list of valid tokens for the installed version lives in
 `.cursor/rules/_generated-seed-tokens.mdc` and `.seed/tokens.json`. When you are unsure, call
-`get_rootage` or `get_react_component` on the `seed-docs` MCP server rather than guessing.
+`get_rootage` or `get_doc` on the `seed-docs` MCP server rather than guessing.
 
 ## Components
 
@@ -57,8 +57,17 @@ These files are snippets fetched by `@seed-design/cli`. If the component you nee
 with `pnpm seed:add ui:<name>` instead of hand-rolling one. Only `src/shared/seed/**` and
 `src/shared/ui/**` may import `@seed-design/react` directly.
 
-Icons come from `@karrotmarket/react-monochrome-icon` and `@karrotmarket/react-multicolor-icon`. Find
-the right one with `search_icons` on the MCP server; it understands Korean queries.
+Icons come from `lucide-react`. Prefer named imports (`import { ChevronRight } from "lucide-react"`).
+Do not add `@karrotmarket/react-*-icon` or `@daangn/react-*-icon` — `seed-lockin/no-karrot-icons`
+and `pnpm verify:lockin` refuse them, including inside vendored `src/shared/seed/**` snippets.
+
+## Brand
+
+Product brand lives in `config/brand.config.json` (schema: `config/brand.config.schema.json`). It remaps SEED's
+`palette-carrot-*` scale so semantic brand tokens (`fg-brand`, `bg-brand-solid`, …) and components
+like `ActionButton` `brandSolid` follow the product. After editing the config run
+`pnpm brand:sync`. Never hand-edit the `/* <brand-generated> */` block in `global.css`, and never
+invent new color utilities for branding.
 
 ## Escape hatches
 

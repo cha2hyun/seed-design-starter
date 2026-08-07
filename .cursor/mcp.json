@@ -1,15 +1,9 @@
 {
   "mcpServers": {
     "seed-docs": {
-      "command": "npx",
-      "args": ["-y", "@seed-design/docs-mcp"]
-    },
-    "seed-figma": {
-      "command": "npx",
-      "args": ["-y", "@seed-design/mcp@latest"],
-      "env": {
-        "FIGMA_PERSONAL_ACCESS_TOKEN": "${env:FIGMA_PERSONAL_ACCESS_TOKEN}"
-      }
+      "type": "stdio",
+      "command": "/bin/sh",
+      "args": ["${workspaceFolder}/.cursor/mcp-node.sh", "@seed-design/docs-mcp@0.7.0"]
     }
   }
 }

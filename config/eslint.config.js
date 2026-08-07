@@ -3,9 +3,13 @@ import boundaries from "eslint-plugin-boundaries";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import globals from "globals";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import tseslint from "typescript-eslint";
 
 import { seedLockin } from "./eslint-rules/index.js";
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 /** Feature-Sliced Design layers, ordered from the top of the import graph down. */
 const LAYERS = ["app", "pages", "widgets", "features", "entities", "shared"];
@@ -33,13 +37,13 @@ export default tseslint.config(
       globals: globals.browser,
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: import.meta.dirname,
+        tsconfigRootDir: ROOT,
       },
     },
     settings: {
       // Lets eslint-plugin-boundaries follow the `@/*` and `seed-design/*` aliases.
       "import/resolver": {
-        typescript: { project: "./tsconfig.app.json" },
+        typescript: { project: join(ROOT, "tsconfig.app.json") },
       },
       "boundaries/elements": [
         { type: "app", pattern: "src/app" },
@@ -106,6 +110,7 @@ export default tseslint.config(
       "seed-lockin/token-only": "error",
       "seed-lockin/no-stylesheets": "error",
       "seed-lockin/no-inline-style": "error",
+      "seed-lockin/no-karrot-icons": "error",
       "no-restricted-imports": [
         "error",
         {
@@ -136,6 +141,7 @@ export default tseslint.config(
   {
     // Vendored snippets belong to @seed-design/cli, which overwrites them on upgrade.
     // Lint them for correctness only; project style rules would fight the generator.
+    // Keep seed-lockin/no-karrot-icons on: re-added snippets must be patched to Lucide.
     files: ["src/shared/seed/**/*.{ts,tsx}"],
     rules: {
       "seed-lockin/token-only": "off",
@@ -163,7 +169,7 @@ export default tseslint.config(
 
   // ── Node-side tooling ──────────────────────────────────────────────────────
   {
-    files: ["scripts/**/*.ts", "*.config.ts", "*.config.js", "eslint-rules/**/*.js"],
+    files: ["scripts/**/*.ts", "config/**/*.{ts,js}", "*.config.ts", "*.config.js"],
     languageOptions: {
       globals: globals.node,
       parserOptions: { projectService: false, project: false },

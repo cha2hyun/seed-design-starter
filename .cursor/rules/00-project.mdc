@@ -11,33 +11,38 @@ architecture or i18n decisions.
 
 ## Stack
 
-| Concern          | Choice                                                     |
-| ---------------- | ---------------------------------------------------------- |
-| Build            | Vite 8, React 19, TypeScript 5.9                            |
-| Design system    | `@seed-design/react` + `@seed-design/css`, snippets via CLI |
-| Styling          | Tailwind CSS 4 with SEED tokens only                        |
-| Routing          | TanStack Router, file-based under `src/app/routes`          |
-| Server state     | TanStack Query                                              |
-| Client state     | Zustand                                                     |
-| i18n             | i18next + react-i18next, Korean and English                 |
-| Package manager  | pnpm, Node 22 or newer                                      |
+| Concern         | Choice                                                            |
+| --------------- | ----------------------------------------------------------------- |
+| Build           | Vite 8, React 19, TypeScript 5.9                                  |
+| Design system   | `@seed-design/react` + `@seed-design/css`, snippets via CLI       |
+| Brand           | `config/brand.config.json` → remaps SEED carrot / brand semantics |
+| Icons           | `lucide-react` (not Karrot/SEED icon packages)                    |
+| Styling         | Tailwind CSS 4 with SEED tokens only                              |
+| Routing         | TanStack Router, file-based under `src/app/routes`                |
+| Server state    | TanStack Query                                                    |
+| Client state    | Zustand                                                           |
+| i18n            | i18next + react-i18next, Korean and English                       |
+| Package manager | pnpm, Node 22 or newer                                            |
 
 ## Commands
 
 - `pnpm bootstrap` — first run: install, generate routes, sync SEED, typecheck
 - `pnpm dev` / `pnpm build`
-- `pnpm verify` — everything CI runs: typecheck, lint, FSD lint, format, SEED drift, lock-in
+- `pnpm verify` — identical to CI: typecheck, lint, FSD, format, seed, brand, compat, lock-in, build
 - `pnpm seed:add <item>` — add a SEED snippet, e.g. `pnpm seed:add ui:tabs`
 - `pnpm seed:sync` — regenerate `.seed/tokens.json`, the generated token rule, and the cached docs
+- `pnpm brand:sync` — apply `config/brand.config.json` into `global.css` (carrot → product brand)
 - `pnpm seed:docs <component>` — print doc, llms.txt and snippet URLs for a component
 
 ## Non-negotiables
 
 1. Design decisions come from SEED. Check the `seed-docs` MCP server before writing a `className`.
 2. Never add a `.css` file. `src/app/styles/global.css` is the only one, and it is configuration.
-3. Respect the FSD import direction and slice public APIs.
-4. Every user-facing string is translated into both Korean and English.
-5. `pnpm verify` must pass before you call a task done.
+3. Product brand colors change only via `config/brand.config.json` + `pnpm brand:sync`. Never invent
+   `bg-*` / `text-*` colors outside SEED tokens.
+4. Respect the FSD import direction and slice public APIs.
+5. Every user-facing string is translated into both Korean and English.
+6. `pnpm verify` must pass before you call a task done.
 
 ## When you change dependencies
 

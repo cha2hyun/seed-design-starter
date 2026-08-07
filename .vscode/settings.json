@@ -7,6 +7,11 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
 
+  "eslint.options": {
+    "overrideConfigFile": "config/eslint.config.js"
+  },
+  "prettier.configPath": "config/prettier.config.js",
+
   "tailwindCSS.experimental.configFile": "src/app/styles/global.css",
   "tailwindCSS.classFunctions": ["cn", "clsx"],
   "css.validate": false,
