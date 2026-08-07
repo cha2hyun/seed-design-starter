@@ -25,8 +25,10 @@
     "seed:compat": "seed-design compat",
     "seed:add": "seed-design add",
     "seed:docs": "seed-design docs",
+    "brand:sync": "tsx scripts/sync-brand.ts",
+    "brand:check": "tsx scripts/sync-brand.ts --check",
     "verify:lockin": "tsx scripts/verify-lockin.ts",
-    "verify": "pnpm typecheck && pnpm lint && pnpm lint:fsd && pnpm format:check && pnpm seed:check && pnpm verify:lockin",
+    "verify": "pnpm typecheck && pnpm lint && pnpm lint:fsd && pnpm format:check && pnpm seed:check && pnpm brand:check && pnpm verify:lockin",
     "prepare": "husky"
   },
   "dependencies": {

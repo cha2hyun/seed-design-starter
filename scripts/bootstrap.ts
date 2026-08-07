@@ -17,6 +17,7 @@ const STEPS: Step[] = [
   { name: "Install dependencies", command: "pnpm", args: ["install"] },
   { name: "Generate the route tree", command: "pnpm", args: ["routes:gen"] },
   { name: "Refresh the SEED token catalog and docs", command: "pnpm", args: ["seed:sync"] },
+  { name: "Apply brand.config.json to global.css", command: "pnpm", args: ["brand:sync"] },
   {
     name: "Check SEED snippets against the installed packages",
     command: "pnpm",
@@ -64,6 +65,7 @@ function main(): void {
   console.log("  pnpm dev            start the app on http://localhost:5173");
   console.log("  pnpm verify         run every check this repository enforces");
   console.log("  pnpm seed:add       add a SEED component snippet");
+  console.log("  pnpm brand:sync     apply brand.config.json to global.css");
 
   console.log(
     "\nWorking with an AI agent? Open this repository in Cursor and run `/start`.\n" +

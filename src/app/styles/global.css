@@ -103,3 +103,42 @@
     font-family: var(--font-sans);
   }
 }
+
+/* <brand-generated> */
+/*
+ * Generated from brand.config.json — do not edit by hand.
+ * Run `pnpm brand:sync` after changing the config.
+ * Remaps --seed-color-palette-carrot-* so SEED brand semantics (fg-brand,
+ * bg-brand-solid, ActionButton brandSolid, …) follow the product palette.
+ */
+@layer base {
+  :root,
+  :root[data-seed-color-mode="light-only"],
+  :root[data-seed-color-mode="system"][data-seed-user-color-scheme="light"] {
+    --seed-color-palette-carrot-100: #fff2ec;
+    --seed-color-palette-carrot-200: #ffe8db;
+    --seed-color-palette-carrot-300: #ffd5c0;
+    --seed-color-palette-carrot-400: #ffb999;
+    --seed-color-palette-carrot-500: #ff9364;
+    --seed-color-palette-carrot-600: #ff6600;
+    --seed-color-palette-carrot-700: #e14d00;
+    --seed-color-palette-carrot-800: #b93901;
+    --seed-color-palette-carrot-900: #862b00;
+    --seed-color-palette-carrot-1000: #471601;
+  }
+
+  :root[data-seed-color-mode="dark-only"],
+  :root[data-seed-color-mode="system"][data-seed-user-color-scheme="dark"] {
+    --seed-color-palette-carrot-100: #31241f;
+    --seed-color-palette-carrot-200: #4b291c;
+    --seed-color-palette-carrot-300: #6b311c;
+    --seed-color-palette-carrot-400: #923600;
+    --seed-color-palette-carrot-500: #bd4201;
+    --seed-color-palette-carrot-600: #e65200;
+    --seed-color-palette-carrot-700: #ff6600;
+    --seed-color-palette-carrot-800: #ff9e65;
+    --seed-color-palette-carrot-900: #eecebc;
+    --seed-color-palette-carrot-1000: #f4eeea;
+  }
+}
+/* </brand-generated> */

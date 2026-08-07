@@ -1,0 +1,31 @@
+{
+  "$schema": "./brand.config.schema.json",
+  "name": "seed-starter",
+  "description": "Product brand palette. Edit this file to recolor the app. Do not invent new color utilities — keep using SEED tokens (bg-bg-brand-solid, text-fg-brand, …). Values remap SEED's carrot scale, which brand semantics reference.",
+  "palette": {
+    "light": {
+      "100": "#fff2ec",
+      "200": "#ffe8db",
+      "300": "#ffd5c0",
+      "400": "#ffb999",
+      "500": "#ff9364",
+      "600": "#ff6600",
+      "700": "#e14d00",
+      "800": "#b93901",
+      "900": "#862b00",
+      "1000": "#471601"
+    },
+    "dark": {
+      "100": "#31241f",
+      "200": "#4b291c",
+      "300": "#6b311c",
+      "400": "#923600",
+      "500": "#bd4201",
+      "600": "#e65200",
+      "700": "#ff6600",
+      "800": "#ff9e65",
+      "900": "#eecebc",
+      "1000": "#f4eeea"
+    }
+  }
+}

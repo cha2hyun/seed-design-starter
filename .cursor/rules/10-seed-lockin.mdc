@@ -61,6 +61,14 @@ Icons come from `lucide-react`. Prefer named imports (`import { ChevronRight } f
 Do not add `@karrotmarket/react-*-icon` or `@daangn/react-*-icon` — `seed-lockin/no-karrot-icons`
 and `pnpm verify:lockin` refuse them, including inside vendored `src/shared/seed/**` snippets.
 
+## Brand
+
+Product brand lives in `brand.config.json` (schema: `brand.config.schema.json`). It remaps SEED's
+`palette-carrot-*` scale so semantic brand tokens (`fg-brand`, `bg-brand-solid`, …) and components
+like `ActionButton` `brandSolid` follow the product. After editing the config run
+`pnpm brand:sync`. Never hand-edit the `/* <brand-generated> */` block in `global.css`, and never
+invent new color utilities for branding.
+
 ## Escape hatches
 
 There are two, and both are deliberate friction:

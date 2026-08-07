@@ -19,6 +19,11 @@ Use SEED tokens: `bg-bg-layer-default`, `p-x4`, `t4-bold`, `rounded-r4`, `shadow
 The valid set for the installed version is in `.seed/tokens.json` and
 `.cursor/rules/_generated-seed-tokens.mdc`.
 
+Product brand colors are not free-form Tailwind colors. Edit `brand.config.json` (light/dark
+carrot-scale hex values), then run `pnpm brand:sync`. That remaps `--seed-color-palette-carrot-*`
+so `bg-bg-brand-solid`, `text-fg-brand`, and SEED `brandSolid` variants follow the product.
+Do not invent `bg-#hex` utilities or hand-edit the generated brand block in `global.css`.
+
 ## Before you write a className or use a component
 
 Ask the `seed-docs` MCP server. It is declared in `.cursor/mcp.json` and needs no credentials.
@@ -44,18 +49,19 @@ Offline: `.seed/llms/` holds cached docs, and `pnpm seed:docs <component>` print
 
 1. **SEED tokens only.** Escape hatches are an inline `style` with a `// seed-escape: <reason>`
    comment above it, or a new token in the project `@theme` block of `global.css` with a comment
-   explaining what SEED lacks.
+   explaining what SEED lacks. Brand recoloring goes through `brand.config.json`, not new tokens.
 2. **No new stylesheets.** `src/app/styles/global.css` is the only CSS file and holds configuration
-   only, never a selector.
-3. **FSD import direction:** `app → pages → widgets → features → entities → shared`. Import a slice
+   only, never a selector (except the generated brand CSS-variable block).
+3. **Brand via config.** Change product colors only in `brand.config.json`, then `pnpm brand:sync`.
+4. **FSD import direction:** `app → pages → widgets → features → entities → shared`. Import a slice
    through its `index.ts`. `shared` is segment-based and may be imported directly.
-4. **Import SEED components from `seed-design/ui/*`**, not `@seed-design/react`. Missing one? Run
+5. **Import SEED components from `seed-design/ui/*`**, not `@seed-design/react`. Missing one? Run
    `pnpm seed:add ui:<name>`. Only `src/shared/seed/**` and `src/shared/ui/**` may use the raw
    package.
-5. **Every user-facing string is translated** into Korean and English under
+6. **Every user-facing string is translated** into Korean and English under
    `src/shared/i18n/locales/`. Korean is the source of truth and types the keys.
-6. **Server state is TanStack Query, client state is Zustand.** Never copy one into the other.
-7. **`pnpm verify` must pass** before you consider a task finished.
+7. **Server state is TanStack Query, client state is Zustand.** Never copy one into the other.
+8. **`pnpm verify` must pass** before you consider a task finished.
 
 ## Landing a change
 
@@ -97,9 +103,10 @@ first because they fail silently.
 ```bash
 pnpm bootstrap        # first run: install, generate routes, sync SEED, typecheck
 pnpm dev
-pnpm verify           # typecheck, lint, FSD lint, format, SEED drift, lock-in
+pnpm verify           # typecheck, lint, FSD lint, format, SEED drift, brand, lock-in
 pnpm seed:add ui:tabs # add a SEED snippet
 pnpm seed:sync        # regenerate the token catalog and cached docs
+pnpm brand:sync       # apply brand.config.json into global.css
 pnpm seed:compat      # check snippets against installed SEED versions
 ```
 
