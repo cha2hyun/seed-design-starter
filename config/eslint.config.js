@@ -111,6 +111,7 @@ export default tseslint.config(
       "seed-lockin/no-stylesheets": "error",
       "seed-lockin/no-inline-style": "error",
       "seed-lockin/no-karrot-icons": "error",
+      "seed-lockin/icon-only-icon": "error",
       "no-restricted-imports": [
         "error",
         {

@@ -1,3 +1,4 @@
+import iconOnlyIcon from "./rules/icon-only-icon.js";
 import noInlineStyle from "./rules/no-inline-style.js";
 import noKarrotIcons from "./rules/no-karrot-icons.js";
 import noStylesheets from "./rules/no-stylesheets.js";
@@ -17,6 +18,7 @@ export const seedLockin = {
     "no-stylesheets": noStylesheets,
     "no-inline-style": noInlineStyle,
     "no-karrot-icons": noKarrotIcons,
+    "icon-only-icon": iconOnlyIcon,
   },
 };
 

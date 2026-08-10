@@ -61,6 +61,11 @@ Icons come from `lucide-react`. Prefer named imports (`import { ChevronRight } f
 Do not add `@karrotmarket/react-*-icon` or `@daangn/react-*-icon` — `seed-lockin/no-karrot-icons`
 and `pnpm verify:lockin` refuse them, including inside vendored `src/shared/seed/**` snippets.
 
+When a SEED control uses `layout="iconOnly"` (ActionButton, Chip, …), the child must be
+`<Icon svg={<SomeLucideIcon />} />` from `@/shared/ui` (re-exports `@seed-design/react`). A raw
+`<SomeLucideIcon />` passes TypeScript but throws at runtime; `seed-lockin/icon-only-icon` catches
+it at lint time.
+
 ## Brand
 
 Product brand lives in `config/brand.config.json` (schema: `config/brand.config.schema.json`). It remaps SEED's
