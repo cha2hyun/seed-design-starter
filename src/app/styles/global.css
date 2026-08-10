@@ -94,8 +94,18 @@
     system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Reading width of the app shell, replacing Tailwind's `max-w-*` scale. */
-  --container-content: 48rem;
+  /*
+   * Contents Layout max-width from SEED foundations/layout. Default recommendation
+   * is 1040px; commerce / wide exploration may go up to 1280px — this starter uses
+   * that upper bound for product listing surfaces.
+   */
+  --container-content: 80rem; /* 1280px */
+
+  /*
+   * Side Navigation width. SEED Layout defines the region but no dimension token;
+   * 240px is a common desktop rail that leaves room for Contents Layout beside it.
+   */
+  --width-sidebar: 15rem; /* 240px */
 }
 
 @layer base {

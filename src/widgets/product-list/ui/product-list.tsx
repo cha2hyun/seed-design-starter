@@ -8,7 +8,8 @@ import { useProductFilterStore } from "@/features/product-filter";
 
 import { ProductCard, productListQuery } from "@/entities/product";
 
-import { LoadingBlock, StateMessage } from "@/shared/ui";
+import { cn } from "@/shared/lib";
+import { LoadingBlock, shellGutterClassName, StateMessage } from "@/shared/ui";
 
 export function ProductList() {
   const { t } = useTranslation(["product", "common"]);
@@ -43,15 +44,15 @@ export function ProductList() {
   }
 
   return (
-    <ul className="flex flex-col gap-x3">
+    <ul className={cn("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3", shellGutterClassName)}>
       {data.map((product) => (
-        <li key={product.id}>
+        <li key={product.id} className="min-w-x0">
           <Link
             to="/products/$productId"
             params={{ productId: product.id }}
-            className="group block rounded-r4"
+            className="group block h-full rounded-r4"
           >
-            <ProductCard product={product} />
+            <ProductCard product={product} className="h-full" />
           </Link>
         </li>
       ))}

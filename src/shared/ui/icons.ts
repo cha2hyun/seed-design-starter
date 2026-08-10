@@ -8,8 +8,11 @@ export {
   ChevronRight as IconChevronRight,
   CircleAlert as IconCircleAlert,
   CircleCheck as IconCircleCheck,
+  Home as IconHome,
+  Menu as IconMenu,
   Minus as IconMinus,
   Moon as IconMoon,
+  Settings as IconSettings,
   Sun as IconSun,
   X as IconX,
 } from "lucide-react";

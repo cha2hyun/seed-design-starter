@@ -2,8 +2,13 @@
   "appName": "SEED Starter",
   "nav": {
     "home": "Home",
-    "settings": "Settings"
+    "settings": "Settings",
+    "primary": "Primary navigation",
+    "side": "Side navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
+
   "preferences": {
     "language": {
       "label": "Switch language"

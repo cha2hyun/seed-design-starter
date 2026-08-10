@@ -82,7 +82,8 @@ There are two, and both are deliberate friction:
 - An inline `style` attribute needs a `// seed-escape: <reason>` comment directly above it.
 - A genuinely missing token goes into the project `@theme` block in `src/app/styles/global.css`,
   with a comment explaining why SEED has no equivalent. Today that block holds only the breakpoints,
-  the Pretendard font stack and one content width.
+  the Pretendard font stack, Contents Layout max-width (1280px / `max-w-content`),
+  and Side Navigation width (`--width-sidebar`, 240px).
 
 Reach for these rarely. If you find yourself wanting a third one, the design is probably fighting
 the design system.

@@ -7,20 +7,23 @@ import { ProductList } from "@/widgets/product-list";
 
 import { ProductFilter } from "@/features/product-filter";
 
-import { PageSection } from "@/shared/ui";
+import { cn } from "@/shared/lib";
+import { PageSection, shellGutterClassName } from "@/shared/ui";
 
 export function HomePage() {
   const { t } = useTranslation("product");
 
   return (
-    <div className="flex flex-col gap-x6">
+    <div className={cn("flex flex-col", shellGutterClassName)}>
       <PageSection title={t("list.title")} description={t("list.description")}>
-        <ProductFilter />
+        <div className="overflow-x-auto">
+          <ProductFilter />
+        </div>
       </PageSection>
 
       <ProductList />
 
-      <ActionButton size="large" asChild>
+      <ActionButton size="large" className="w-full md:w-auto" asChild>
         <Link to="/products/new">{t("create.title")}</Link>
       </ActionButton>
     </div>

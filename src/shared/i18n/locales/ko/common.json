@@ -2,8 +2,13 @@
   "appName": "SEED 스타터",
   "nav": {
     "home": "홈",
-    "settings": "설정"
+    "settings": "설정",
+    "primary": "주요 메뉴",
+    "side": "사이드 메뉴",
+    "openMenu": "메뉴 열기",
+    "closeMenu": "메뉴 닫기"
   },
+
   "preferences": {
     "language": {
       "label": "언어 전환"

@@ -2,6 +2,13 @@ export const LANGUAGES = ["ko", "en"] as const;
 export type Language = (typeof LANGUAGES)[number];
 export const DEFAULT_LANGUAGE: Language = "ko";
 
+/** Primary app destinations shared by Side Navigation and the mobile header menu. */
+export const NAV_ITEMS = [
+  { to: "/", labelKey: "nav.home" },
+  { to: "/settings", labelKey: "nav.settings" },
+] as const;
+export type NavItemTo = (typeof NAV_ITEMS)[number]["to"];
+
 /** Mirrors SEED's `data-seed-color-mode` attribute values. */
 export const COLOR_MODES = ["system", "light-only", "dark-only"] as const;
 export type ColorMode = (typeof COLOR_MODES)[number];
