@@ -29,7 +29,7 @@ export function DevtoolsProvider({ children, router }: DevtoolsProviderProps) {
 function MountedTanStackDevtools({ router }: { router: AnyRouter }) {
   return (
     <TanStackDevtools
-      config={{ position: "bottom-left" }}
+      config={{ position: "bottom-right" }}
       plugins={[
         {
           name: "TanStack Query",
