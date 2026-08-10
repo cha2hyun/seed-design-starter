@@ -1,25 +1,33 @@
 import { useTranslation } from "react-i18next";
 
-import { SegmentedControl, SegmentedControlItem } from "seed-design/ui/segmented-control";
+import { ActionButton } from "seed-design/ui/action-button";
 
 import { type Language, LANGUAGES } from "@/shared/config";
 import { useLanguage } from "@/shared/i18n";
 
+const LANGUAGE_LABEL: Record<Language, string> = {
+  ko: "KO",
+  en: "EN",
+};
+
+function nextLanguage(language: Language): Language {
+  const index = LANGUAGES.indexOf(language);
+  return LANGUAGES[(index + 1) % LANGUAGES.length] ?? LANGUAGES[0];
+}
+
 export function LanguagePicker() {
-  const { t } = useTranslation("settings");
+  const { t } = useTranslation();
   const { language, setLanguage } = useLanguage();
 
   return (
-    <SegmentedControl
-      aria-label={t("language.label")}
-      value={language}
-      onValueChange={(value) => setLanguage(value as Language)}
+    <ActionButton
+      type="button"
+      size="xsmall"
+      variant="neutralWeak"
+      aria-label={`${t("preferences.language.label")}: ${LANGUAGE_LABEL[language]}`}
+      onClick={() => setLanguage(nextLanguage(language))}
     >
-      {LANGUAGES.map((code) => (
-        <SegmentedControlItem key={code} value={code}>
-          {t(`language.${code}`)}
-        </SegmentedControlItem>
-      ))}
-    </SegmentedControl>
+      {LANGUAGE_LABEL[language]}
+    </ActionButton>
   );
 }

@@ -11,7 +11,7 @@ import {
   useSnackbarAdapter as useSeedSnackbarAdapter,
 } from "@seed-design/react";
 
-import { CircleAlert, CircleCheck } from "lucide-react";
+import { IconCircleAlert, IconCircleCheck } from "@/shared/ui";
 
 export interface SnackbarProviderProps extends SeedSnackbar.RootProviderProps {}
 
@@ -55,9 +55,9 @@ export const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
           <SeedSnackbar.PrefixIcon
             svg={
               variant === "positive" ? (
-                <CircleCheck />
+                <IconCircleCheck />
               ) : variant === "critical" ? (
-                <CircleAlert />
+                <IconCircleAlert />
               ) : null
             }
           />

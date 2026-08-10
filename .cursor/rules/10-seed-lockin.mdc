@@ -57,9 +57,15 @@ These files are snippets fetched by `@seed-design/cli`. If the component you nee
 with `pnpm seed:add ui:<name>` instead of hand-rolling one. Only `src/shared/seed/**` and
 `src/shared/ui/**` may import `@seed-design/react` directly.
 
-Icons come from `lucide-react`. Prefer named imports (`import { ChevronRight } from "lucide-react"`).
-Do not add `@karrotmarket/react-*-icon` or `@daangn/react-*-icon` — `seed-lockin/no-karrot-icons`
-and `pnpm verify:lockin` refuse them, including inside vendored `src/shared/seed/**` snippets.
+Icons live in `src/shared/ui/icons.ts` and are re-exported as `Icon*` (`IconMoon`, `IconSun`, …)
+from `@/shared/ui`. Do not import `lucide-react` in feature/page code — add the glyph to the catalog
+first. `seed-lockin/no-direct-lucide` and `seed-lockin/no-karrot-icons` enforce this, including
+inside vendored `src/shared/seed/**` snippets.
+
+When a SEED control uses `layout="iconOnly"` (ActionButton, Chip, …), the child must be
+`<Icon svg={<IconSun />} />` — `Icon` is the SEED wrapper from `@/shared/ui`, and `IconSun` is the
+Lucide glyph. A raw SVG passes TypeScript but throws at runtime; `seed-lockin/icon-only-icon`
+catches it at lint time.
 
 ## Brand
 
@@ -76,7 +82,8 @@ There are two, and both are deliberate friction:
 - An inline `style` attribute needs a `// seed-escape: <reason>` comment directly above it.
 - A genuinely missing token goes into the project `@theme` block in `src/app/styles/global.css`,
   with a comment explaining why SEED has no equivalent. Today that block holds only the breakpoints,
-  the Pretendard font stack and one content width.
+  the Pretendard font stack, Contents Layout max-width (1280px / `max-w-content`),
+  and Side Navigation width (`--width-sidebar`, 240px).
 
 Reach for these rarely. If you find yourself wanting a third one, the design is probably fighting
 the design system.

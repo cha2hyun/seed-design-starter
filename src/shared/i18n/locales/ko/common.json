@@ -2,7 +2,26 @@
   "appName": "SEED 스타터",
   "nav": {
     "home": "홈",
-    "settings": "설정"
+    "settings": "설정",
+    "primary": "주요 메뉴",
+    "side": "사이드 메뉴",
+    "openMenu": "메뉴 열기",
+    "closeMenu": "메뉴 닫기"
+  },
+  "footer": {
+    "github": "GitHub"
+  },
+
+  "preferences": {
+    "language": {
+      "label": "언어 전환"
+    },
+    "colorMode": {
+      "label": "화면 모드",
+      "system": "시스템 설정",
+      "light-only": "라이트",
+      "dark-only": "다크"
+    }
   },
   "action": {
     "retry": "다시 시도",

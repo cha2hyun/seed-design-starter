@@ -4,6 +4,25 @@
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)를 따르고, 버전은
 [SemVer](https://semver.org/)와 `package.json`을 따릅니다.
 
+## [0.3.0] - 2026-08-10
+
+앱 셸을 SEED Contents Layout에 맞추고, 헤더·사이드 네비·푸터로 탐색 영역을
+나눴습니다. `feat` 커밋이 있어 minor로 올렸습니다.
+
+### Added
+
+- md 이상에서 노출되는 Side Navigation과, md 미만에서 헤더로 접히는 모바일 메뉴
+- SEED `block:footer-01` 기반 앱 푸터 (공개 GitHub 저장소 링크)
+- Query·Router를 하나의 TanStack Devtools 셸에 모은 개발 도구
+- `layout="iconOnly"` 자식이 SEED `Icon` 래퍼인지 검사하는 ESLint 규칙
+
+### Changed
+
+- Contents Layout 셸을 커머스 상한(1280px)과 breakpoint 마진·거터에 맞춤
+- 언어·색상 모드 전환을 설정 페이지가 아니라 헤더로 이동
+- Lucide 아이콘을 `Icon*` 카탈로그로 모아 직접 `lucide-react` import를 금지
+- 상품 목록을 `1 / md:2 / lg:3` 반응형 그리드로 표시
+
 ## [0.2.0] - 2026-08-07
 
 `develop`에 쌓인 통합·락인·에이전트 워크플로 변경의 첫 릴리스입니다. `feat` 커밋이 있어

@@ -211,5 +211,5 @@ import는 항상 아래 방향으로만 흐릅니다: `app → pages → widgets
 
 SEED Design 등 Apache-2.0 구성요소의 귀속 고지는 [NOTICE](./NOTICE)에,
 라이선스 전문은 [licenses/Apache-2.0.txt](./licenses/Apache-2.0.txt)에 있습니다.
-앱 아이콘은 `lucide-react`(ISC)를 쓰고, 당근 로고·상호·캐릭터 같은 브랜드 리소스는
+앱 아이콘은 `src/shared/ui/icons.ts`에서 Lucide를 `Icon*`로 재수출해 쓰고, 당근 로고·상호·캐릭터 같은 브랜드 리소스는
 NOTICE의 상표 안내를 따릅니다.

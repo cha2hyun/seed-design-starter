@@ -2,15 +2,27 @@ import { createRootRoute, Outlet } from "@tanstack/react-router";
 
 import { NotFoundPage } from "@/pages/not-found";
 
+import { AppFooter } from "@/widgets/app-footer";
 import { AppHeader } from "@/widgets/app-header";
+import { AppSidebar } from "@/widgets/app-sidebar";
+
+import { shellContentClassName } from "@/shared/ui";
 
 function RootLayout() {
   return (
-    <div className="min-h-dvh bg-bg-layer-basement text-fg-neutral">
-      <AppHeader />
-      <main className="mx-auto w-full max-w-content py-x6 px-x5">
-        <Outlet />
-      </main>
+    <div className="flex flex-col bg-bg-layer-basement text-fg-neutral">
+      <div className="flex min-h-screen flex-col">
+        <AppHeader />
+        <div className="flex flex-1">
+          <AppSidebar />
+          <main className="min-w-x0 flex-1 py-x4 md:py-x6">
+            <div className={shellContentClassName}>
+              <Outlet />
+            </div>
+          </main>
+        </div>
+      </div>
+      <AppFooter />
     </div>
   );
 }

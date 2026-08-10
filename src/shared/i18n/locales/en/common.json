@@ -2,7 +2,26 @@
   "appName": "SEED Starter",
   "nav": {
     "home": "Home",
-    "settings": "Settings"
+    "settings": "Settings",
+    "primary": "Primary navigation",
+    "side": "Side navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "footer": {
+    "github": "GitHub"
+  },
+
+  "preferences": {
+    "language": {
+      "label": "Switch language"
+    },
+    "colorMode": {
+      "label": "Appearance",
+      "system": "System",
+      "light-only": "Light",
+      "dark-only": "Dark"
+    }
   },
   "action": {
     "retry": "Try again",

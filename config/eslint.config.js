@@ -111,6 +111,8 @@ export default tseslint.config(
       "seed-lockin/no-stylesheets": "error",
       "seed-lockin/no-inline-style": "error",
       "seed-lockin/no-karrot-icons": "error",
+      "seed-lockin/no-direct-lucide": "error",
+      "seed-lockin/icon-only-icon": "error",
       "no-restricted-imports": [
         "error",
         {
@@ -141,7 +143,7 @@ export default tseslint.config(
   {
     // Vendored snippets belong to @seed-design/cli, which overwrites them on upgrade.
     // Lint them for correctness only; project style rules would fight the generator.
-    // Keep seed-lockin/no-karrot-icons on: re-added snippets must be patched to Lucide.
+    // Keep seed-lockin/no-karrot-icons and no-direct-lucide on: re-added snippets must use Icon*.
     files: ["src/shared/seed/**/*.{ts,tsx}"],
     rules: {
       "seed-lockin/token-only": "off",
