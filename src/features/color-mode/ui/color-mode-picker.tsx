@@ -1,5 +1,6 @@
-import { Monitor, Moon, Sun } from "lucide-react";
 import { useTranslation } from "react-i18next";
+
+import { Monitor, Moon, Sun } from "lucide-react";
 
 import { ActionButton } from "seed-design/ui/action-button";
 
