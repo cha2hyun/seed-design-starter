@@ -1,27 +1,40 @@
+import { Monitor, Moon, Sun } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-import { SegmentedControl, SegmentedControlItem } from "seed-design/ui/segmented-control";
+import { ActionButton } from "seed-design/ui/action-button";
 
 import { COLOR_MODES, type ColorMode } from "@/shared/config";
+import { Icon } from "@/shared/ui";
 
 import { useColorModeStore } from "../model/color-mode-store";
 
+const MODE_ICON = {
+  system: Monitor,
+  "light-only": Sun,
+  "dark-only": Moon,
+} as const;
+
+function nextColorMode(colorMode: ColorMode): ColorMode {
+  const index = COLOR_MODES.indexOf(colorMode);
+  return COLOR_MODES[(index + 1) % COLOR_MODES.length] ?? COLOR_MODES[0];
+}
+
 export function ColorModePicker() {
-  const { t } = useTranslation("settings");
+  const { t } = useTranslation();
   const colorMode = useColorModeStore((state) => state.colorMode);
   const setColorMode = useColorModeStore((state) => state.setColorMode);
+  const ModeIcon = MODE_ICON[colorMode];
 
   return (
-    <SegmentedControl
-      aria-label={t("colorMode.label")}
-      value={colorMode}
-      onValueChange={(value) => setColorMode(value as ColorMode)}
+    <ActionButton
+      type="button"
+      size="xsmall"
+      variant="ghost"
+      layout="iconOnly"
+      aria-label={`${t("preferences.colorMode.label")}: ${t(`preferences.colorMode.${colorMode}`)}`}
+      onClick={() => setColorMode(nextColorMode(colorMode))}
     >
-      {COLOR_MODES.map((mode) => (
-        <SegmentedControlItem key={mode} value={mode}>
-          {t(`colorMode.${mode}`)}
-        </SegmentedControlItem>
-      ))}
-    </SegmentedControl>
+      <Icon svg={<ModeIcon />} />
+    </ActionButton>
   );
 }

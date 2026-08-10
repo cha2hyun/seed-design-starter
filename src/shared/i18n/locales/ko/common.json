@@ -4,6 +4,17 @@
     "home": "홈",
     "settings": "설정"
   },
+  "preferences": {
+    "language": {
+      "label": "언어 전환"
+    },
+    "colorMode": {
+      "label": "화면 모드",
+      "system": "시스템 설정",
+      "light-only": "라이트",
+      "dark-only": "다크"
+    }
+  },
   "action": {
     "retry": "다시 시도",
     "cancel": "취소",

@@ -1,16 +1,5 @@
 {
   "title": "Settings",
-  "description": "Theme and language are stored in your browser.",
-  "language": {
-    "label": "Language",
-    "ko": "한국어",
-    "en": "English"
-  },
-  "colorMode": {
-    "label": "Appearance",
-    "system": "System",
-    "light-only": "Light",
-    "dark-only": "Dark",
-    "hint": "Choosing System follows your device setting."
-  }
+  "description": "A placeholder screen for future app settings.",
+  "preferencesInHeader": "Language and appearance can be changed from the header at the top of the screen."
 }

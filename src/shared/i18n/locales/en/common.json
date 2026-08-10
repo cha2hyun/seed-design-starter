@@ -4,6 +4,17 @@
     "home": "Home",
     "settings": "Settings"
   },
+  "preferences": {
+    "language": {
+      "label": "Switch language"
+    },
+    "colorMode": {
+      "label": "Appearance",
+      "system": "System",
+      "light-only": "Light",
+      "dark-only": "Dark"
+    }
+  },
   "action": {
     "retry": "Try again",
     "cancel": "Cancel",
