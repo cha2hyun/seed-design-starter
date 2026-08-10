@@ -2,6 +2,7 @@ import { createRootRoute, Outlet } from "@tanstack/react-router";
 
 import { NotFoundPage } from "@/pages/not-found";
 
+import { AppFooter } from "@/widgets/app-footer";
 import { AppHeader } from "@/widgets/app-header";
 import { AppSidebar } from "@/widgets/app-sidebar";
 
@@ -19,6 +20,7 @@ function RootLayout() {
           </div>
         </main>
       </div>
+      <AppFooter />
     </div>
   );
 }

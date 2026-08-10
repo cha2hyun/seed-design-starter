@@ -8,6 +8,9 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },
+  "footer": {
+    "github": "GitHub"
+  },
 
   "preferences": {
     "language": {

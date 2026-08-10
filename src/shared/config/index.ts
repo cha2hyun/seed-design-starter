@@ -9,6 +9,9 @@ export const NAV_ITEMS = [
 ] as const;
 export type NavItemTo = (typeof NAV_ITEMS)[number]["to"];
 
+/** Public GitHub repository for this starter. */
+export const REPO_URL = "https://github.com/cha2hyun/seed-design-starter";
+
 /** Mirrors SEED's `data-seed-color-mode` attribute values. */
 export const COLOR_MODES = ["system", "light-only", "dark-only"] as const;
 export type ColorMode = (typeof COLOR_MODES)[number];

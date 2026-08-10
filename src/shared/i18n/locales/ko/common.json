@@ -8,6 +8,9 @@
     "openMenu": "메뉴 열기",
     "closeMenu": "메뉴 닫기"
   },
+  "footer": {
+    "github": "GitHub"
+  },
 
   "preferences": {
     "language": {
