@@ -1,4 +1,5 @@
 import tailwindcss from "@tailwindcss/vite";
+import { devtools } from "@tanstack/devtools-vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
 import { dirname, resolve } from "node:path";
@@ -30,6 +31,8 @@ export default defineConfig({
   // Keep secrets and mode files under env/ instead of the repository root.
   envDir: resolve(ROOT, "env"),
   plugins: [
+    // Must be first — strips Devtools from production and enables source/console piping.
+    devtools(),
     tanstackRouter({
       target: "react",
       autoCodeSplitting: true,

@@ -16,7 +16,7 @@ if (!container) {
 
 createRoot(container).render(
   <StrictMode>
-    <AppProviders>
+    <AppProviders router={router}>
       <RouterProvider router={router} />
     </AppProviders>
   </StrictMode>,
