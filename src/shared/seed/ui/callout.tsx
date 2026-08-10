@@ -7,7 +7,7 @@ import * as React from "react";
 
 import { PrefixIcon, Callout as SeedCallout, SuffixIcon } from "@seed-design/react";
 
-import { ChevronRight, X } from "lucide-react";
+import { IconChevronRight, IconX } from "@/shared/ui";
 
 export interface CalloutProps extends Omit<
   SeedCallout.RootProps,
@@ -67,7 +67,7 @@ export const ActionableCallout = React.forwardRef<
           {title && <SeedCallout.Title>{title}</SeedCallout.Title>}
           <SeedCallout.Description>{description}</SeedCallout.Description>
         </SeedCallout.Content>
-        <SuffixIcon svg={<ChevronRight />} />
+        <SuffixIcon svg={<IconChevronRight />} />
       </button>
     </SeedCallout.Root>
   );
@@ -104,7 +104,7 @@ export const DismissibleCallout = React.forwardRef<
       </SeedCallout.Content>
       {/* You may implement your own i18n for dismiss label */}
       <SeedCallout.CloseButton aria-label="닫기">
-        <SuffixIcon svg={<X />} />
+        <SuffixIcon svg={<IconX />} />
       </SeedCallout.CloseButton>
     </SeedCallout.Root>
   );

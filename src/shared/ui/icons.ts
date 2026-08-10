@@ -1,0 +1,15 @@
+/**
+ * App icon catalog. Re-export Lucide icons with an `Icon` prefix so call sites never
+ * import `lucide-react` directly — add new glyphs here when a screen needs one.
+ */
+export {
+  Check as IconCheck,
+  ChevronDown as IconChevronDown,
+  ChevronRight as IconChevronRight,
+  CircleAlert as IconCircleAlert,
+  CircleCheck as IconCircleCheck,
+  Minus as IconMinus,
+  Moon as IconMoon,
+  Sun as IconSun,
+  X as IconX,
+} from "lucide-react";

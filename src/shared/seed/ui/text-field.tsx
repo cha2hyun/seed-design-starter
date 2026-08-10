@@ -15,7 +15,7 @@ import {
   VisuallyHidden,
 } from "@seed-design/react";
 
-import { CircleAlert } from "lucide-react";
+import { IconCircleAlert } from "@/shared/ui";
 
 export interface TextFieldProps extends Omit<
   SeedTextField.RootProps,
@@ -140,7 +140,7 @@ export const TextField = React.forwardRef<HTMLDivElement, TextFieldProps>(
               ))}
             {renderErrorMessage && (
               <SeedField.ErrorMessage>
-                <PrefixIcon svg={<CircleAlert />} />
+                <PrefixIcon svg={<IconCircleAlert />} />
                 {errorMessage}
               </SeedField.ErrorMessage>
             )}

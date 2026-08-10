@@ -49,17 +49,17 @@ Sections and their categories:
 
 ## Reach for a tool when
 
-| Question                                       | Call                                                                          |
-| ---------------------------------------------- | ----------------------------------------------------------------------------- |
-| Does a component for this exist?               | `list_docs({ section: "react", category: "components" })`                     |
-| What props does it take?                       | `get_doc({ section: "react", path: "components/action-button" })`             |
-| When should this component be used at all?     | `get_doc({ section: "docs", path: "components/action-button" })`              |
-| How do colour or spacing foundations work?     | `get_doc({ section: "docs", path: "foundation/color" })`                      |
-| What is the exact token name?                  | `get_rootage({ path: "/color.json" })`                                        |
-| What is this component's spec?                 | `get_rootage({ path: "/components/action-button.json" })`                     |
-| Which icon shows a left arrow?                 | Use `lucide-react` (e.g. `ChevronLeft`); do not add Karrot icon packages      |
-| How is theming or Tailwind meant to be set up? | `get_doc({ section: "react", path: "getting-started/styling/tailwind-css" })` |
-| What changed in the last release?              | `list_docs({ section: "react", category: "updates" })`                        |
+| Question                                       | Call                                                                                             |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Does a component for this exist?               | `list_docs({ section: "react", category: "components" })`                                        |
+| What props does it take?                       | `get_doc({ section: "react", path: "components/action-button" })`                                |
+| When should this component be used at all?     | `get_doc({ section: "docs", path: "components/action-button" })`                                 |
+| How do colour or spacing foundations work?     | `get_doc({ section: "docs", path: "foundation/color" })`                                         |
+| What is the exact token name?                  | `get_rootage({ path: "/color.json" })`                                                           |
+| What is this component's spec?                 | `get_rootage({ path: "/components/action-button.json" })`                                        |
+| Which icon shows a left arrow?                 | Add/reuse `IconChevronLeft` in `src/shared/ui/icons.ts`; do not import lucide or Karrot packages |
+| How is theming or Tailwind meant to be set up? | `get_doc({ section: "react", path: "getting-started/styling/tailwind-css" })`                    |
+| What changed in the last release?              | `list_docs({ section: "react", category: "updates" })`                                           |
 
 The tool surface has changed between minor versions of `@seed-design/docs-mcp` before. If a call
 fails with an unknown-tool error, run `discover_seed_docs` and re-read what is actually there rather

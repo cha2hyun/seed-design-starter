@@ -13,7 +13,7 @@ import {
   VisuallyHidden,
 } from "@seed-design/react";
 
-import { Check, ChevronDown, CircleAlert } from "lucide-react";
+import { IconCheck, IconChevronDown, IconCircleAlert } from "@/shared/ui";
 
 export interface SelectRootProps extends SeedSelect.RootProps {
   label?: React.ReactNode;
@@ -94,7 +94,7 @@ export const SelectRoot = ({
             ))}
           {renderErrorMessage && (
             <SeedField.ErrorMessage>
-              <PrefixIcon svg={<CircleAlert />} />
+              <PrefixIcon svg={<IconCircleAlert />} />
               {errorMessage}
             </SeedField.ErrorMessage>
           )}
@@ -110,7 +110,7 @@ export interface SelectTriggerProps extends Omit<SeedSelect.TriggerProps, "child
   prefixIcon?: React.ReactNode;
 
   /**
-   * @default <ChevronDown />
+   * @default <IconChevronDown />
    */
   suffixIcon?: React.ReactNode;
 }
@@ -119,7 +119,7 @@ export interface SelectTriggerProps extends Omit<SeedSelect.TriggerProps, "child
  * @see https://seed-design.io/react/components/select
  */
 export const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
-  ({ placeholder, prefixIcon, suffixIcon = <ChevronDown />, ...props }, ref) => {
+  ({ placeholder, prefixIcon, suffixIcon = <IconChevronDown />, ...props }, ref) => {
     return (
       <SeedSelect.Trigger ref={ref} {...props}>
         <SeedSelect.PrefixIcon fallback={prefixIcon} />
@@ -187,7 +187,7 @@ export const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
           <SeedSelect.ItemLabel />
           {description && <SeedSelect.ItemDescription>{description}</SeedSelect.ItemDescription>}
         </SeedSelect.ItemBody>
-        <SeedSelect.ItemIndicator selected={<Check />} />
+        <SeedSelect.ItemIndicator selected={<IconCheck />} />
       </SeedSelect.Item>
     );
   },

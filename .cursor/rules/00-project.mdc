@@ -11,18 +11,18 @@ architecture or i18n decisions.
 
 ## Stack
 
-| Concern         | Choice                                                            |
-| --------------- | ----------------------------------------------------------------- |
-| Build           | Vite 8, React 19, TypeScript 5.9                                  |
-| Design system   | `@seed-design/react` + `@seed-design/css`, snippets via CLI       |
-| Brand           | `config/brand.config.json` → remaps SEED carrot / brand semantics |
-| Icons           | `lucide-react` (not Karrot/SEED icon packages)                    |
-| Styling         | Tailwind CSS 4 with SEED tokens only                              |
-| Routing         | TanStack Router, file-based under `src/app/routes`                |
-| Server state    | TanStack Query                                                    |
-| Client state    | Zustand                                                           |
-| i18n            | i18next + react-i18next, Korean and English                       |
-| Package manager | pnpm, Node 22 or newer                                            |
+| Concern         | Choice                                                                       |
+| --------------- | ---------------------------------------------------------------------------- |
+| Build           | Vite 8, React 19, TypeScript 5.9                                             |
+| Design system   | `@seed-design/react` + `@seed-design/css`, snippets via CLI                  |
+| Brand           | `config/brand.config.json` → remaps SEED carrot / brand semantics            |
+| Icons           | `src/shared/ui/icons.ts` → `Icon*` via `@/shared/ui` (Lucide under the hood) |
+| Styling         | Tailwind CSS 4 with SEED tokens only                                         |
+| Routing         | TanStack Router, file-based under `src/app/routes`                           |
+| Server state    | TanStack Query                                                               |
+| Client state    | Zustand                                                                      |
+| i18n            | i18next + react-i18next, Korean and English                                  |
+| Package manager | pnpm, Node 22 or newer                                                       |
 
 ## Commands
 

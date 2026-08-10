@@ -1,30 +1,30 @@
 import { useTranslation } from "react-i18next";
 
-import { Monitor, Moon, Sun } from "lucide-react";
-
 import { ActionButton } from "seed-design/ui/action-button";
 
-import { COLOR_MODES, type ColorMode } from "@/shared/config";
-import { Icon } from "@/shared/ui";
+import type { ColorMode } from "@/shared/config";
+import { Icon, IconMoon, IconSun } from "@/shared/ui";
 
 import { useColorModeStore } from "../model/color-mode-store";
 
-const MODE_ICON = {
-  system: Monitor,
-  "light-only": Sun,
-  "dark-only": Moon,
-} as const;
+type ExplicitColorMode = Extract<ColorMode, "light-only" | "dark-only">;
 
-function nextColorMode(colorMode: ColorMode): ColorMode {
-  const index = COLOR_MODES.indexOf(colorMode);
-  return COLOR_MODES[(index + 1) % COLOR_MODES.length] ?? COLOR_MODES[0];
+function resolveExplicitMode(colorMode: ColorMode): ExplicitColorMode {
+  if (colorMode === "light-only" || colorMode === "dark-only") return colorMode;
+  if (typeof window === "undefined") return "light-only";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark-only" : "light-only";
+}
+
+function toggleColorMode(colorMode: ColorMode): ExplicitColorMode {
+  return resolveExplicitMode(colorMode) === "light-only" ? "dark-only" : "light-only";
 }
 
 export function ColorModePicker() {
   const { t } = useTranslation();
   const colorMode = useColorModeStore((state) => state.colorMode);
   const setColorMode = useColorModeStore((state) => state.setColorMode);
-  const ModeIcon = MODE_ICON[colorMode];
+  const explicitMode = resolveExplicitMode(colorMode);
+  const ModeIcon = explicitMode === "light-only" ? IconSun : IconMoon;
 
   return (
     <ActionButton
@@ -32,8 +32,8 @@ export function ColorModePicker() {
       size="xsmall"
       variant="ghost"
       layout="iconOnly"
-      aria-label={`${t("preferences.colorMode.label")}: ${t(`preferences.colorMode.${colorMode}`)}`}
-      onClick={() => setColorMode(nextColorMode(colorMode))}
+      aria-label={`${t("preferences.colorMode.label")}: ${t(`preferences.colorMode.${explicitMode}`)}`}
+      onClick={() => setColorMode(toggleColorMode(colorMode))}
     >
       <Icon svg={<ModeIcon />} />
     </ActionButton>

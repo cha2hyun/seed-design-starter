@@ -17,7 +17,7 @@ import {
   VisuallyHidden,
 } from "@seed-design/react";
 
-import { Check, CircleAlert, Minus } from "lucide-react";
+import { IconCheck, IconCircleAlert, IconMinus } from "@/shared/ui";
 
 export interface CheckboxGroupProps extends SeedFieldset.RootProps, CheckboxGroupVariantProps {
   label?: React.ReactNode;
@@ -88,7 +88,7 @@ export const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps
               ))}
             {errorMessage && (
               <SeedFieldset.ErrorMessage>
-                <PrefixIcon svg={<CircleAlert />} />
+                <PrefixIcon svg={<IconCircleAlert />} />
                 {errorMessage}
               </SeedFieldset.ErrorMessage>
             )}
@@ -117,9 +117,9 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       <SeedCheckbox.Root ref={rootRef} {...otherProps}>
         <SeedCheckbox.Control>
           <SeedCheckbox.Indicator
-            unchecked={otherProps.variant === "ghost" ? <Check /> : null}
-            checked={<Check />}
-            indeterminate={<Minus />}
+            unchecked={otherProps.variant === "ghost" ? <IconCheck /> : null}
+            checked={<IconCheck />}
+            indeterminate={<IconMinus />}
           />
         </SeedCheckbox.Control>
         <SeedCheckbox.Label>{label}</SeedCheckbox.Label>
@@ -136,9 +136,9 @@ export const Checkmark = React.forwardRef<HTMLDivElement, CheckmarkProps>((props
   return (
     <SeedCheckbox.Control ref={ref} {...props}>
       <SeedCheckbox.Indicator
-        unchecked={props.variant === "ghost" ? <Check /> : null}
-        checked={<Check />}
-        indeterminate={<Minus />}
+        unchecked={props.variant === "ghost" ? <IconCheck /> : null}
+        checked={<IconCheck />}
+        indeterminate={<IconMinus />}
       />
     </SeedCheckbox.Control>
   );

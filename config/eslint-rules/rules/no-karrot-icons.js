@@ -19,7 +19,7 @@ export default {
     schema: [],
     messages: {
       banned:
-        'Do not import `{{source}}`. Use `lucide-react` instead (e.g. `import { ChevronRight } from "lucide-react"`).',
+        "Do not import `{{source}}`. Re-export the glyph from `src/shared/ui/icons.ts` as `Icon*` and import it from `@/shared/ui` (e.g. `IconChevronRight`).",
     },
   },
 
