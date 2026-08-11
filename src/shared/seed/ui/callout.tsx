@@ -84,6 +84,9 @@ export interface DismissibleCalloutProps extends Omit<
 
   description: React.ReactNode;
 
+  /** Accessible label for the dismiss control. */
+  closeLabel: string;
+
   linkProps?: SeedCallout.LinkProps;
 }
 
@@ -93,7 +96,7 @@ export interface DismissibleCalloutProps extends Omit<
 export const DismissibleCallout = React.forwardRef<
   React.ElementRef<typeof SeedCallout.Root>,
   DismissibleCalloutProps
->(({ prefixIcon, title, description, linkProps, ...otherProps }, ref) => {
+>(({ prefixIcon, title, description, closeLabel, linkProps, ...otherProps }, ref) => {
   return (
     <SeedCallout.Root ref={ref} {...otherProps}>
       {prefixIcon && <PrefixIcon svg={prefixIcon} />}
@@ -102,8 +105,7 @@ export const DismissibleCallout = React.forwardRef<
         <SeedCallout.Description>{description}</SeedCallout.Description>
         {linkProps && <SeedCallout.Link {...linkProps} />}
       </SeedCallout.Content>
-      {/* You may implement your own i18n for dismiss label */}
-      <SeedCallout.CloseButton aria-label="닫기">
+      <SeedCallout.CloseButton aria-label={closeLabel}>
         <SuffixIcon svg={<IconX />} />
       </SeedCallout.CloseButton>
     </SeedCallout.Root>

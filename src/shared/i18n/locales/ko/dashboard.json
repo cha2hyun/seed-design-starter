@@ -1,0 +1,44 @@
+{
+  "title": "대시보드",
+  "description": "요약 카드, 기간 컨트롤, 필터 칩, 검색을 조합한 예시 화면이에요.",
+  "summary": {
+    "title": "핵심 지표 요약",
+    "periodLabel": "집계 기간",
+    "period": {
+      "daily": "일간",
+      "weekly": "주간",
+      "monthly": "월간"
+    },
+    "gmv": "총 누적 거래액",
+    "newProducts": "신규 등록 상품",
+    "acceptedOffers": "성공한 제안 수",
+    "vsPrevious": "지난 기간 대비",
+    "trendUp": "{{change}} 상승",
+    "trendDown": "{{change}} 하락"
+  },
+  "list": {
+    "title": "최근 거래",
+    "searchLabel": "제목 검색",
+    "searchPlaceholder": "제목을 입력하세요",
+    "filterLabel": "거래 상태 필터",
+    "filter": {
+      "all": "전체",
+      "active": "판매 중",
+      "completed": "거래 완료"
+    },
+    "status": {
+      "active": "판매중",
+      "completed": "거래완료"
+    },
+    "empty": {
+      "title": "조건에 맞는 거래가 없어요",
+      "description": "검색어나 필터를 바꿔 보세요."
+    },
+    "item": {
+      "mbp-m3-max": "맥북 프로 M3 Max 16인치",
+      "iphone-15-pro": "아이폰 15 프로 256GB",
+      "sony-xm5": "소니 WH-1000XM5 헤드폰",
+      "switch-oled": "닌텐도 스위치 OLED"
+    }
+  }
+}

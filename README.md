@@ -4,16 +4,23 @@ Vite + React + TypeScript 스타터입니다. 당근의 디자인 시스템 [SEE
 **락인**되어 있고, [Feature-Sliced Design](https://feature-sliced.design)으로 구조를 잡았으며,
 AI 에이전트가 바로 일할 수 있도록 MCP·룰·커맨드가 레포에 함께 들어 있습니다.
 
+![SEED Design Starter의 데스크톱 홈 화면](./docs/images/seed-design-starter-preview.png)
+
 클론 → `pnpm bootstrap` → `/start` 한 번이면 누구나 같은 환경에서 시작합니다.
 
 ```bash
 git clone https://github.com/cha2hyun/seed-design-starter.git
 cd seed-design-starter
+corepack enable
+corepack prepare pnpm@10.33.0 --activate
 pnpm bootstrap
 pnpm dev
 ```
 
-Node 22 이상과 pnpm이 필요합니다. `.nvmrc`가 있으니 `nvm use`로 맞출 수 있어요.
+Node 22.22.2 이상(22.x), 24.15.0 이상(24.x), 또는 26 이상과 **pnpm 10.33.0**이
+필요합니다. `.nvmrc`가 있으니 `nvm use`로 지원되는 Node 22 버전에 맞출 수 있어요. Corepack이
+없는 Node 배포판이라면 사용하는 설치 방식으로 pnpm 10.33.0을 설치하세요. `bootstrap`은 버전이
+다르면 설치 전에 해결 방법과 함께 멈춥니다.
 
 ---
 
@@ -50,7 +57,7 @@ bg-red-500   p-4   text-lg   rounded-md   shadow-md   max-w-3xl
    allowlist와 대조해 `p-4` 같은 클래스에 대안 토큰까지 제안합니다. 인라인 `style`, 추가 `.css`
    파일, `@seed-design/react` 직접 import도 함께 막습니다.
 3. **회귀 테스트** — `pnpm verify:lockin`이 Tailwind를 실제로 컴파일해서, 비-SEED 유틸리티 27개가
-   여전히 죽어 있고 SEED 유틸리티 25개가 살아 있는지 확인합니다. CI에서 돌아갑니다.
+   여전히 죽어 있고 SEED 유틸리티 27개가 살아 있는지 확인합니다. CI에서 돌아갑니다.
 
 예외는 의도적으로 번거롭습니다. 인라인 스타일은 바로 위에 `// seed-escape: <이유>` 주석이 있어야
 하고, SEED에 없는 토큰은 `global.css`의 프로젝트 `@theme` 블록에 사유와 함께 추가합니다. **제품
@@ -73,7 +80,7 @@ bg-red-500   p-4   text-lg   rounded-md   shadow-md   max-w-3xl
 | `.cursor/mcp.json`               | `seed-docs` (인증 불필요)                                                      |
 | `config/brand.config.json`       | 제품 brand 팔레트 (carrot 스케일 재매핑). 수정 후 `pnpm brand:sync`            |
 | `config/`                        | ESLint · Prettier · Vite · commitlint · brand 등 툴링 설정                     |
-| `env/`                           | Vite 환경변수 (`VITE_*`). `env/.env.example` 참고, 로컬 비밀은 `.env.local`    |
+| `env/`                           | 공개 Vite 빌드 설정 (`VITE_*`). 머신별 값은 `.env.local`, 비밀은 절대 금지     |
 | `.cursor/rules/*.mdc`            | 프로젝트 · 락인 · FSD · i18n · MCP 사용법 · 코드 스타일 · git 워크플로         |
 | `.cursor/rules/_generated-*.mdc` | 설치된 SEED 버전의 실제 토큰 목록 (자동 생성)                                  |
 | `.cursor/commands/*.md`          | `/start` `/seed-sync` `/new-feature` `/audit-tokens` `/commit` `/pr` `/review` |
@@ -97,7 +104,7 @@ Cursor가 아니어도 됩니다. 이 프롬프트 하나로 충분해요.
 ```bash
 git switch develop                      # main은 릴리스 브랜치라 커밋 자체가 막힘
 git switch -c feat/price-offer-toggle   # 리뷰가 필요한 변경이면 브랜치를 팜
-pnpm verify                             # CI와 완전히 같은 명령
+pnpm verify                             # CI의 핵심 정적·단위 검증과 같은 명령
 git commit                              # Conventional Commits 강제
 git push -u origin HEAD                 # pre-push가 pnpm verify를 다시 실행
 gh pr create --base develop             # PR 제목도 같은 규칙 (squash 머지용)
@@ -108,9 +115,9 @@ gh pr create --base develop             # PR 제목도 같은 규칙 (squash 머
 브랜치를 따서 `develop`으로 PR을 올립니다.
 
 **릴리스**는 `develop`에서 `package.json` 버전과 `CHANGELOG.md`를 올린 뒤 `develop` → `main`
-PR을 **merge commit**으로 머지합니다 (squash 금지). `main` 푸시 시 `release` 워크플로가
-`vX.Y.Z` 태그와 GitHub Release를 만듭니다. 자세한 규칙은 [CONTRIBUTING.md](./CONTRIBUTING.md#릴리스)에
-있습니다.
+PR을 **merge commit**으로 머지합니다 (squash 금지). `main`의 CI가 모두 통과하면 `release`
+워크플로가 버전·CHANGELOG·기존 태그를 다시 검사한 뒤 `vX.Y.Z` 태그와 GitHub Release를 만듭니다.
+자세한 규칙은 [CONTRIBUTING.md](./CONTRIBUTING.md#릴리스)에 있습니다.
 
 강제되는 것들:
 
@@ -118,8 +125,8 @@ PR을 **merge commit**으로 머지합니다 (squash 금지). `main` 푸시 시 
 - **커밋 메시지** — Conventional Commits. 제목 12–72자, `update`·`changes`·`wip` 같은
   빈 껍데기 제목은 커스텀 commitlint 규칙이 걸러냅니다. scope는 선택이지만 쓴다면 실제 존재하는
   영역이어야 합니다.
-- **푸시 전 검사** — pre-push가 `pnpm verify`를 돌립니다. CI와 같은 명령이라 로컬이 초록이면
-  PR도 초록입니다.
+- **푸시 전 검사** — pre-push가 CI의 핵심 검증과 같은 `pnpm verify`를 돌립니다. 실제 Chromium의
+  5개 viewport 스모크 테스트는 CI에서 추가로 실행합니다.
 - **PR 제목** — `pr-title` 워크플로가 commitlint로 검사합니다.
 
 `/commit` `/pr` `/review` 커맨드가 이 루프를 그대로 실행하고, `/review`에는 이 레포 전용 리뷰
@@ -130,9 +137,10 @@ PR을 **merge commit**으로 머지합니다 (squash 금지). `main` 푸시 시 
 에이전트에게 `/seed-sync`를 시키면 npm 최신 버전 확인 → changelog 대조 → 업그레이드 →
 `pnpm seed:sync` → `pnpm seed:compat` → `pnpm verify`까지 한 번에 처리합니다.
 
-`pnpm seed:sync`는 설치된 패키지에서 `.seed/tokens.json`, 생성 룰 파일, `.seed/llms/` 문서 캐시를
-다시 만듭니다. CI의 `pnpm seed:check`가 이 산출물이 낡았으면 빌드를 깨뜨리므로, AI가 보는 토큰
-목록은 항상 실제 설치 버전과 일치합니다.
+`pnpm seed:sync`는 설치된 패키지에서 `.seed/tokens.json`, 생성 룰 파일을 다시 만들고 온라인이면
+`.seed/llms/` 문서 캐시도 갱신합니다. CI의 `pnpm seed:check`는 토큰 카탈로그와 생성 룰의 drift를
+검사하므로, AI가 사용하는 토큰 목록은 실제 설치 버전과 일치합니다. 문서 캐시는 오프라인 fallback이며
+최신 내용이 필요한 작업은 MCP나 `pnpm seed:docs`로 다시 확인합니다.
 
 ---
 
@@ -144,10 +152,10 @@ src/
 │   ├── providers/    QueryClient, Snackbar
 │   ├── routes/       TanStack Router 파일 기반 라우트 (page만 조립)
 │   └── styles/       global.css — 프로젝트 유일 스타일시트
-├── pages/            home · product-detail · product-new · settings · not-found
-├── widgets/          app-header · product-list
-├── features/         color-mode · language · product-filter · create-product
-├── entities/         product (types · api · queries · card)
+├── pages/            home · dashboard · wizard · product-* · profile · login · settings · states
+├── widgets/          app-header · app-sidebar · app-footer · product-list
+├── features/         account-menu · color-mode · language · product-filter · create-product
+├── entities/         product · session (types · api · queries · presentation)
 └── shared/
     ├── api/ config/ lib/ ui/ i18n/
     └── seed/         @seed-design/cli 스니펫 (`seed-design/ui/*` 별칭)
@@ -164,21 +172,54 @@ import는 항상 아래 방향으로만 흐릅니다: `app → pages → widgets
 
 ## 명령어
 
-| 명령어               | 하는 일                                                    |
-| -------------------- | ---------------------------------------------------------- |
-| `pnpm bootstrap`     | 최초 실행: 설치 · 라우트 생성 · SEED 동기화 · 타입체크     |
-| `pnpm dev`           | 개발 서버                                                  |
-| `pnpm build`         | 라우트 생성 → 타입체크 → 프로덕션 빌드                     |
-| `pnpm verify`        | CI가 도는 모든 검사                                        |
-| `pnpm verify:lockin` | 락인 회귀 테스트                                           |
-| `pnpm brand:sync`    | `config/brand.config.json` → `global.css` brand 오버라이드 |
-| `pnpm brand:check`   | brand 생성물이 config와 일치하는지 확인                    |
-| `pnpm lint` / `:fix` | ESLint (SEED 락인 + FSD 경계)                              |
-| `pnpm lint:fsd`      | steiger로 FSD 구조 검사                                    |
-| `pnpm seed:add`      | SEED 스니펫 추가 — `pnpm seed:add ui:tabs`                 |
-| `pnpm seed:sync`     | 토큰 카탈로그 · 생성 룰 · 문서 캐시 재생성                 |
-| `pnpm seed:compat`   | 스니펫과 설치된 SEED 버전 호환성 검사                      |
-| `pnpm seed:docs`     | 컴포넌트의 문서 · llms.txt · 스니펫 URL 출력               |
+| 명령어                | 하는 일                                                    |
+| --------------------- | ---------------------------------------------------------- |
+| `pnpm bootstrap`      | 최초 실행: 설치 · 라우트 생성 · SEED 동기화 · 타입체크     |
+| `pnpm dev`            | 개발 서버                                                  |
+| `pnpm build`          | 라우트 생성 → 타입체크 → 프로덕션 빌드                     |
+| `pnpm verify`         | CI의 핵심 정적·단위·빌드 계약                              |
+| `pnpm test:e2e`       | 실제 브라우저에서 base·sm·md·lg·xl 스모크 테스트           |
+| `pnpm routes:check`   | route tree가 현재 generator 출력과 같은지 검사             |
+| `pnpm verify:lockin`  | 락인 회귀 테스트                                           |
+| `pnpm verify:release` | 버전·태그·CHANGELOG 릴리스 계약 검사                       |
+| `pnpm brand:sync`     | `config/brand.config.json` → `global.css` brand 오버라이드 |
+| `pnpm brand:check`    | brand 생성물이 config와 일치하는지 확인                    |
+| `pnpm lint` / `:fix`  | ESLint (SEED 락인 + FSD 경계)                              |
+| `pnpm lint:fsd`       | steiger로 FSD 구조 검사                                    |
+| `pnpm seed:add`       | SEED 스니펫 추가 — `pnpm seed:add ui:tabs`                 |
+| `pnpm seed:sync`      | 토큰 카탈로그 · 생성 룰 · 문서 캐시 재생성                 |
+| `pnpm seed:compat`    | 스니펫과 설치된 SEED 버전 호환성 검사                      |
+| `pnpm seed:docs`      | 컴포넌트의 문서 · llms.txt · 스니펫 URL 출력               |
+
+---
+
+## 이 스타터를 제품으로 바꿀 때
+
+클론한 뒤 아래 항목을 한 번에 바꾸면 원본 스타터의 이름이나 링크가 제품에 남지 않습니다.
+
+1. `package.json`의 `name`과 `description`
+2. `src/shared/i18n/locales/{ko,en}/common.json`의 `appName`
+3. `src/shared/config/index.ts`의 `REPO_URL`
+4. `config/brand.config.json`의 제품명과 light/dark 팔레트 후 `pnpm brand:sync`
+5. 백엔드가 있다면 `env/.env.local`의 `VITE_API_BASE_URL`
+6. `src/entities/session/api/session-api.ts`의 demo session을 서버 인증으로 교체
+
+`VITE_*` 값은 브라우저 번들에 들어갑니다. API 키·토큰·비밀번호 같은 비밀은 여기에 넣지 말고
+백엔드나 배포 플랫폼의 서버 전용 secret store에서 관리하세요.
+
+현재 session은 UI 흐름을 보여 주기 위한 데모로, 형식이 맞는 임의의 자격증명을 받고 브라우저에는
+로그인 여부 marker만 남깁니다. client route guard는 보안 경계가 아니므로 제품에서는 서버가 세션을
+검증하게 바꾸고, 보호 API마다 인증·인가를 반드시 다시 확인하세요.
+
+## 브라우저 검증과 배포
+
+CI는 320·480·768·1280·1440px에서 실제 Chromium으로 셸·내비게이션·가로 오버플로를 검사합니다.
+각 실행의 `playwright-report` artifact에는 다섯 viewport와 핵심 로그인·상품 등록 흐름의 전체 화면
+스크린샷이 들어 있어 원격에서도 확인할 수 있습니다.
+
+`pnpm build` 결과는 `dist/`에 생성됩니다. TanStack Router가 history URL을 사용하므로 정적 호스트는
+`/profile`, `/products/:id` 같은 모든 요청을 `/index.html`로 rewrite해야 합니다. 배포 전에는 호스트의
+SPA fallback 설정을 켠 뒤 새 탭에서 하위 경로를 직접 열어 확인하세요.
 
 ---
 
@@ -200,8 +241,8 @@ import는 항상 아래 방향으로만 흐릅니다: `app → pages → widgets
 **훅 메시지** — husky 훅은 실패 원인만 알려주지 않고 다음에 칠 명령까지 출력합니다. 에이전트가
 루프 중간에 문서를 다시 읽지 않아도 되게 하려는 의도예요.
 
-**Git hooks** — pre-commit은 lint-staged, commit-msg는 Conventional Commits, pre-push는 타입체크와
-전체 린트를 돌립니다.
+**Git hooks** — pre-commit은 lint-staged, commit-msg는 Conventional Commits, pre-push는 CI의 핵심
+검증과 같은 `pnpm verify` 계약을 돌립니다. 브라우저 matrix는 CI가 별도로 맡습니다.
 
 ---
 

@@ -1,0 +1,23 @@
+{
+  "title": "Sign in",
+  "description": "An example screen combining an auth form, a checkbox and social sign-in buttons.",
+  "heading": "Sign in to continue",
+  "field": {
+    "email": "Email",
+    "emailPlaceholder": "email@example.com",
+    "emailInvalid": "Enter a valid email address.",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "rememberMe": "Keep me signed in"
+  },
+  "action": {
+    "submit": "Sign in",
+    "kakao": "Continue with Kakao",
+    "apple": "Continue with Apple"
+  },
+  "error": {
+    "title": "Couldn't sign in",
+    "description": "Please try again in a moment."
+  },
+  "divider": "or"
+}

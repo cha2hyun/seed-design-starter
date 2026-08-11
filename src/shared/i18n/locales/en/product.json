@@ -19,6 +19,7 @@
     "sold": "Sold"
   },
   "detail": {
+    "title": "Product details",
     "sellerLabel": "Seller",
     "descriptionLabel": "Description",
     "chatAction": "Start a chat"
@@ -34,7 +35,10 @@
     "categoryField": "Category",
     "negotiableField": "Accept price offers",
     "submit": "Post listing",
-    "successMessage": "Your listing is live."
+    "successMessage": "Your listing is live.",
+    "errorTitle": "Couldn't post your listing",
+    "errorDescription": "Your entries are still here. Please try again in a moment.",
+    "priceSuffix": "KRW"
   },
   "validation": {
     "titleRequired": "Enter a title.",

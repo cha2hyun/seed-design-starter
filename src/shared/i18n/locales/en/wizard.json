@@ -1,0 +1,36 @@
+{
+  "title": "Multi-step form",
+  "description": "An example of input across several steps, with validation and a submit flow.",
+  "progress": "Step {{current}} of {{total}}",
+  "step": {
+    "account": "Account details",
+    "preferences": "Preferences",
+    "review": "Review",
+    "completed": "Completed",
+    "current": "In progress"
+  },
+  "field": {
+    "name": "Name",
+    "namePlaceholder": "Enter your name",
+    "email": "Email address",
+    "emailPlaceholder": "name@example.com",
+    "emailInvalid": "That does not look like an email address.",
+    "notifications": "Send me notifications",
+    "terms": "I agree to the terms of service"
+  },
+  "review": {
+    "title": "Check your details",
+    "agreed": "Agreed",
+    "notAgreed": "Not agreed"
+  },
+  "action": {
+    "previous": "Back",
+    "next": "Next",
+    "submit": "Submit"
+  },
+  "submitted": {
+    "title": "Submitted",
+    "description": "We saved the details for {{name}}.",
+    "restart": "Start over"
+  }
+}

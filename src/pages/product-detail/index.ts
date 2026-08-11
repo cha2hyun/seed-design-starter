@@ -1,1 +1,5 @@
-export { ProductDetailPage, type ProductDetailPageProps } from "./ui/product-detail-page";
+export {
+  ProductDetailPage,
+  ProductDetailPendingPage,
+  type ProductDetailPageProps,
+} from "./ui/product-detail-page";

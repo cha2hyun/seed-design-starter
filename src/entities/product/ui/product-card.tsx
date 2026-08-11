@@ -24,13 +24,15 @@ export function ProductCard({ product, className }: ProductCardProps) {
       )}
     >
       <div className="flex items-start justify-between gap-x3">
-        <h3 className="t5-bold text-fg-neutral">{product.title}</h3>
+        <h3 className="line-clamp-2 min-w-0 t5-bold break-words text-fg-neutral">
+          {product.title}
+        </h3>
         <ProductStatusTag status={product.status} />
       </div>
 
       <p className="t6-bold text-fg-neutral">{formatCurrency(product.price, language)}</p>
 
-      <div className="flex items-center gap-x2 t3-regular text-fg-neutral-muted">
+      <div className="flex flex-wrap items-center gap-x2 t3-regular text-fg-neutral-muted">
         <span>{product.region}</span>
         <span aria-hidden>·</span>
         <span>{formatRelativeTime(product.createdAt, language)}</span>

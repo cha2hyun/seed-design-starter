@@ -2,16 +2,30 @@
   "appName": "SEED 스타터",
   "nav": {
     "home": "홈",
+    "dashboard": "대시보드",
+    "wizard": "마법사 폼",
     "settings": "설정",
+    "group": {
+      "app": "서비스",
+      "blueprint": "블루프린트"
+    },
     "primary": "주요 메뉴",
     "side": "사이드 메뉴",
     "openMenu": "메뉴 열기",
-    "closeMenu": "메뉴 닫기"
+    "closeMenu": "메뉴 닫기",
+    "skipToContent": "본문으로 건너뛰기"
+  },
+  "account": {
+    "menu": "계정",
+    "openMenu": "{{name}} 계정 메뉴 열기",
+    "signIn": "로그인",
+    "profile": "프로필 보기",
+    "signOut": "로그아웃",
+    "signOutError": "로그아웃하지 못했어요. 잠시 후 다시 시도해 주세요."
   },
   "footer": {
     "github": "GitHub"
   },
-
   "preferences": {
     "language": {
       "label": "언어 전환"
@@ -24,6 +38,7 @@
     }
   },
   "action": {
+    "close": "닫기",
     "retry": "다시 시도",
     "cancel": "취소",
     "confirm": "확인",

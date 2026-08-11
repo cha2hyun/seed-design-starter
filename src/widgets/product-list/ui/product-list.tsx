@@ -23,6 +23,7 @@ export function ProductList() {
   if (isError) {
     return (
       <StateMessage
+        role="alert"
         title={t("common:state.error.title")}
         description={t("common:state.error.description")}
         action={
@@ -44,9 +45,9 @@ export function ProductList() {
   }
 
   return (
-    <ul className={cn("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3", shellGutterClassName)}>
+    <ul className={cn("grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3", shellGutterClassName)}>
       {data.map((product) => (
-        <li key={product.id} className="min-w-x0">
+        <li key={product.id} className="min-w-0">
           <Link
             to="/products/$productId"
             params={{ productId: product.id }}

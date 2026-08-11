@@ -38,6 +38,7 @@ export default defineConfig({
       autoCodeSplitting: true,
       routesDirectory: resolve(ROOT, "src/app/routes"),
       generatedRouteTree: resolve(ROOT, "src/app/routeTree.gen.ts"),
+      routeFileIgnorePattern: "\\.test\\.",
       quoteStyle: "double",
       semicolons: true,
     }),

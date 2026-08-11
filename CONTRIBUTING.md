@@ -58,8 +58,9 @@ stderr만 읽고 복구하면 됩니다.
 5. `develop`을 푸시한 뒤 base=`main`, head=`develop` PR을 엽니다. 제목은 커밋과 같습니다.
 6. CI가 초록이면 **Create a merge commit**으로 머지합니다. squash·rebase는 쓰지 않습니다.
    `main`의 히스토리와 태그가 가리킬 커밋을 흐리지 않기 위함입니다.
-7. `main` 푸시 시 `release` 워크플로가 `package.json` 버전을 읽어 `vX.Y.Z` 태그와 GitHub
-   Release를 만듭니다. 태그가 이미 있으면 건너뜁니다.
+7. `main`의 CI와 5개 viewport 브라우저 테스트가 모두 통과하면 `release` 워크플로가
+   `pnpm verify:release` 계약을 확인한 뒤 `vX.Y.Z` 태그와 GitHub Release를 만듭니다. 버전이
+   기존 태그와 겹치거나 CHANGELOG 섹션이 없으면 건너뛰지 않고 실패합니다.
 
 버전을 올리지 않은 채 `main`에 머지하지 마세요. 태그가 이전 버전에 묶이거나, 워크플로가
 이미 존재하는 태그를 보고 아무 것도 하지 않습니다.
@@ -93,8 +94,8 @@ stderr만 읽고 복구하면 됩니다.
 2. **변경합니다.** `className`을 쓰기 전에 `seed-docs` MCP로 토큰과 컴포넌트를 확인하세요.
    자세한 규칙은 [AGENTS.md](./AGENTS.md)와 `.cursor/rules/`에 있습니다.
 
-3. **`pnpm verify`를 통과시킵니다.** pre-push 훅과 CI가 **완전히 같은 명령**을 돌리므로, 여기서
-   초록불이면 PR도 초록불입니다.
+3. **`pnpm verify`를 통과시킵니다.** pre-push 훅과 CI의 핵심 검증 job이 같은 명령을 돌립니다.
+   CI는 이어서 실제 Chromium의 5개 viewport 스모크 테스트와 지원 Node matrix를 추가로 확인합니다.
 
 4. **커밋합니다.** 훅이 브랜치 이름, 스테이징된 파일, 커밋 메시지를 순서대로 검사합니다.
 
@@ -168,7 +169,6 @@ PR 제목도 Conventional Commits를 따릅니다. squash 머지 시 제목이 �
 - **어떻게 확인했는지** — 돌린 명령, 확인한 화면
 
 PR 하나는 리뷰어가 한 번에 이해할 수 있는 크기여야 합니다. 여러 관심사가 섞였다면 나누세요.
-Cursor의 `/split-to-prs`가 도와줍니다.
 
 ---
 

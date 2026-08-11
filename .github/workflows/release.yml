@@ -4,8 +4,10 @@ name: Release
 # Version source of truth: package.json (see CONTRIBUTING.md § 릴리스).
 
 on:
-  push:
+  workflow_run:
+    workflows: [CI]
     branches: [main]
+    types: [completed]
 
 permissions:
   contents: write
@@ -16,18 +18,26 @@ concurrency:
 
 jobs:
   release:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
         with:
+          ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
           fetch-tags: true
+
+      - name: Verify release contract
+        run: node scripts/verify-release.mjs
 
       - name: Read package version
         id: version
         run: |
           VERSION="$(node -p "require('./package.json').version")"
-          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-].+)?$ ]]; then
+          if ! [[ "$VERSION" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
             echo "::error::package.json version \"$VERSION\" is not a valid SemVer string."
             exit 1
           fi
@@ -36,25 +46,11 @@ jobs:
             echo "tag=v$VERSION"
           } >> "$GITHUB_OUTPUT"
 
-      - name: Check whether the tag already exists
-        id: tag
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ steps.version.outputs.tag }}
-        run: |
-          if git rev-parse "refs/tags/$TAG" >/dev/null 2>&1 || \
-            gh release view "$TAG" >/dev/null 2>&1; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-            echo "Tag $TAG already exists — skipping release."
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Extract CHANGELOG notes for this version
-        if: steps.tag.outputs.exists == 'false'
         id: notes
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
-          VERSION="${{ steps.version.outputs.version }}"
           NOTES_FILE="${RUNNER_TEMP}/release-notes.md"
           awk -v ver="$VERSION" '
             BEGIN { grabbing = 0 }
@@ -62,20 +58,16 @@ jobs:
             grabbing && $0 ~ /^## \[/ { exit }
             grabbing { print }
           ' CHANGELOG.md > "$NOTES_FILE"
-          if [ ! -s "$NOTES_FILE" ]; then
-            printf '%s\n' \
-              "No CHANGELOG section for ${VERSION}." \
-              "See the commit history on main for details." \
-              > "$NOTES_FILE"
-          fi
           echo "path=$NOTES_FILE" >> "$GITHUB_OUTPUT"
 
       - name: Create GitHub Release
-        if: steps.tag.outputs.exists == 'false'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_SHA: ${{ github.event.workflow_run.head_sha }}
+          RELEASE_TAG: ${{ steps.version.outputs.tag }}
+          NOTES_FILE: ${{ steps.notes.outputs.path }}
         run: |
-          gh release create "${{ steps.version.outputs.tag }}" \
-            --title "${{ steps.version.outputs.tag }}" \
-            --notes-file "${{ steps.notes.outputs.path }}" \
-            --target "${{ github.sha }}"
+          gh release create "$RELEASE_TAG" \
+            --title "$RELEASE_TAG" \
+            --notes-file "$NOTES_FILE" \
+            --target "$RELEASE_SHA"

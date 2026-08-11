@@ -2,16 +2,30 @@
   "appName": "SEED Starter",
   "nav": {
     "home": "Home",
+    "dashboard": "Dashboard",
+    "wizard": "Multi-step form",
     "settings": "Settings",
+    "group": {
+      "app": "App",
+      "blueprint": "Blueprints"
+    },
     "primary": "Primary navigation",
     "side": "Side navigation",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "skipToContent": "Skip to content"
+  },
+  "account": {
+    "menu": "Account",
+    "openMenu": "Open {{name}} account menu",
+    "signIn": "Sign in",
+    "profile": "View profile",
+    "signOut": "Sign out",
+    "signOutError": "We couldn't sign you out. Please try again in a moment."
   },
   "footer": {
     "github": "GitHub"
   },
-
   "preferences": {
     "language": {
       "label": "Switch language"
@@ -24,6 +38,7 @@
     }
   },
   "action": {
+    "close": "Close",
     "retry": "Try again",
     "cancel": "Cancel",
     "confirm": "Confirm",

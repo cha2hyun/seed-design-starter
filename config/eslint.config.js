@@ -24,7 +24,14 @@ function layersBelow(layer) {
 
 export default tseslint.config(
   {
-    ignores: ["dist", "node_modules", "src/app/routeTree.gen.ts", ".seed"],
+    ignores: [
+      "dist",
+      "node_modules",
+      "playwright-report",
+      "test-results",
+      "src/app/routeTree.gen.ts",
+      ".seed",
+    ],
   },
 
   js.configs.recommended,
@@ -169,13 +176,29 @@ export default tseslint.config(
     rules: { "react-refresh/only-export-components": "off" },
   },
 
+  {
+    // Static browser bootstrap files are not part of a TypeScript project.
+    files: ["public/**/*.js"],
+    ...tseslint.configs.disableTypeChecked,
+    languageOptions: {
+      globals: globals.browser,
+      parserOptions: { projectService: false, project: false },
+    },
+  },
+
   // ── Node-side tooling ──────────────────────────────────────────────────────
   {
-    files: ["scripts/**/*.ts", "config/**/*.{ts,js}", "*.config.ts", "*.config.js"],
+    files: [
+      "scripts/**/*.{ts,mjs}",
+      "config/**/*.{ts,js}",
+      "e2e/**/*.ts",
+      "*.config.ts",
+      "*.config.js",
+    ],
+    ...tseslint.configs.disableTypeChecked,
     languageOptions: {
       globals: globals.node,
       parserOptions: { projectService: false, project: false },
     },
-    ...tseslint.configs.disableTypeChecked,
   },
 );

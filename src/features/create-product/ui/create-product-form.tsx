@@ -3,6 +3,7 @@ import type { FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ActionButton } from "seed-design/ui/action-button";
+import { Callout } from "seed-design/ui/callout";
 import {
   SelectContent,
   SelectGroup,
@@ -29,7 +30,7 @@ export interface CreateProductFormProps {
 export function CreateProductForm({ onCreated }: CreateProductFormProps) {
   const { t } = useTranslation("product");
   const { values, errors, setValue, reset, validate } = useProductForm();
-  const { mutate, isPending } = useCreateProductMutation();
+  const { mutate, isError, isPending } = useCreateProductMutation();
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -64,7 +65,7 @@ export function CreateProductForm({ onCreated }: CreateProductFormProps) {
         label={t("create.priceField")}
         invalid={Boolean(errors.price)}
         errorMessage={errors.price}
-        suffix="원"
+        suffix={t("create.priceSuffix")}
         value={values.price}
         onValueChange={({ value }) => setValue("price", value)}
         showRequiredIndicator
@@ -107,6 +108,15 @@ export function CreateProductForm({ onCreated }: CreateProductFormProps) {
         checked={values.negotiable}
         onCheckedChange={(checked) => setValue("negotiable", checked)}
       />
+
+      {isError && (
+        <Callout
+          role="alert"
+          tone="critical"
+          title={t("create.errorTitle")}
+          description={t("create.errorDescription")}
+        />
+      )}
 
       <ActionButton type="submit" size="large" loading={isPending}>
         {t("create.submit")}

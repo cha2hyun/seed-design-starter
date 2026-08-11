@@ -2,12 +2,31 @@ export const LANGUAGES = ["ko", "en"] as const;
 export type Language = (typeof LANGUAGES)[number];
 export const DEFAULT_LANGUAGE: Language = "ko";
 
-/** Primary app destinations shared by Side Navigation and the mobile header menu. */
-export const NAV_ITEMS = [
-  { to: "/", labelKey: "nav.home" },
-  { to: "/settings", labelKey: "nav.settings" },
+/**
+ * Destinations for Side Navigation and the mobile header menu, in render order.
+ *
+ * Grouped on purpose: the starter's own screens come first, and the blueprint screens
+ * exist only to demonstrate SEED components. Profile and authentication destinations
+ * are account actions, so they live in the account menu instead of primary navigation.
+ */
+export const NAV_GROUPS = [
+  {
+    labelKey: "nav.group.app",
+    items: [
+      { to: "/", labelKey: "nav.home" },
+      { to: "/settings", labelKey: "nav.settings" },
+    ],
+  },
+  {
+    labelKey: "nav.group.blueprint",
+    items: [
+      { to: "/dashboard", labelKey: "nav.dashboard" },
+      { to: "/wizard", labelKey: "nav.wizard" },
+    ],
+  },
 ] as const;
-export type NavItemTo = (typeof NAV_ITEMS)[number]["to"];
+
+export type NavItemTo = (typeof NAV_GROUPS)[number]["items"][number]["to"];
 
 /** Public GitHub repository for this starter. */
 export const REPO_URL = "https://github.com/cha2hyun/seed-design-starter";
@@ -27,5 +46,4 @@ export const IS_DEV = import.meta.env.DEV;
 /** Values from `env/.env*` (Vite `envDir`). Only `VITE_*` keys reach the client. */
 export const ENV = {
   apiBaseUrl: import.meta.env.VITE_API_BASE_URL ?? "",
-  appName: import.meta.env.VITE_APP_NAME ?? "seed-design-starter",
 } as const;
