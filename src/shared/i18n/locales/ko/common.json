@@ -4,8 +4,6 @@
     "home": "홈",
     "dashboard": "대시보드",
     "wizard": "마법사 폼",
-    "profile": "프로필",
-    "login": "로그인",
     "settings": "설정",
     "group": {
       "app": "서비스",
@@ -16,6 +14,14 @@
     "openMenu": "메뉴 열기",
     "closeMenu": "메뉴 닫기",
     "skipToContent": "본문으로 건너뛰기"
+  },
+  "account": {
+    "menu": "계정",
+    "name": "당근이",
+    "email": "karrot@example.com",
+    "openMenu": "{{name}} 계정 메뉴 열기",
+    "profile": "프로필 보기",
+    "signOut": "로그아웃"
   },
   "footer": {
     "github": "GitHub"

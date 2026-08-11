@@ -1,10 +1,6 @@
 {
   "title": "프로필",
   "description": "Avatar, 매너온도 배지, Tabs, AlertDialog를 조합한 계정 화면 예시예요.",
-  "user": {
-    "name": "당근이",
-    "email": "karrot@example.com"
-  },
   "logout": {
     "action": "로그아웃",
     "title": "로그아웃하시겠어요?",

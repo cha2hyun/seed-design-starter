@@ -4,8 +4,6 @@
     "home": "Home",
     "dashboard": "Dashboard",
     "wizard": "Multi-step form",
-    "profile": "Profile",
-    "login": "Sign in",
     "settings": "Settings",
     "group": {
       "app": "App",
@@ -16,6 +14,14 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "skipToContent": "Skip to content"
+  },
+  "account": {
+    "menu": "Account",
+    "name": "Karrot",
+    "email": "karrot@example.com",
+    "openMenu": "Open {{name}} account menu",
+    "profile": "View profile",
+    "signOut": "Sign out"
   },
   "footer": {
     "github": "GitHub"

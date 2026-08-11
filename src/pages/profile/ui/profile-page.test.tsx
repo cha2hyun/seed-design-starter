@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
@@ -27,6 +27,10 @@ describe("ProfilePage", () => {
     expect(
       within(dialog).getByRole("heading", { name: "로그아웃하시겠어요?" }),
     ).toBeInTheDocument();
-    expect(within(dialog).getByRole("button", { name: "로그아웃" })).toBeInTheDocument();
+    const confirm = within(dialog).getByRole("button", { name: "로그아웃" });
+    expect(confirm).toBeInTheDocument();
+
+    await user.click(confirm);
+    await waitFor(() => expect(router.location()).toBe("/login"));
   });
 });

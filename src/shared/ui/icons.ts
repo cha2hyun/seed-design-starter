@@ -13,6 +13,7 @@ export {
   Home as IconHome,
   LayoutDashboard as IconDashboard,
   LogIn as IconLogin,
+  LogOut as IconLogout,
   Menu as IconMenu,
   Minus as IconMinus,
   Moon as IconMoon,

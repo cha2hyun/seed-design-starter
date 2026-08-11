@@ -4,23 +4,15 @@ import { useTranslation } from "react-i18next";
 import { List, ListLinkItem } from "seed-design/ui/list";
 import { ListHeader } from "seed-design/ui/list-header";
 
+import { AccountMenu } from "@/features/account-menu";
+
 import { NAV_GROUPS, type NavItemTo } from "@/shared/config";
-import {
-  Icon,
-  IconDashboard,
-  IconHome,
-  IconLogin,
-  IconSettings,
-  IconUser,
-  IconWizard,
-} from "@/shared/ui";
+import { Icon, IconDashboard, IconHome, IconSettings, IconWizard } from "@/shared/ui";
 
 const NAV_ICONS: Record<NavItemTo, typeof IconHome> = {
   "/": IconHome,
   "/dashboard": IconDashboard,
   "/wizard": IconWizard,
-  "/profile": IconUser,
-  "/login": IconLogin,
   "/settings": IconSettings,
 };
 
@@ -38,24 +30,35 @@ export function AppSidebar() {
       // `w-sidebar` reads the project `--width-*` namespace that seed-lockin/token-only refuses
       style={{ width: "var(--width-sidebar)" }}
     >
-      <div className="flex flex-col gap-x4 py-x4 md:sticky md:top-x16">
-        {NAV_GROUPS.map((group) => (
-          <div key={group.labelKey} className="flex flex-col gap-x2">
-            <ListHeader as="h2" variant="mediumWeak">
-              {t(group.labelKey)}
-            </ListHeader>
-            <List>
-              {group.items.map((item) => (
-                <SidebarLink
-                  key={item.to}
-                  to={item.to}
-                  label={t(item.labelKey)}
-                  active={item.to === "/" ? pathname === "/" : pathname.startsWith(item.to)}
-                />
-              ))}
-            </List>
-          </div>
-        ))}
+      <div
+        className="sticky top-x16 flex flex-col overflow-y-auto py-x4"
+        // seed-escape: the side navigation account entry stays at the viewport bottom;
+        // SEED has no viewport-relative height token for the space below the x16 header.
+        style={{ height: "calc(100dvh - var(--seed-dimension-x16))" }}
+      >
+        <div className="flex flex-col gap-x4">
+          {NAV_GROUPS.map((group) => (
+            <div key={group.labelKey} className="flex flex-col gap-x2">
+              <ListHeader as="h2" variant="mediumWeak">
+                {t(group.labelKey)}
+              </ListHeader>
+              <List>
+                {group.items.map((item) => (
+                  <SidebarLink
+                    key={item.to}
+                    to={item.to}
+                    label={t(item.labelKey)}
+                    active={item.to === "/" ? pathname === "/" : pathname.startsWith(item.to)}
+                  />
+                ))}
+              </List>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-auto border-t border-stroke-neutral-muted pt-x3">
+          <AccountMenu location="sidebar" />
+        </div>
       </div>
     </nav>
   );

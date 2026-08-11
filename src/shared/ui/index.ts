@@ -11,6 +11,7 @@ export {
   IconHandshake,
   IconHome,
   IconLogin,
+  IconLogout,
   IconMenu,
   IconMinus,
   IconMoon,

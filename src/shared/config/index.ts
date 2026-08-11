@@ -6,8 +6,8 @@ export const DEFAULT_LANGUAGE: Language = "ko";
  * Destinations for Side Navigation and the mobile header menu, in render order.
  *
  * Grouped on purpose: the starter's own screens come first, and the blueprint screens
- * exist only to demonstrate SEED components. Flattening the two reads as if `/login`
- * were somewhere you navigate to mid-session, and buries the product flow.
+ * exist only to demonstrate SEED components. Profile and authentication destinations
+ * are account actions, so they live in the account menu instead of primary navigation.
  */
 export const NAV_GROUPS = [
   {
@@ -22,8 +22,6 @@ export const NAV_GROUPS = [
     items: [
       { to: "/dashboard", labelKey: "nav.dashboard" },
       { to: "/wizard", labelKey: "nav.wizard" },
-      { to: "/profile", labelKey: "nav.profile" },
-      { to: "/login", labelKey: "nav.login" },
     ],
   },
 ] as const;

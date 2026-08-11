@@ -1,10 +1,6 @@
 {
   "title": "Profile",
   "description": "An example account screen combining Avatar, Manner Temp Badge, Tabs and AlertDialog.",
-  "user": {
-    "name": "Karrot",
-    "email": "karrot@example.com"
-  },
   "logout": {
     "action": "Sign out",
     "title": "Sign out?",

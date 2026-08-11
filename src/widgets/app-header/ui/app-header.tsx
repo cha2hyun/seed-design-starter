@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import { ActionButton } from "seed-design/ui/action-button";
 
+import { AccountMenu } from "@/features/account-menu";
 import { ColorModePicker } from "@/features/color-mode";
 import { LanguagePicker } from "@/features/language";
 
@@ -26,16 +27,21 @@ export function AppHeader() {
       <div
         className={cn(
           shellInsetClassName,
-          "flex items-center justify-between gap-x4 py-x3 md:gap-x8 md:py-x4",
+          "flex items-center justify-between gap-x2 py-x3 sm:gap-x4 md:gap-x8 md:py-x4",
         )}
       >
-        <Link to="/" className="t6-bold text-fg-neutral" onClick={() => setMenuOpen(false)}>
+        <Link
+          to="/"
+          className="t5-bold text-fg-neutral sm:t6-bold"
+          onClick={() => setMenuOpen(false)}
+        >
           {t("appName")}
         </Link>
 
-        <div className="flex items-center gap-x2">
+        <div className="flex items-center gap-x1 sm:gap-x2">
           <LanguagePicker />
           <ColorModePicker />
+          <AccountMenu location="header" />
           <ActionButton
             type="button"
             size="xsmall"
@@ -61,7 +67,10 @@ export function AppHeader() {
           <div
             // gap-x4 between groups, gap-x1 inside one: the group label only reads as a
             // heading if it sits closer to its own items than to the group above.
-            className={cn(shellInsetClassName, "flex flex-col gap-x4 overflow-y-auto py-x3")}
+            className={cn(
+              shellInsetClassName,
+              "flex flex-col gap-x4 overflow-y-auto py-x3 sm:py-x4",
+            )}
             // seed-escape: the open menu is pinned inside the sticky header, so it has to cap
             // against the viewport; SEED has no viewport-relative dimension to cap with
             style={{ maxHeight: "60vh" }}

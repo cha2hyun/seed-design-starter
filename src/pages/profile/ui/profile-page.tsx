@@ -30,7 +30,7 @@ export function ProfilePage() {
   const navigate = useNavigate();
   const [tab, setTab] = useState<Tab>("activity");
 
-  const name = t("profile:user.name");
+  const name = t("common:account.name");
 
   return (
     <div className="flex flex-col gap-x8">
@@ -49,7 +49,7 @@ export function ProfilePage() {
                 <span className="t7-bold text-fg-neutral">{name}</span>
                 <MannerTempBadge temperature={36.5} />
               </div>
-              <span className="t3-regular text-fg-neutral-muted">{t("profile:user.email")}</span>
+              <span className="t3-regular text-fg-neutral-muted">{t("common:account.email")}</span>
             </div>
           </div>
 
