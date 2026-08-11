@@ -34,6 +34,9 @@ jobs:
       - name: Lint architecture
         run: pnpm lint:fsd
 
+      - name: Test
+        run: pnpm test
+
       - name: Check formatting
         run: pnpm format:check
 
@@ -45,6 +48,9 @@ jobs:
 
       - name: Check SEED snippet compatibility
         run: pnpm seed:compat
+
+      - name: Check Korean and English translations are in parity
+        run: pnpm verify:i18n
 
       - name: Verify the design system lock-in still holds
         run: pnpm verify:lockin

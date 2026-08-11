@@ -35,7 +35,7 @@ fi
 
 if ! command -v npx >/dev/null 2>&1; then
   echo "seed MCP: no npx on PATH, and none found under nvm, fnm, Volta or Homebrew." >&2
-  echo "Install Node 22 or newer, then reload Cursor." >&2
+  echo "Install a Node version accepted by package.json, then reload Cursor." >&2
   exit 1
 fi
 

@@ -29,5 +29,5 @@
       "seed-design/*": ["./src/shared/seed/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "config/vitest.setup.ts"]
 }

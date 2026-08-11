@@ -21,5 +21,6 @@
     "noUncheckedSideEffectImports": true,
     "erasableSyntaxOnly": true
   },
-  "include": ["config/**/*.ts", "scripts/**/*.ts", "steiger.config.ts"]
+  "include": ["config/**/*.ts", "scripts/**/*.ts", "steiger.config.ts"],
+  "exclude": ["config/vitest.setup.ts"]
 }

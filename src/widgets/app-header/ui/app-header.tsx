@@ -8,7 +8,7 @@ import { ActionButton } from "seed-design/ui/action-button";
 import { ColorModePicker } from "@/features/color-mode";
 import { LanguagePicker } from "@/features/language";
 
-import { NAV_ITEMS, type NavItemTo } from "@/shared/config";
+import { NAV_GROUPS, type NavItemTo } from "@/shared/config";
 import { cn } from "@/shared/lib";
 import { Icon, IconMenu, IconX, shellInsetClassName } from "@/shared/ui";
 
@@ -17,7 +17,12 @@ export function AppHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-x0_5 z-10 border-b border-stroke-neutral-muted bg-bg-layer-default">
+    <header
+      className="sticky z-10 border-b border-stroke-neutral-muted bg-bg-layer-default"
+      // seed-escape: a sticky header pins flush to the viewport edge, and SEED's dimension
+      // scale starts at x0_5 (2px), so no token resolves to `top: 0` (`top-0` emits nothing)
+      style={{ top: 0 }}
+    >
       <div
         className={cn(
           shellInsetClassName,
@@ -53,15 +58,27 @@ export function AppHeader() {
           className="border-t border-stroke-neutral-muted md:hidden"
           aria-label={t("nav.primary")}
         >
-          <div className={cn(shellInsetClassName, "flex flex-col gap-x1 py-x3")}>
-            {NAV_ITEMS.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                label={t(item.labelKey)}
-                className="w-full"
-                onNavigate={() => setMenuOpen(false)}
-              />
+          <div
+            // gap-x4 between groups, gap-x1 inside one: the group label only reads as a
+            // heading if it sits closer to its own items than to the group above.
+            className={cn(shellInsetClassName, "flex flex-col gap-x4 overflow-y-auto py-x3")}
+            // seed-escape: the open menu is pinned inside the sticky header, so it has to cap
+            // against the viewport; SEED has no viewport-relative dimension to cap with
+            style={{ maxHeight: "60vh" }}
+          >
+            {NAV_GROUPS.map((group) => (
+              <div key={group.labelKey} className="flex flex-col gap-x1">
+                <p className="py-x1 px-x3 t2-bold text-fg-neutral-muted">{t(group.labelKey)}</p>
+                {group.items.map((item) => (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    label={t(item.labelKey)}
+                    className="w-full"
+                    onNavigate={() => setMenuOpen(false)}
+                  />
+                ))}
+              </div>
             ))}
           </div>
         </nav>

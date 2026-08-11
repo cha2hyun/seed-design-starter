@@ -13,7 +13,8 @@ pnpm bootstrap
 pnpm dev
 ```
 
-Node 22 이상과 pnpm이 필요합니다. `.nvmrc`가 있으니 `nvm use`로 맞출 수 있어요.
+Node 22.22.2 이상(22.x), 24.15.0 이상(24.x), 또는 26 이상과 pnpm이 필요합니다.
+`.nvmrc`가 있으니 `nvm use`로 지원되는 Node 22 버전에 맞출 수 있어요.
 
 ---
 
@@ -50,7 +51,7 @@ bg-red-500   p-4   text-lg   rounded-md   shadow-md   max-w-3xl
    allowlist와 대조해 `p-4` 같은 클래스에 대안 토큰까지 제안합니다. 인라인 `style`, 추가 `.css`
    파일, `@seed-design/react` 직접 import도 함께 막습니다.
 3. **회귀 테스트** — `pnpm verify:lockin`이 Tailwind를 실제로 컴파일해서, 비-SEED 유틸리티 27개가
-   여전히 죽어 있고 SEED 유틸리티 25개가 살아 있는지 확인합니다. CI에서 돌아갑니다.
+   여전히 죽어 있고 SEED 유틸리티 27개가 살아 있는지 확인합니다. CI에서 돌아갑니다.
 
 예외는 의도적으로 번거롭습니다. 인라인 스타일은 바로 위에 `// seed-escape: <이유>` 주석이 있어야
 하고, SEED에 없는 토큰은 `global.css`의 프로젝트 `@theme` 블록에 사유와 함께 추가합니다. **제품

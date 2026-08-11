@@ -1,0 +1,44 @@
+{
+  "title": "Dashboard",
+  "description": "An example screen combining summary cards, a period control, filter chips and search.",
+  "summary": {
+    "title": "Key metrics",
+    "periodLabel": "Reporting period",
+    "period": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    },
+    "gmv": "Gross transaction volume",
+    "newProducts": "New listings",
+    "acceptedOffers": "Accepted offers",
+    "vsPrevious": "vs. previous period",
+    "trendUp": "up {{change}}",
+    "trendDown": "down {{change}}"
+  },
+  "list": {
+    "title": "Recent transactions",
+    "searchLabel": "Search by title",
+    "searchPlaceholder": "Enter a title",
+    "filterLabel": "Filter by transaction status",
+    "filter": {
+      "all": "All",
+      "active": "On sale",
+      "completed": "Completed"
+    },
+    "status": {
+      "active": "On sale",
+      "completed": "Completed"
+    },
+    "empty": {
+      "title": "No transactions match",
+      "description": "Try a different search term or filter."
+    },
+    "item": {
+      "mbp-m3-max": "MacBook Pro M3 Max 16\"",
+      "iphone-15-pro": "iPhone 15 Pro 256GB",
+      "sony-xm5": "Sony WH-1000XM5 headphones",
+      "switch-oled": "Nintendo Switch OLED"
+    }
+  }
+}

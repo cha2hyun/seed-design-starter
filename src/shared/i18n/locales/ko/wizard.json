@@ -1,0 +1,36 @@
+{
+  "title": "단계별 폼",
+  "description": "여러 단계에 걸친 입력, 유효성 검사, 제출 흐름 예시예요.",
+  "progress": "{{total}}단계 중 {{current}}단계",
+  "step": {
+    "account": "계정 정보",
+    "preferences": "환경 설정",
+    "review": "최종 확인",
+    "completed": "완료됨",
+    "current": "진행 중"
+  },
+  "field": {
+    "name": "이름",
+    "namePlaceholder": "이름을 입력하세요",
+    "email": "이메일 주소",
+    "emailPlaceholder": "name@example.com",
+    "emailInvalid": "이메일 주소 형식이 올바르지 않아요.",
+    "notifications": "알림 수신 동의",
+    "terms": "서비스 이용약관 동의"
+  },
+  "review": {
+    "title": "입력 정보 확인",
+    "agreed": "동의함",
+    "notAgreed": "동의 안 함"
+  },
+  "action": {
+    "previous": "이전",
+    "next": "다음",
+    "submit": "제출하기"
+  },
+  "submitted": {
+    "title": "제출이 완료됐어요",
+    "description": "{{name}} 님의 정보를 저장했어요.",
+    "restart": "처음부터 다시"
+  }
+}

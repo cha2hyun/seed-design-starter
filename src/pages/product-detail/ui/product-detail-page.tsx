@@ -9,7 +9,7 @@ import { Callout } from "seed-design/ui/callout";
 import { productDetailQuery, ProductStatusTag } from "@/entities/product";
 
 import { useLanguage } from "@/shared/i18n";
-import { formatCurrency, formatRelativeTime } from "@/shared/lib";
+import { formatCurrency, formatRelativeTime, useDocumentTitle } from "@/shared/lib";
 import { LoadingBlock, PageSection, StateMessage } from "@/shared/ui";
 
 export interface ProductDetailPageProps {
@@ -20,6 +20,7 @@ export function ProductDetailPage({ productId }: ProductDetailPageProps) {
   const { t } = useTranslation(["product", "common"]);
   const { language } = useLanguage();
   const { data, isPending, isError } = useQuery(productDetailQuery(productId));
+  useDocumentTitle(data?.title ?? t("product:detail.title"));
 
   if (isPending) {
     return <LoadingBlock label={t("common:state.loading")} />;
@@ -28,6 +29,7 @@ export function ProductDetailPage({ productId }: ProductDetailPageProps) {
   if (isError) {
     return (
       <StateMessage
+        headingAs="h1"
         title={t("common:state.notFound.title")}
         description={t("common:state.notFound.description")}
         action={
@@ -58,11 +60,11 @@ export function ProductDetailPage({ productId }: ProductDetailPageProps) {
 
       <div className="flex items-center gap-x3 rounded-r4 bg-bg-layer-default p-x4">
         <Avatar size="48" fallback={data.sellerName.slice(0, 1)} alt={data.sellerName} />
-        <div className="flex flex-col">
+        <div className="flex min-w-0 flex-col">
           <span className="t3-regular text-fg-neutral-muted">
             {t("product:detail.sellerLabel")}
           </span>
-          <span className="t5-bold text-fg-neutral">{data.sellerName}</span>
+          <span className="truncate t5-bold text-fg-neutral">{data.sellerName}</span>
         </div>
       </div>
 
@@ -74,7 +76,7 @@ export function ProductDetailPage({ productId }: ProductDetailPageProps) {
         <p className="article-body whitespace-pre-line text-fg-neutral">{data.description}</p>
       </PageSection>
 
-      <ActionButton size="large" disabled={data.status === "sold"}>
+      <ActionButton size="large" className="max-w-form" disabled={data.status === "sold"}>
         {t("product:detail.chatAction")}
       </ActionButton>
     </div>

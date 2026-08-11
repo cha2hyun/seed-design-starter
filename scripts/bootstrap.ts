@@ -3,7 +3,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const MIN_NODE_MAJOR = 22;
+const SUPPORTED_NODE_RANGE = "^22.22.2 || ^24.15.0 || >=26.0.0";
 
 interface Step {
   name: string;
@@ -29,10 +29,17 @@ const STEPS: Step[] = [
 ];
 
 function checkNodeVersion(): void {
-  const major = Number(process.versions.node.split(".")[0]);
-  if (major < MIN_NODE_MAJOR) {
+  const [major = 0, minor = 0, patch = 0] = process.versions.node
+    .split(".")
+    .map((part) => Number(part));
+  const supported =
+    (major === 22 && (minor > 22 || (minor === 22 && patch >= 2))) ||
+    (major === 24 && minor >= 15) ||
+    major >= 26;
+
+  if (!supported) {
     console.error(
-      `Node ${MIN_NODE_MAJOR} or newer is required, found ${process.versions.node}.\n` +
+      `Node ${SUPPORTED_NODE_RANGE} is required, found ${process.versions.node}.\n` +
         `Run \`nvm use\` to pick up the version in .nvmrc.`,
     );
     process.exit(1);

@@ -64,7 +64,7 @@ export function CreateProductForm({ onCreated }: CreateProductFormProps) {
         label={t("create.priceField")}
         invalid={Boolean(errors.price)}
         errorMessage={errors.price}
-        suffix="원"
+        suffix={t("create.priceSuffix")}
         value={values.price}
         onValueChange={({ value }) => setValue("price", value)}
         showRequiredIndicator

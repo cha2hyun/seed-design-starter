@@ -22,13 +22,14 @@ architecture or i18n decisions.
 | Server state    | TanStack Query                                                               |
 | Client state    | Zustand                                                                      |
 | i18n            | i18next + react-i18next, Korean and English                                  |
-| Package manager | pnpm, Node 22 or newer                                                       |
+| Package manager | pnpm, Node ^22.22.2, ^24.15.0, or >=26                                       |
 
 ## Commands
 
 - `pnpm bootstrap` — first run: install, generate routes, sync SEED, typecheck
 - `pnpm dev` / `pnpm build`
-- `pnpm verify` — identical to CI: typecheck, lint, FSD, format, seed, brand, compat, lock-in, build
+- `pnpm verify` — identical to CI: typecheck, lint, FSD, test, format, seed, brand, compat, i18n,
+  lock-in, build
 - `pnpm seed:add <item>` — add a SEED snippet, e.g. `pnpm seed:add ui:tabs`
 - `pnpm seed:sync` — regenerate `.seed/tokens.json`, the generated token rule, and the cached docs
 - `pnpm brand:sync` — apply `config/brand.config.json` into `global.css` (carrot → product brand)

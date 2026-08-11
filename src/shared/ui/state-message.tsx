@@ -7,10 +7,18 @@ export interface StateMessageProps {
   description?: ReactNode;
   action?: ReactNode;
   className?: string;
+  /** The title's semantic heading element. Keep unset for embedded states. */
+  headingAs?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 }
 
 /** Shared shell for empty, error and not-found states. */
-export function StateMessage({ title, description, action, className }: StateMessageProps) {
+export function StateMessage({
+  title,
+  description,
+  action,
+  className,
+  headingAs: Heading,
+}: StateMessageProps) {
   return (
     <div
       className={cn(
@@ -19,7 +27,11 @@ export function StateMessage({ title, description, action, className }: StateMes
         className,
       )}
     >
-      <p className="t6-bold text-fg-neutral">{title}</p>
+      {Heading ? (
+        <Heading className="t6-bold text-fg-neutral">{title}</Heading>
+      ) : (
+        <p className="t6-bold text-fg-neutral">{title}</p>
+      )}
       {description && <p className="t4-regular text-fg-neutral-muted">{description}</p>}
       {action && <div className="mt-x2">{action}</div>}
     </div>

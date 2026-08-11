@@ -1,0 +1,24 @@
+{
+  "title": "Profile",
+  "description": "An example account screen combining Avatar, Manner Temp Badge, Tabs and AlertDialog.",
+  "user": {
+    "name": "Karrot",
+    "email": "karrot@example.com"
+  },
+  "logout": {
+    "action": "Sign out",
+    "title": "Sign out?",
+    "confirmAction": "Sign out",
+    "description": "You will need to sign in again to keep using the service."
+  },
+  "tabs": {
+    "heading": "Activity",
+    "label": "Profile tabs",
+    "activity": "Activity",
+    "saved": "Saved",
+    "history": "History",
+    "activityBody": "Recent activity appears in this area.",
+    "savedBody": "Products you have saved.",
+    "historyBody": "Transactions you have completed."
+  }
+}

@@ -10,7 +10,11 @@
 
 import { Route as rootRouteImport } from "./routes/__root";
 import { Route as IndexRouteImport } from "./routes/index";
+import { Route as DashboardRouteImport } from "./routes/dashboard";
+import { Route as LoginRouteImport } from "./routes/login";
+import { Route as ProfileRouteImport } from "./routes/profile";
 import { Route as SettingsRouteImport } from "./routes/settings";
+import { Route as WizardRouteImport } from "./routes/wizard";
 import { Route as ProductsProductIdRouteImport } from "./routes/products.$productId";
 import { Route as ProductsNewRouteImport } from "./routes/products.new";
 
@@ -19,9 +23,29 @@ const IndexRoute = IndexRouteImport.update({
   path: "/",
   getParentRoute: () => rootRouteImport,
 } as any);
+const DashboardRoute = DashboardRouteImport.update({
+  id: "/dashboard",
+  path: "/dashboard",
+  getParentRoute: () => rootRouteImport,
+} as any);
+const LoginRoute = LoginRouteImport.update({
+  id: "/login",
+  path: "/login",
+  getParentRoute: () => rootRouteImport,
+} as any);
+const ProfileRoute = ProfileRouteImport.update({
+  id: "/profile",
+  path: "/profile",
+  getParentRoute: () => rootRouteImport,
+} as any);
 const SettingsRoute = SettingsRouteImport.update({
   id: "/settings",
   path: "/settings",
+  getParentRoute: () => rootRouteImport,
+} as any);
+const WizardRoute = WizardRouteImport.update({
+  id: "/wizard",
+  path: "/wizard",
   getParentRoute: () => rootRouteImport,
 } as any);
 const ProductsProductIdRoute = ProductsProductIdRouteImport.update({
@@ -37,34 +61,75 @@ const ProductsNewRoute = ProductsNewRouteImport.update({
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
+  "/dashboard": typeof DashboardRoute;
+  "/login": typeof LoginRoute;
+  "/profile": typeof ProfileRoute;
   "/settings": typeof SettingsRoute;
+  "/wizard": typeof WizardRoute;
   "/products/$productId": typeof ProductsProductIdRoute;
   "/products/new": typeof ProductsNewRoute;
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
+  "/dashboard": typeof DashboardRoute;
+  "/login": typeof LoginRoute;
+  "/profile": typeof ProfileRoute;
   "/settings": typeof SettingsRoute;
+  "/wizard": typeof WizardRoute;
   "/products/$productId": typeof ProductsProductIdRoute;
   "/products/new": typeof ProductsNewRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   "/": typeof IndexRoute;
+  "/dashboard": typeof DashboardRoute;
+  "/login": typeof LoginRoute;
+  "/profile": typeof ProfileRoute;
   "/settings": typeof SettingsRoute;
+  "/wizard": typeof WizardRoute;
   "/products/$productId": typeof ProductsProductIdRoute;
   "/products/new": typeof ProductsNewRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/settings" | "/products/$productId" | "/products/new";
+  fullPaths:
+    | "/"
+    | "/dashboard"
+    | "/login"
+    | "/profile"
+    | "/settings"
+    | "/wizard"
+    | "/products/$productId"
+    | "/products/new";
   fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/settings" | "/products/$productId" | "/products/new";
-  id: "__root__" | "/" | "/settings" | "/products/$productId" | "/products/new";
+  to:
+    | "/"
+    | "/dashboard"
+    | "/login"
+    | "/profile"
+    | "/settings"
+    | "/wizard"
+    | "/products/$productId"
+    | "/products/new";
+  id:
+    | "__root__"
+    | "/"
+    | "/dashboard"
+    | "/login"
+    | "/profile"
+    | "/settings"
+    | "/wizard"
+    | "/products/$productId"
+    | "/products/new";
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
+  DashboardRoute: typeof DashboardRoute;
+  LoginRoute: typeof LoginRoute;
+  ProfileRoute: typeof ProfileRoute;
   SettingsRoute: typeof SettingsRoute;
+  WizardRoute: typeof WizardRoute;
   ProductsProductIdRoute: typeof ProductsProductIdRoute;
   ProductsNewRoute: typeof ProductsNewRoute;
 }
@@ -78,11 +143,39 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexRouteImport;
       parentRoute: typeof rootRouteImport;
     };
+    "/dashboard": {
+      id: "/dashboard";
+      path: "/dashboard";
+      fullPath: "/dashboard";
+      preLoaderRoute: typeof DashboardRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/login": {
+      id: "/login";
+      path: "/login";
+      fullPath: "/login";
+      preLoaderRoute: typeof LoginRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/profile": {
+      id: "/profile";
+      path: "/profile";
+      fullPath: "/profile";
+      preLoaderRoute: typeof ProfileRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     "/settings": {
       id: "/settings";
       path: "/settings";
       fullPath: "/settings";
       preLoaderRoute: typeof SettingsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/wizard": {
+      id: "/wizard";
+      path: "/wizard";
+      fullPath: "/wizard";
+      preLoaderRoute: typeof WizardRouteImport;
       parentRoute: typeof rootRouteImport;
     };
     "/products/$productId": {
@@ -104,7 +197,11 @@ declare module "@tanstack/react-router" {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
+  LoginRoute: LoginRoute,
+  ProfileRoute: ProfileRoute,
   SettingsRoute: SettingsRoute,
+  WizardRoute: WizardRoute,
   ProductsProductIdRoute: ProductsProductIdRoute,
   ProductsNewRoute: ProductsNewRoute,
 };

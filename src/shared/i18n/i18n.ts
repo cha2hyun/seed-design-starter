@@ -24,9 +24,14 @@ void i18n
     returnNull: false,
   });
 
-i18n.on("languageChanged", (language) => {
-  document.documentElement.lang = language;
+i18n.on("languageChanged", () => {
+  document.documentElement.lang = getCurrentLanguage();
 });
+
+// Resources are inline, so init() resolves synchronously and has already emitted
+// `languageChanged` by the time the listener above is attached. Without this the attribute
+// keeps the `lang="ko"` hardcoded in index.html even when the detector resolved English.
+document.documentElement.lang = getCurrentLanguage();
 
 export function changeLanguage(language: Language): void {
   void i18n.changeLanguage(language);

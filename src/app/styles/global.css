@@ -75,6 +75,14 @@
     margin-block-start: --value(--dimension-*);
   }
 }
+/*
+ * `min-width: 0` is a flex-layout primitive rather than a design value, and SEED has
+ * no `x0` dimension to point `min-w-*` at. Without it a flex child cannot shrink below
+ * its content, so long text overflows the row instead of truncating.
+ */
+@utility min-w-0 {
+  min-width: 0;
+}
 
 /*
  * ── Project theme ───────────────────────────────────────────────────────────
@@ -100,6 +108,13 @@
    * that upper bound for product listing surfaces.
    */
   --container-content: 80rem; /* 1280px */
+
+  /*
+   * Single-column form width. SEED sizes components but defines no container scale
+   * between a component and `--container-content`, so login/wizard surfaces have
+   * nothing to constrain themselves to.
+   */
+  --container-form: 30rem; /* 480px */
 
   /*
    * Side Navigation width. SEED Layout defines the region but no dimension token;

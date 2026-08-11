@@ -2,16 +2,24 @@
   "appName": "SEED Starter",
   "nav": {
     "home": "Home",
+    "dashboard": "Dashboard",
+    "wizard": "Multi-step form",
+    "profile": "Profile",
+    "login": "Sign in",
     "settings": "Settings",
+    "group": {
+      "app": "App",
+      "blueprint": "Blueprints"
+    },
     "primary": "Primary navigation",
     "side": "Side navigation",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "skipToContent": "Skip to content"
   },
   "footer": {
     "github": "GitHub"
   },
-
   "preferences": {
     "language": {
       "label": "Switch language"

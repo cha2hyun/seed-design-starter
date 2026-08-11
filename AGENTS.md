@@ -19,6 +19,25 @@ Use SEED tokens: `bg-bg-layer-default`, `p-x4`, `t4-bold`, `rounded-r4`, `shadow
 The valid set for the installed version is in `.seed/tokens.json` and
 `.cursor/rules/_generated-seed-tokens.mdc`.
 
+`pnpm verify:lockin` compiles every utility it recognizes in a class context and fails on the
+ones emitting nothing. Direct `className` values and class-named maps cannot silently no-op in
+CI. ESLint only covers prefixes that carry a token, and `min-w-`, `max-w-` and `basis-` are not
+among them — the lock-in scan is what catches those.
+
+Two traps worth naming, because both fail silently:
+
+- **`fg-*-contrast` is not the foreground for the matching solid background.** SEED pairs it
+  with `bg-*-weak` in weak Badge recipes. In dark mode `fg-brand-contrast` resolves to the same
+  carrot as `bg-brand-solid`, so text on `bg-bg-brand-solid` must use
+  `text-palette-static-white`, which is what SEED's own `brandSolid` recipe does.
+- **`min-width: 0` has no SEED dimension.** `min-w-0` exists only because `global.css` re-adds it
+  as an explicit `@utility`; `min-w-x0` is not a thing and emits nothing. A flex child holding
+  text needs `min-w-0` before `truncate` does anything.
+
+Breakpoints are `sm` 480, `md` 768, `lg` 1280, `xl` 1440. The content column is capped at
+`--container-content` (1280px) and the 240px sidebar sits outside it, so `xl:` inside page content
+is almost always dead weight — it only bites on the shell, header and sidebar.
+
 Product brand colors are not free-form Tailwind colors. Edit `config/brand.config.json` (light/dark
 carrot-scale hex values), then run `pnpm brand:sync`. That remaps `--seed-color-palette-carrot-*`
 so `bg-bg-brand-solid`, `text-fg-brand`, and SEED `brandSolid` variants follow the product.
@@ -58,9 +77,17 @@ Offline: `.seed/llms/` holds cached docs, and `pnpm seed:docs <component>` print
    `pnpm seed:add ui:<name>`. Only `src/shared/seed/**` and `src/shared/ui/**` may use the raw
    package.
 6. **Every user-facing string is translated** into Korean and English under
-   `src/shared/i18n/locales/`. Korean is the source of truth and types the keys.
+   `src/shared/i18n/locales/`. Korean is the source of truth and types the keys — which means a
+   key missing from English is not a type error, it silently serves Korean. `pnpm verify:i18n`
+   is what catches that, along with a namespace absent from `resources.ts` and an interpolation
+   placeholder present in one language but not the other.
 7. **Server state is TanStack Query, client state is Zustand.** Never copy one into the other.
-8. **`pnpm verify` must pass** before you consider a task finished.
+8. **Tests live beside the code** as `*.test.ts(x)` and run under Vitest in jsdom. Assert
+   behaviour a user can observe — a role, an accessible name, a disabled control, a rendered
+   string. Class names are worth asserting only where the class _is_ the contract, as in
+   `Tag`'s tone pairing. A component that calls router hooks gets `createTestRouter` from
+   `@/shared/lib/test-router` rather than a mocked `useNavigate`.
+9. **`pnpm verify` must pass** before you consider a task finished.
 
 ## Landing a change
 
@@ -106,7 +133,9 @@ first because they fail silently.
 ```bash
 pnpm bootstrap        # first run: install, generate routes, sync SEED, typecheck
 pnpm dev
-pnpm verify           # identical to CI: typecheck…brand…compat…lockin…build
+pnpm verify           # identical to CI: typecheck…test…brand…compat…i18n…lockin…build
+pnpm test             # vitest, jsdom; `pnpm test:watch` while working
+pnpm verify:i18n      # ko/en key parity and matching interpolation
 pnpm seed:add ui:tabs # add a SEED snippet
 pnpm seed:sync        # regenerate the token catalog and cached docs
 pnpm brand:sync       # apply config/brand.config.json into global.css

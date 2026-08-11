@@ -1,0 +1,24 @@
+{
+  "title": "프로필",
+  "description": "Avatar, 매너온도 배지, Tabs, AlertDialog를 조합한 계정 화면 예시예요.",
+  "user": {
+    "name": "당근이",
+    "email": "karrot@example.com"
+  },
+  "logout": {
+    "action": "로그아웃",
+    "title": "로그아웃하시겠어요?",
+    "confirmAction": "로그아웃",
+    "description": "로그아웃하면 서비스를 이용할 때 다시 로그인해야 해요."
+  },
+  "tabs": {
+    "heading": "활동 내역",
+    "label": "프로필 탭",
+    "activity": "최근 활동",
+    "saved": "관심 목록",
+    "history": "거래 내역",
+    "activityBody": "최근 활동 내역이 표시되는 영역이에요.",
+    "savedBody": "관심 등록한 상품 목록이에요.",
+    "historyBody": "거래가 완료된 내역이에요."
+  }
+}
