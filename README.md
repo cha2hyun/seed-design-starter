@@ -4,6 +4,8 @@ Vite + React + TypeScript 스타터입니다. 당근의 디자인 시스템 [SEE
 **락인**되어 있고, [Feature-Sliced Design](https://feature-sliced.design)으로 구조를 잡았으며,
 AI 에이전트가 바로 일할 수 있도록 MCP·룰·커맨드가 레포에 함께 들어 있습니다.
 
+![SEED Design Starter의 데스크톱 홈 화면](./docs/images/seed-design-starter-preview.png)
+
 클론 → `pnpm bootstrap` → `/start` 한 번이면 누구나 같은 환경에서 시작합니다.
 
 ```bash
