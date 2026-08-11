@@ -24,6 +24,7 @@ export function ErrorPage({ reset }: ErrorComponentProps) {
 
   return (
     <StateMessage
+      role="alert"
       title={t("state.error.title")}
       description={t("state.error.description")}
       headingAs="h1"

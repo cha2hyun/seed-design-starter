@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-import { Link } from "@tanstack/react-router";
+import { Link, useRouter } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { ActionButton } from "seed-design/ui/action-button";
@@ -15,7 +15,42 @@ import { Icon, IconMenu, IconX, shellInsetClassName } from "@/shared/ui";
 
 export function AppHeader() {
   const { t } = useTranslation();
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuTriggerRef = useRef<HTMLButtonElement>(null);
+  const closeMobileMenuWhenPopupOpens = useCallback((open: boolean) => {
+    if (open) setMenuOpen(false);
+  }, []);
+
+  useEffect(
+    () =>
+      router.subscribe("onBeforeNavigate", (event) => {
+        if (event.hrefChanged) setMenuOpen(false);
+      }),
+    [router],
+  );
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const desktopQuery = window.matchMedia("(min-width: 768px)");
+    const closeAtDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) setMenuOpen(false);
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape" || event.defaultPrevented) return;
+      setMenuOpen(false);
+      menuTriggerRef.current?.focus();
+    };
+
+    desktopQuery.addEventListener("change", closeAtDesktop);
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      desktopQuery.removeEventListener("change", closeAtDesktop);
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [menuOpen]);
 
   return (
     <header
@@ -40,9 +75,10 @@ export function AppHeader() {
 
         <div className="flex items-center gap-x1 sm:gap-x2">
           <LanguagePicker />
-          <ColorModePicker />
-          <AccountMenu location="header" />
+          <ColorModePicker onOpenChange={closeMobileMenuWhenPopupOpens} />
+          <AccountMenu location="header" onOpenChange={closeMobileMenuWhenPopupOpens} />
           <ActionButton
+            ref={menuTriggerRef}
             type="button"
             size="xsmall"
             variant="ghost"

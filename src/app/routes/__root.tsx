@@ -1,4 +1,5 @@
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import type { QueryClient } from "@tanstack/react-query";
+import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 
 import { NotFoundPage } from "@/pages/not-found";
 
@@ -7,6 +8,10 @@ import { AppHeader } from "@/widgets/app-header";
 import { AppSidebar } from "@/widgets/app-sidebar";
 
 import { MAIN_CONTENT_ID, shellContentClassName, SkipToContent } from "@/shared/ui";
+
+export interface AppRouterContext {
+  queryClient: QueryClient;
+}
 
 function RootLayout() {
   return (
@@ -33,7 +38,7 @@ function RootLayout() {
   );
 }
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<AppRouterContext>()({
   component: RootLayout,
   notFoundComponent: NotFoundPage,
 });

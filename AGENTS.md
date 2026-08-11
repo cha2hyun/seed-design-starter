@@ -103,7 +103,7 @@ opens the GitHub Release. Never squash a release PR or tag on `develop`.
 ```bash
 git switch develop
 git switch -c feat/price-offer-toggle   # <type>/<kebab-summary>
-pnpm verify                             # identical to CI, so green here is green there
+pnpm verify                             # identical to CI's core verify job; CI also runs browser smoke
 git commit                              # Conventional Commits, see below
 git push -u origin HEAD
 gh pr create --base develop             # title is Conventional Commits too — squash merge uses it
@@ -133,7 +133,8 @@ first because they fail silently.
 ```bash
 pnpm bootstrap        # first run: install, generate routes, sync SEED, typecheck
 pnpm dev
-pnpm verify           # identical to CI: typecheck…test…brand…compat…i18n…lockin…build
+pnpm verify           # CI core: routes…typecheck…test…brand…compat…i18n…lockin…build
+pnpm test:e2e         # Chromium smoke at base/sm/md/lg/xl; CI uploads the report
 pnpm test             # vitest, jsdom; `pnpm test:watch` while working
 pnpm verify:i18n      # ko/en key parity and matching interpolation
 pnpm seed:add ui:tabs # add a SEED snippet
@@ -146,7 +147,7 @@ pnpm seed:compat      # check snippets against installed SEED versions
 
 ```
 config/          tooling configs (eslint, prettier, vite, commitlint, brand, …)
-env/             Vite env files — copy env/.env.example → env/.env.local for secrets
+env/             Public Vite build config — copy .env.example to .env.local; never put secrets in VITE_*
 src/
 ├── app/         providers, routes, router, the single stylesheet
 ├── pages/       one screen per slice

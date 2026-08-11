@@ -9,19 +9,28 @@ import { useDocumentTitle } from "@/shared/lib";
 import { PageSection } from "@/shared/ui";
 
 export function ProductNewPage() {
-  const { t } = useTranslation("product");
-  useDocumentTitle(t("create.title"));
+  const { t } = useTranslation(["product", "common"]);
+  useDocumentTitle(t("product:create.title"));
   const navigate = useNavigate();
   const snackbar = useSnackbarAdapter();
 
   return (
-    <PageSection title={t("create.title")} className="max-w-form" headingAs="h1">
+    <PageSection title={t("product:create.title")} className="max-w-form" headingAs="h1">
       <CreateProductForm
         onCreated={(product) => {
           snackbar.create({
-            render: () => <Snackbar variant="positive" message={t("create.successMessage")} />,
+            render: () => (
+              <Snackbar
+                variant="positive"
+                message={t("product:create.successMessage")}
+                closeLabel={t("common:action.close")}
+              />
+            ),
           });
-          void navigate({ to: "/products/$productId", params: { productId: product.id } });
+          void navigate({
+            to: "/products/$productId",
+            params: { productId: product.id },
+          });
         }}
       />
     </PageSection>

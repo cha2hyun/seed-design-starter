@@ -6,18 +6,21 @@
   "description": "AI-first Vite + React starter locked in to the SEED Design System, structured with Feature-Sliced Design.",
   "packageManager": "pnpm@10.33.0",
   "engines": {
-    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0",
+    "pnpm": "10.33.0"
   },
   "scripts": {
-    "bootstrap": "tsx scripts/bootstrap.ts",
+    "bootstrap": "node scripts/bootstrap.mjs",
     "dev": "vite --config config/vite.config.ts",
     "build": "pnpm routes:gen && tsc -b && vite build --config config/vite.config.ts",
     "preview": "vite preview --config config/vite.config.ts",
     "routes:gen": "tsr generate",
+    "routes:check": "node scripts/check-routes.mjs",
     "typecheck": "pnpm routes:gen && tsc -b --noEmit",
     "lint": "eslint -c config/eslint.config.js .",
     "test": "vitest run --config config/vitest.config.ts",
     "test:watch": "vitest --config config/vitest.config.ts",
+    "test:e2e": "playwright test --config config/playwright.config.ts",
     "lint:fix": "eslint -c config/eslint.config.js . --fix",
     "lint:fsd": "steiger ./src",
     "format": "prettier --config config/prettier.config.js --write .",
@@ -31,7 +34,8 @@
     "brand:check": "tsx scripts/sync-brand.ts --check",
     "verify:i18n": "tsx scripts/verify-i18n.ts",
     "verify:lockin": "tsx scripts/verify-lockin.ts",
-    "verify": "pnpm typecheck && pnpm lint && pnpm lint:fsd && pnpm test && pnpm format:check && pnpm seed:check && pnpm brand:check && pnpm seed:compat && pnpm verify:i18n && pnpm verify:lockin && pnpm build",
+    "verify:release": "node scripts/verify-release.mjs",
+    "verify": "pnpm routes:check && pnpm typecheck && pnpm lint && pnpm lint:fsd && pnpm test && pnpm format:check && pnpm seed:check && pnpm brand:check && pnpm seed:compat && pnpm verify:i18n && pnpm verify:lockin && pnpm build",
     "prepare": "husky"
   },
   "dependencies": {
@@ -53,6 +57,7 @@
     "@commitlint/config-conventional": "^21.2.0",
     "@eslint/js": "^10.0.1",
     "@feature-sliced/steiger-plugin": "^0.7.0",
+    "@playwright/test": "^1.62.1",
     "@seed-design/cli": "^1.6.1",
     "@seed-design/tailwind4-theme": "^2.3.0",
     "@seed-design/vite-plugin": "^2.1.0",
@@ -67,7 +72,7 @@
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.3",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-    "@types/node": "^24.0.0",
+    "@types/node": "^22.20.1",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "@vitejs/plugin-react": "^6.0.5",

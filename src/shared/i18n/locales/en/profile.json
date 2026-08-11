@@ -5,7 +5,9 @@
     "action": "Sign out",
     "title": "Sign out?",
     "confirmAction": "Sign out",
-    "description": "You will need to sign in again to keep using the service."
+    "description": "You will need to sign in again to keep using the service.",
+    "errorTitle": "Couldn't sign out",
+    "errorDescription": "Please try again in a moment."
   },
   "tabs": {
     "heading": "Activity",

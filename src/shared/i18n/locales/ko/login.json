@@ -5,6 +5,7 @@
   "field": {
     "email": "이메일",
     "emailPlaceholder": "email@example.com",
+    "emailInvalid": "올바른 이메일 주소를 입력해 주세요.",
     "password": "비밀번호",
     "passwordPlaceholder": "비밀번호를 입력하세요",
     "rememberMe": "로그인 상태 유지"
@@ -13,6 +14,10 @@
     "submit": "로그인하기",
     "kakao": "카카오로 시작하기",
     "apple": "Apple로 시작하기"
+  },
+  "error": {
+    "title": "로그인하지 못했어요",
+    "description": "잠시 후 다시 시도해 주세요."
   },
   "divider": "또는"
 }

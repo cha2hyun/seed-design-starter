@@ -2,17 +2,33 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
+import { type Product, productDetailQuery } from "@/entities/product";
+
 import { createTestRouter } from "@/shared/lib/test-router";
 
-import { ProductDetailPage } from "./product-detail-page";
+import { ProductDetailPage, ProductDetailPendingPage } from "./product-detail-page";
 
-function renderPage(productId: string) {
+const product: Product = {
+  id: "p-detail",
+  title: "테스트 캠핑 의자",
+  price: 25000,
+  description: "튼튼한 캠핑 의자예요.",
+  category: "outdoor",
+  status: "onSale",
+  negotiable: true,
+  sellerName: "당근이",
+  region: "역삼동",
+  createdAt: new Date().toISOString(),
+};
+
+function renderPage() {
   const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
+    defaultOptions: { queries: { retry: false, staleTime: Infinity } },
   });
+  queryClient.setQueryData(productDetailQuery(product.id).queryKey, product);
   const router = createTestRouter(
     <QueryClientProvider client={queryClient}>
-      <ProductDetailPage productId={productId} />
+      <ProductDetailPage productId={product.id} />
     </QueryClientProvider>,
   );
 
@@ -20,19 +36,28 @@ function renderPage(productId: string) {
 }
 
 describe("ProductDetailPage", () => {
-  it("uses the product detail title while the product is loading", async () => {
-    renderPage("p-1");
-
-    expect(await screen.findByRole("status")).toHaveTextContent("불러오는 중이에요");
-    expect(document.title).toBe("상품 상세 · SEED 스타터");
-  });
-
-  it("identifies the error state as the page heading", async () => {
-    renderPage("missing-product");
+  it("renders loader-provided product data and uses its title for the document", async () => {
+    renderPage();
 
     expect(
-      await screen.findByRole("heading", { level: 1, name: "페이지를 찾을 수 없어요" }),
+      await screen.findByRole("heading", { level: 1, name: product.title }),
     ).toBeInTheDocument();
+    expect(document.title).toBe(`${product.title} · SEED 스타터`);
+  });
+
+  it("keeps the seller avatar decorative when the seller name is already visible", async () => {
+    renderPage();
+
+    expect(await screen.findByText(product.sellerName)).toBeInTheDocument();
+    expect(screen.queryByRole("img", { name: product.sellerName })).not.toBeInTheDocument();
+  });
+});
+
+describe("ProductDetailPendingPage", () => {
+  it("announces the route-level loading state", () => {
+    render(<ProductDetailPendingPage />);
+
+    expect(screen.getByRole("status")).toHaveTextContent("불러오는 중이에요");
     expect(document.title).toBe("상품 상세 · SEED 스타터");
   });
 });

@@ -17,11 +17,11 @@
   },
   "account": {
     "menu": "Account",
-    "name": "Karrot",
-    "email": "karrot@example.com",
     "openMenu": "Open {{name}} account menu",
+    "signIn": "Sign in",
     "profile": "View profile",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "signOutError": "We couldn't sign you out. Please try again in a moment."
   },
   "footer": {
     "github": "GitHub"
@@ -38,6 +38,7 @@
     }
   },
   "action": {
+    "close": "Close",
     "retry": "Try again",
     "cancel": "Cancel",
     "confirm": "Confirm",

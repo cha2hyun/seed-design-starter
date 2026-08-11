@@ -28,8 +28,8 @@ architecture or i18n decisions.
 
 - `pnpm bootstrap` — first run: install, generate routes, sync SEED, typecheck
 - `pnpm dev` / `pnpm build`
-- `pnpm verify` — identical to CI: typecheck, lint, FSD, test, format, seed, brand, compat, i18n,
-  lock-in, build
+- `pnpm verify` — identical to CI's core job: routes, typecheck, lint, FSD, unit tests, format,
+  seed, brand, compat, i18n, lock-in and build. CI also runs the browser viewport matrix.
 - `pnpm seed:add <item>` — add a SEED snippet, e.g. `pnpm seed:add ui:tabs`
 - `pnpm seed:sync` — regenerate `.seed/tokens.json`, the generated token rule, and the cached docs
 - `pnpm brand:sync` — apply `config/brand.config.json` into `global.css` (carrot → product brand)

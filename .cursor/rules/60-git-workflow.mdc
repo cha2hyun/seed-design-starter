@@ -46,7 +46,8 @@ debugging in six months, not by someone watching you work.
 
 ## Before pushing
 
-`pnpm verify` is exactly what CI runs. Green locally means green on the pull request.
+`pnpm verify` is exactly what CI's core job runs. CI then adds supported-Node builds and the real
+browser viewport matrix, so run `pnpm test:e2e` locally when a layout or interaction changes.
 
 ## Pull request
 

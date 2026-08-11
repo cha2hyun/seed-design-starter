@@ -36,6 +36,8 @@
     "negotiableField": "Accept price offers",
     "submit": "Post listing",
     "successMessage": "Your listing is live.",
+    "errorTitle": "Couldn't post your listing",
+    "errorDescription": "Your entries are still here. Please try again in a moment.",
     "priceSuffix": "KRW"
   },
   "validation": {

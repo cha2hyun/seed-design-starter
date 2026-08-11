@@ -33,6 +33,9 @@ export interface SnackbarProps extends SeedSnackbar.RootProps {
    */
   message: string;
 
+  /** Accessible label for the hidden dismiss control. */
+  closeLabel: string;
+
   /**
    * 스낵바에 표시할 액션 버튼의 라벨
    */
@@ -48,7 +51,10 @@ export interface SnackbarProps extends SeedSnackbar.RootProps {
  * @see https://seed-design.io/react/components/snackbar
  */
 export const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
-  ({ variant = "default", children, message, actionLabel, onAction, ...otherProps }, ref) => {
+  (
+    { variant = "default", children, message, closeLabel, actionLabel, onAction, ...otherProps },
+    ref,
+  ) => {
     return (
       <SeedSnackbar.Root ref={ref} variant={variant} {...otherProps}>
         {variant !== "default" && (
@@ -68,8 +74,7 @@ export const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
             <SeedSnackbar.ActionButton onClick={onAction}>{actionLabel}</SeedSnackbar.ActionButton>
           )}
         </SeedSnackbar.Content>
-        {/* You may implement your own i18n for dismiss label */}
-        <SeedSnackbar.HiddenCloseButton>닫기</SeedSnackbar.HiddenCloseButton>
+        <SeedSnackbar.HiddenCloseButton>{closeLabel}</SeedSnackbar.HiddenCloseButton>
       </SeedSnackbar.Root>
     );
   },

@@ -23,4 +23,11 @@ describe("StateMessage", () => {
       expect(screen.getByRole("heading", { level, name: "페이지 상태" })).toBeInTheDocument();
     },
   );
+
+  it("forwards live-region attributes to the state container", () => {
+    render(<StateMessage title="불러오지 못했어요" role="alert" aria-live="assertive" />);
+
+    expect(screen.getByRole("alert")).toHaveAttribute("aria-live", "assertive");
+    expect(screen.getByRole("alert")).toHaveTextContent("불러오지 못했어요");
+  });
 });

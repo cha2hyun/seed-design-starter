@@ -46,5 +46,4 @@ export const IS_DEV = import.meta.env.DEV;
 /** Values from `env/.env*` (Vite `envDir`). Only `VITE_*` keys reach the client. */
 export const ENV = {
   apiBaseUrl: import.meta.env.VITE_API_BASE_URL ?? "",
-  appName: import.meta.env.VITE_APP_NAME ?? "seed-design-starter",
 } as const;

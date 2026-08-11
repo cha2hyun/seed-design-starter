@@ -1,9 +1,9 @@
 #!/bin/sh
-# Deliberately the same command CI runs, so a green push cannot turn into a red pull request.
+# Deliberately the same command as CI's core verify job. Browser smoke remains a CI-only check.
 if ! pnpm verify; then
   cat >&2 <<'EOF'
 
-✖ pnpm verify failed. CI runs the identical command, so this push would open a red pull request.
+✖ pnpm verify failed. CI's core job runs the identical command, so this push would open a red pull request.
 
   Map the failing step to its fix:
 

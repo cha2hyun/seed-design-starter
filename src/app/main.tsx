@@ -5,9 +5,12 @@ import { RouterProvider } from "@tanstack/react-router";
 
 import "@/shared/i18n";
 
-import { AppProviders } from "./providers";
-import { router } from "./router";
+import { AppProviders, createQueryClient } from "./providers";
+import { createAppRouter } from "./router";
 import "./styles/global.css";
+
+const queryClient = createQueryClient();
+const router = createAppRouter({ queryClient });
 
 const container = document.getElementById("root");
 if (!container) {
@@ -16,7 +19,7 @@ if (!container) {
 
 createRoot(container).render(
   <StrictMode>
-    <AppProviders router={router}>
+    <AppProviders queryClient={queryClient} router={router}>
       <RouterProvider router={router} />
     </AppProviders>
   </StrictMode>,

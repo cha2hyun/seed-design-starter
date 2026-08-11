@@ -2,7 +2,7 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "ES2023",
-    "lib": ["ES2023"],
+    "lib": ["ES2023", "DOM"],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -21,6 +21,6 @@
     "noUncheckedSideEffectImports": true,
     "erasableSyntaxOnly": true
   },
-  "include": ["config/**/*.ts", "scripts/**/*.ts", "steiger.config.ts"],
+  "include": ["config/**/*.ts", "e2e/**/*.ts", "scripts/**/*.ts", "steiger.config.ts"],
   "exclude": ["config/vitest.setup.ts"]
 }

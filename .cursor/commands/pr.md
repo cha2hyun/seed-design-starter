@@ -10,7 +10,8 @@ Base is `develop`. Head is a `<type>/<kebab-summary>` branch.
    `git log develop..HEAD --oneline`, `git diff develop...HEAD --stat` and the diff itself. A pull
    request describes every commit on the branch.
 2. Confirm you are on a `<type>/<kebab-summary>` branch off `develop`, not on `develop` or `main`.
-3. Run `pnpm verify`. CI runs the same command; opening a red pull request wastes a review cycle.
+3. Run `pnpm verify`. CI runs the same core job before its browser smoke matrix; opening a pull
+   request with a known core failure wastes a review cycle.
 4. Review your own diff first with the rubric in `.cursor/commands/review.md`. Fix what you find
    before anyone else reads it.
 5. Push: `git push -u origin HEAD`.

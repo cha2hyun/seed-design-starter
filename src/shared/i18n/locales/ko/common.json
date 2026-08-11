@@ -17,11 +17,11 @@
   },
   "account": {
     "menu": "계정",
-    "name": "당근이",
-    "email": "karrot@example.com",
     "openMenu": "{{name}} 계정 메뉴 열기",
+    "signIn": "로그인",
     "profile": "프로필 보기",
-    "signOut": "로그아웃"
+    "signOut": "로그아웃",
+    "signOutError": "로그아웃하지 못했어요. 잠시 후 다시 시도해 주세요."
   },
   "footer": {
     "github": "GitHub"
@@ -38,6 +38,7 @@
     }
   },
   "action": {
+    "close": "닫기",
     "retry": "다시 시도",
     "cancel": "취소",
     "confirm": "확인",

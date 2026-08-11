@@ -23,6 +23,7 @@ export function ProductList() {
   if (isError) {
     return (
       <StateMessage
+        role="alert"
         title={t("common:state.error.title")}
         description={t("common:state.error.description")}
         action={

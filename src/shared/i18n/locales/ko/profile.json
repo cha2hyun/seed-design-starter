@@ -5,7 +5,9 @@
     "action": "로그아웃",
     "title": "로그아웃하시겠어요?",
     "confirmAction": "로그아웃",
-    "description": "로그아웃하면 서비스를 이용할 때 다시 로그인해야 해요."
+    "description": "로그아웃하면 서비스를 이용할 때 다시 로그인해야 해요.",
+    "errorTitle": "로그아웃하지 못했어요",
+    "errorDescription": "잠시 후 다시 시도해 주세요."
   },
   "tabs": {
     "heading": "활동 내역",

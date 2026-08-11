@@ -1,13 +1,27 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
+import { SnackbarProvider } from "seed-design/ui/snackbar";
+
+import { DEMO_SESSION } from "@/entities/session";
+
+import { queryKeys } from "@/shared/api";
 import { createTestRouter } from "@/shared/lib/test-router";
 
 import { AppSidebar } from "./app-sidebar";
 
 describe("AppSidebar", () => {
   it("starts at md and keeps the full account identity at the bottom", async () => {
-    const router = createTestRouter(<AppSidebar />);
+    const queryClient = new QueryClient();
+    queryClient.setQueryData(queryKeys.session.current, DEMO_SESSION);
+    const router = createTestRouter(
+      <QueryClientProvider client={queryClient}>
+        <SnackbarProvider>
+          <AppSidebar />
+        </SnackbarProvider>
+      </QueryClientProvider>,
+    );
     render(router.element);
 
     const navigation = await screen.findByRole("navigation", { name: "사이드 메뉴" });

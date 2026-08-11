@@ -1,5 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-import { Link } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
 import { ActionButton } from "seed-design/ui/action-button";
@@ -10,7 +9,7 @@ import { productDetailQuery, ProductStatusTag } from "@/entities/product";
 
 import { useLanguage } from "@/shared/i18n";
 import { formatCurrency, formatRelativeTime, useDocumentTitle } from "@/shared/lib";
-import { LoadingBlock, PageSection, StateMessage } from "@/shared/ui";
+import { LoadingBlock, PageSection } from "@/shared/ui";
 
 export interface ProductDetailPageProps {
   productId: string;
@@ -19,27 +18,8 @@ export interface ProductDetailPageProps {
 export function ProductDetailPage({ productId }: ProductDetailPageProps) {
   const { t } = useTranslation(["product", "common"]);
   const { language } = useLanguage();
-  const { data, isPending, isError } = useQuery(productDetailQuery(productId));
-  useDocumentTitle(data?.title ?? t("product:detail.title"));
-
-  if (isPending) {
-    return <LoadingBlock label={t("common:state.loading")} />;
-  }
-
-  if (isError) {
-    return (
-      <StateMessage
-        headingAs="h1"
-        title={t("common:state.notFound.title")}
-        description={t("common:state.notFound.description")}
-        action={
-          <ActionButton variant="neutralWeak" size="medium" asChild>
-            <Link to="/">{t("common:action.goHome")}</Link>
-          </ActionButton>
-        }
-      />
-    );
-  }
+  const { data } = useSuspenseQuery(productDetailQuery(productId));
+  useDocumentTitle(data.title);
 
   return (
     <div className="flex flex-col gap-x6">
@@ -59,7 +39,7 @@ export function ProductDetailPage({ productId }: ProductDetailPageProps) {
       </div>
 
       <div className="flex items-center gap-x3 rounded-r4 bg-bg-layer-default p-x4">
-        <Avatar size="48" fallback={data.sellerName.slice(0, 1)} alt={data.sellerName} />
+        <Avatar size="48" fallback={data.sellerName.slice(0, 1)} alt="" aria-hidden="true" />
         <div className="flex min-w-0 flex-col">
           <span className="t3-regular text-fg-neutral-muted">
             {t("product:detail.sellerLabel")}
@@ -81,4 +61,11 @@ export function ProductDetailPage({ productId }: ProductDetailPageProps) {
       </ActionButton>
     </div>
   );
+}
+
+export function ProductDetailPendingPage() {
+  const { t } = useTranslation(["product", "common"]);
+  useDocumentTitle(t("product:detail.title"));
+
+  return <LoadingBlock label={t("common:state.loading")} />;
 }

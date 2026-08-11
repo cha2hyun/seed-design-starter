@@ -91,6 +91,42 @@ export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
 );
 MenuItem.displayName = "MenuItem";
 
+export interface MenuLinkItemProps extends Omit<
+  React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  "children"
+> {
+  prefixIcon?: React.ReactNode;
+  label: React.ReactNode;
+  description?: React.ReactNode;
+  suffixIcon?: React.ReactNode;
+  typeaheadLabel?: string;
+}
+
+/** A menu action that preserves native link and router-link behaviour. */
+export const MenuLinkItem = React.forwardRef<HTMLAnchorElement, MenuLinkItemProps>(
+  ({ prefixIcon, label, description, suffixIcon, typeaheadLabel, onClick, ...props }, ref) => {
+    return (
+      <SeedMenu.Item
+        asChild
+        typeaheadLabel={typeaheadLabel}
+        onClick={
+          onClick ? (event) => onClick(event as React.MouseEvent<HTMLAnchorElement>) : undefined
+        }
+      >
+        <a ref={ref} {...props}>
+          {prefixIcon && <PrefixIcon svg={prefixIcon} />}
+          <SeedMenu.ItemBody>
+            <SeedMenu.ItemLabel>{label}</SeedMenu.ItemLabel>
+            {description && <SeedMenu.ItemDescription>{description}</SeedMenu.ItemDescription>}
+          </SeedMenu.ItemBody>
+          {suffixIcon && <SuffixIcon svg={suffixIcon} />}
+        </a>
+      </SeedMenu.Item>
+    );
+  },
+);
+MenuLinkItem.displayName = "MenuLinkItem";
+
 /**
  * This file is a snippet from SEED Design, helping you get started quickly with @seed-design/* packages.
  * You can extend this snippet however you want.

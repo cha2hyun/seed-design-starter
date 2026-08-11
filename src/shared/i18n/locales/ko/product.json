@@ -36,6 +36,8 @@
     "negotiableField": "가격 제안 받기",
     "submit": "등록하기",
     "successMessage": "상품을 등록했어요.",
+    "errorTitle": "상품을 등록하지 못했어요",
+    "errorDescription": "입력한 내용은 그대로 두었어요. 잠시 후 다시 시도해 주세요.",
     "priceSuffix": "원"
   },
   "validation": {

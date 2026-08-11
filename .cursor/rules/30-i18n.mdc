@@ -15,10 +15,11 @@ const { t } = useTranslation("product");
 return <h1 className="screen-title text-fg-neutral">{t("list.title")}</h1>;
 ```
 
-Namespaces live in `src/shared/i18n/locales/{ko,en}/`: `common`, `product`, `settings`. Korean is
-the source of truth for the key shape and English must mirror it exactly — `src/shared/i18n/i18next.d.ts`
-types `t()` from the Korean resource, so a missing English key is a silent gap while a missing
-Korean key is a compile error.
+Namespaces live in `src/shared/i18n/locales/{ko,en}/`; `resources.ts` is the current registry
+(`common`, `dashboard`, `login`, `product`, `profile`, `settings`, `wizard`). Korean is the source of
+truth for the key shape and English must mirror it exactly — `src/shared/i18n/i18next.d.ts` types
+`t()` from the Korean resource, so a missing English key is a silent gap while a missing Korean key
+is a compile error.
 
 Reach across namespaces with a prefix: `t("common:action.retry")`.
 
