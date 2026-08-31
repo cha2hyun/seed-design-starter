@@ -6,113 +6,87 @@ Tailwind CSS 프로젝트에서 SEED를 사용하는 방법을 알아봅니다.
 
 SEED에서 제공하는 토큰을 Tailwind CSS 3과 4 유틸리티 클래스를 통해 쉽게 사용하고, SEED React 컴포넌트의 스타일을 오버라이드할 수 있습니다.
 
-## 설정 \[#설정]
+## 설정
 
-<Tabs items="['Tailwind CSS 4', 'Tailwind CSS 3']">
-  <Tab value="Tailwind CSS 4">
-    <Steps>
-      <Step>
-        ### 의존성 설치 \[#의존성-설치]
+### 의존성 설치
 
-        - npm: npm install @seed-design/css @seed-design/tailwind4-theme
-        - pnpm: pnpm add @seed-design/css @seed-design/tailwind4-theme
-        - yarn: yarn add @seed-design/css @seed-design/tailwind4-theme
-        - bun: bun add @seed-design/css @seed-design/tailwind4-theme
-      </Step>
+- npm: npm install @seed-design/css @seed-design/tailwind4-theme
+- pnpm: pnpm add @seed-design/css @seed-design/tailwind4-theme
+- yarn: yarn add @seed-design/css @seed-design/tailwind4-theme
+- bun: bun add @seed-design/css @seed-design/tailwind4-theme
 
-      <Step>
-        ### CSS 파일 설정 \[#css-파일-설정]
+### CSS 파일 설정
 
-        ```css title="style.css"
-        @layer theme, base, seed-base, components, seed-components, utilities;
-        @import "@seed-design/css/base.layered.css";
-        @import "tailwindcss";
-        @import "@seed-design/tailwind4-theme";
-        ```
+```css title="style.css"
+@layer theme, base, seed-base, components, seed-components, utilities;
+@import "@seed-design/css/base.layered.css";
+@import "tailwindcss";
+@import "@seed-design/tailwind4-theme";
+```
 
-        <Callout>
-          `@layer` directive를 통해 SEED CSS와 Tailwind 간의 스타일 우선순위를
-          결정합니다. 자세한 내용은 [Cascade
-          Layers](/react/getting-started/styling/cascade-layers) 문서를 참고하세요.
-        </Callout>
-      </Step>
+<Callout>
+  `@layer` directive를 통해 SEED CSS와 Tailwind 간의 스타일 우선순위를
+  결정합니다. 자세한 내용은 [Cascade
+  Layers](/react/getting-started/styling/cascade-layers) 문서를 참고하세요.
+</Callout>
 
-      <Step>
-        ### 번들러 설정 \[#번들러-설정]
+### 번들러 설정
 
-        SEED React 컴포넌트가 layered CSS 파일을 사용하도록 번들러의 module resolution 설정에 `seed-layered` condition을 추가하세요.
+SEED React 컴포넌트가 layered CSS 파일을 사용하도록 번들러의 module resolution 설정에 `seed-layered` condition을 추가하세요.
 
-        번들러별 설정 방법은 [Cascade Layers](/react/getting-started/styling/cascade-layers#번들러-설정) 문서를 참고하세요.
-      </Step>
+번들러별 설정 방법은 [Cascade Layers](/react/getting-started/styling/cascade-layers#번들러-설정) 문서를 참고하세요.
 
-      <Step>
-        ### Theming 설정 \[#theming-설정]
+### Theming 설정
 
-        Tailwind CSS 스타일시트는 theming 스크립트와 별개로 작동합니다. 아래 가이드를 참고하여 테마 설정을 진행하세요.
+Tailwind CSS 스타일시트는 theming 스크립트와 별개로 작동합니다. 아래 가이드를 참고하여 테마 설정을 진행하세요.
 
-        - [Vite](/react/getting-started/installation/vite)
-        - [Rsbuild](/react/getting-started/installation/rsbuild)
-        - [Webpack](/react/getting-started/installation/webpack)
-        - [Manual](/react/getting-started/installation/manual)
-      </Step>
-    </Steps>
-  </Tab>
+- [Vite](/react/getting-started/installation/vite)
+- [Rsbuild](/react/getting-started/installation/rsbuild)
+- [Webpack](/react/getting-started/installation/webpack)
+- [Manual](/react/getting-started/installation/manual)
 
-  <Tab value="Tailwind CSS 3">
-    <Steps>
-      <Step>
-        ### 의존성 설치 \[#의존성-설치-1]
+### 의존성 설치
 
-        - npm: npm install @seed-design/css @seed-design/tailwind3-plugin
-        - pnpm: pnpm add @seed-design/css @seed-design/tailwind3-plugin
-        - yarn: yarn add @seed-design/css @seed-design/tailwind3-plugin
-        - bun: bun add @seed-design/css @seed-design/tailwind3-plugin
-      </Step>
+- npm: npm install @seed-design/css @seed-design/tailwind3-plugin
+- pnpm: pnpm add @seed-design/css @seed-design/tailwind3-plugin
+- yarn: yarn add @seed-design/css @seed-design/tailwind3-plugin
+- bun: bun add @seed-design/css @seed-design/tailwind3-plugin
 
-      <Step>
-        ### base.css import \[#basecss-import]
+### base.css import
 
-        ```ts title="index.tsx"
-        import "@seed-design/css/base.css";
-        ```
-      </Step>
+```ts title="index.tsx"
+import "@seed-design/css/base.css";
+```
 
-      <Step>
-        ### Tailwind 설정 파일 수정 \[#tailwind-설정-파일-수정]
+### Tailwind 설정 파일 수정
 
-        ```js title="tailwind.config.js"
-        import seedPlugin from "@seed-design/tailwind3-plugin"; // [!code highlight]
+```js title="tailwind.config.js"
+import seedPlugin from "@seed-design/tailwind3-plugin"; // [!code highlight]
 
-        /** @type {import('tailwindcss').Config} */
-        export default {
-          content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-          theme: {
-            extend: {},
-          },
-          plugins: [seedPlugin], // [!code highlight]
-        };
-        ```
-      </Step>
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [seedPlugin], // [!code highlight]
+};
+```
 
-      <Step>
-        ### Theming 설정 \[#theming-설정-1]
+### Theming 설정
 
-        Tailwind CSS 스타일시트는 theming 스크립트와 별개로 작동합니다. 아래 가이드를 참고하여 테마 설정을 진행하세요.
+Tailwind CSS 스타일시트는 theming 스크립트와 별개로 작동합니다. 아래 가이드를 참고하여 테마 설정을 진행하세요.
 
-        - [Vite](/react/getting-started/installation/vite)
-        - [Rsbuild](/react/getting-started/installation/rsbuild)
-        - [Webpack](/react/getting-started/installation/webpack)
-        - [Manual](/react/getting-started/installation/manual)
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
+- [Vite](/react/getting-started/installation/vite)
+- [Rsbuild](/react/getting-started/installation/rsbuild)
+- [Webpack](/react/getting-started/installation/webpack)
+- [Manual](/react/getting-started/installation/manual)
 
-## 유틸리티 클래스 \[#유틸리티-클래스]
+## 유틸리티 클래스
 
 SEED의 모든 디자인 토큰을 Tailwind 유틸리티 클래스로 사용할 수 있습니다.
 
-### 색상 \[#색상]
+### 색상
 
 ```tsx
 import { VStack, Text } from "@seed-design/react";
@@ -157,7 +131,7 @@ export default function TailwindColors() {
 }
 ```
 
-### 타이포그래피 \[#타이포그래피]
+### 타이포그래피
 
 ```tsx
 import { VStack } from "@seed-design/react";
@@ -175,7 +149,7 @@ export default function TailwindTypography() {
 }
 ```
 
-### 크기 및 여백 \[#크기-및-여백]
+### 크기 및 여백
 
 ```tsx
 import { VStack, HStack, Text } from "@seed-design/react";
@@ -221,7 +195,7 @@ export default function TailwindSpacing() {
 }
 ```
 
-### 테두리 반경 \[#테두리-반경]
+### 테두리 반경
 
 ```tsx
 import { HStack, VStack, Text } from "@seed-design/react";
@@ -246,7 +220,7 @@ export default function TailwindBorderRadius() {
 }
 ```
 
-### 그라디언트 \[#그라디언트]
+### 그라디언트
 
 ```tsx
 import { VStack, Text } from "@seed-design/react";
@@ -267,7 +241,7 @@ export default function TailwindGradient() {
 }
 ```
 
-## 관련 문서 \[#관련-문서]
+## 관련 문서
 
 Tailwind CSS를 사용하지 않아도 SEED 토큰을 쉽게 사용할 수 있습니다.
 
