@@ -1,30 +1,25 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import { createMemoryHistory, type RouterHistory, RouterProvider } from "@tanstack/react-router";
-import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { act, render, screen, waitFor } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { SnackbarProvider } from "seed-design/ui/snackbar";
 
 import type { Product } from "@/entities/product";
 
-import { HttpError, queryKeys } from "@/shared/api";
+import { queryKeys } from "@/shared/api";
 
 import { createQueryClient } from "../providers";
 import { createAppRouter } from "../router";
 
-const routeMocks = vi.hoisted(() => ({
-  fetchProduct: vi.fn<(productId: string, signal: AbortSignal) => Promise<Product>>(),
-}));
+const fetchMock = vi.hoisted(() => vi.fn<typeof fetch>());
 
-vi.mock("@/entities/product", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@/entities/product")>();
+vi.mock("@/shared/config", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/shared/config")>();
 
   return {
     ...actual,
-    productDetailQuery: (productId: string) => ({
-      queryKey: ["products", "detail", productId] as const,
-      queryFn: ({ signal }: { signal: AbortSignal }) => routeMocks.fetchProduct(productId, signal),
-    }),
+    ENV: { ...actual.ENV, apiBaseUrl: "https://api.example.com/v1" },
   };
 });
 
@@ -62,23 +57,80 @@ function renderRoute(path: string) {
 }
 
 beforeEach(() => {
-  routeMocks.fetchProduct.mockReset();
+  fetchMock.mockReset();
+  vi.stubGlobal("fetch", fetchMock);
+});
+
+afterEach(() => {
+  vi.unstubAllGlobals();
 });
 
 describe("/products/$productId", () => {
+  it("cancels the transport when the shared query is cancelled", async () => {
+    fetchMock.mockImplementation(
+      (_url, init) =>
+        new Promise((_resolve, reject) => {
+          init?.signal?.addEventListener(
+            "abort",
+            () => reject(new DOMException("The request was aborted", "AbortError")),
+            { once: true },
+          );
+        }),
+    );
+    const { queryClient } = renderRoute(`/products/${product.id}`);
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledOnce());
+    const signal = fetchMock.mock.calls[0]?.[1]?.signal;
+
+    await act(() => queryClient.cancelQueries({ queryKey: queryKeys.products.detail(product.id) }));
+
+    expect(signal?.aborted).toBe(true);
+  });
+
   it("shares the loader cache with the page query", async () => {
-    routeMocks.fetchProduct.mockResolvedValue(product);
+    fetchMock.mockResolvedValue(Response.json(product));
     const { queryClient } = renderRoute(`/products/${product.id}`);
 
     expect(
       await screen.findByRole("heading", { level: 1, name: product.title }),
     ).toBeInTheDocument();
-    expect(routeMocks.fetchProduct).toHaveBeenCalledOnce();
+    expect(fetchMock).toHaveBeenCalledOnce();
+    expect(fetchMock.mock.calls[0]?.[0]).toBe(`https://api.example.com/v1/products/${product.id}`);
     expect(queryClient.getQueryData(queryKeys.products.detail(product.id))).toEqual(product);
   });
 
+  it("reuses an in-flight detail after navigating away and back", async () => {
+    let resolveResponse: ((value: Response) => void) | undefined;
+    fetchMock.mockImplementation(
+      (_url, init) =>
+        new Promise((resolve, reject) => {
+          resolveResponse = resolve;
+          init?.signal?.addEventListener(
+            "abort",
+            () => reject(new DOMException("The request was aborted", "AbortError")),
+            { once: true },
+          );
+        }),
+    );
+    const { router } = renderRoute(`/products/${product.id}`);
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledOnce());
+
+    await act(() => router.navigate({ to: "/settings" }));
+    expect(await screen.findByRole("heading", { level: 1, name: "설정" })).toBeInTheDocument();
+    await act(async () => {
+      resolveResponse?.(Response.json(product));
+      await router.navigate({ to: "/products/$productId", params: { productId: product.id } });
+    });
+
+    expect(
+      await screen.findByRole("heading", { level: 1, name: product.title }),
+    ).toBeInTheDocument();
+    expect(fetchMock).toHaveBeenCalledOnce();
+  });
+
   it("maps a missing product to the route not-found screen", async () => {
-    routeMocks.fetchProduct.mockRejectedValue(new HttpError(404, "Product does not exist"));
+    fetchMock.mockResolvedValue(
+      Response.json({ message: "Product does not exist" }, { status: 404 }),
+    );
     renderRoute("/products/missing");
 
     expect(
@@ -87,7 +139,7 @@ describe("/products/$productId", () => {
   });
 
   it("leaves server failures to the route error boundary", async () => {
-    routeMocks.fetchProduct.mockRejectedValue(new HttpError(503, "Service unavailable"));
+    fetchMock.mockResolvedValue(Response.json({ message: "Service unavailable" }, { status: 503 }));
     renderRoute("/products/unavailable");
 
     expect(
@@ -96,17 +148,17 @@ describe("/products/$productId", () => {
   });
 
   it("shows a pending screen for a slow detail request", async () => {
-    let resolveProduct: ((value: Product) => void) | undefined;
-    routeMocks.fetchProduct.mockImplementation(
+    let resolveResponse: ((value: Response) => void) | undefined;
+    fetchMock.mockImplementation(
       () =>
         new Promise((resolve) => {
-          resolveProduct = resolve;
+          resolveResponse = resolve;
         }),
     );
     renderRoute(`/products/${product.id}`);
 
     expect(await screen.findByRole("status")).toHaveTextContent("불러오는 중이에요");
-    resolveProduct?.(product);
+    resolveResponse?.(Response.json(product));
     expect(
       await screen.findByRole("heading", { level: 1, name: product.title }),
     ).toBeInTheDocument();
