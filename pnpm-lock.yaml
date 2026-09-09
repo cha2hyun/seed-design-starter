@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@seed-design/css':
-        specifier: ^2.5.0
-        version: 2.5.0
+        specifier: ^2.7.0
+        version: 2.7.0
       '@seed-design/react':
-        specifier: ^2.3.0
-        version: 2.3.0(@seed-design/css@2.5.0)(@types/react-dom@19.2.7(@types/react@19.2.18))(@types/react@19.2.18)(embla-carousel@8.6.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^2.4.1
+        version: 2.4.1(@seed-design/css@2.7.0)(@types/react-dom@19.2.7(@types/react@19.2.18))(@types/react@19.2.18)(embla-carousel@8.6.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@tanstack/react-query':
         specifier: ^5.102.8
         version: 5.102.8(react@19.2.8)
@@ -64,14 +64,14 @@ importers:
         specifier: ^1.62.1
         version: 1.62.1
       '@seed-design/cli':
-        specifier: ^1.6.1
-        version: 1.6.1(supports-color@7.2.0)(typescript@5.9.3)
+        specifier: ^1.7.0
+        version: 1.7.0(supports-color@7.2.0)(typescript@5.9.3)
       '@seed-design/tailwind4-theme':
-        specifier: ^2.3.0
-        version: 2.3.0(@seed-design/css@2.5.0)(tailwindcss@4.3.3)
+        specifier: ^2.4.0
+        version: 2.4.0(@seed-design/css@2.7.0)(tailwindcss@4.3.3)
       '@seed-design/vite-plugin':
         specifier: ^2.1.0
-        version: 2.1.0(@seed-design/css@2.5.0)(vite@8.2.2(@types/node@22.20.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0))
+        version: 2.1.0(@seed-design/css@2.7.0)(vite@8.2.2(@types/node@22.20.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0))
       '@tailwindcss/vite':
         specifier: ^4.3.3
         version: 4.3.3(vite@8.2.2(@types/node@22.20.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0))
@@ -177,9 +177,9 @@ packages:
   '@adobe/css-tools@4.5.0':
     resolution: {integrity: sha512-6OzddxPio9UiWTCemp4N8cYLV2ZN1ncRnV1cVGtve7dhPOtRkleRyx32GQCYSwDYgaHU3USMm84tNsvKzRCa1Q==}
 
-  '@antfu/ni@28.3.0':
-    resolution: {integrity: sha512-JbRijiCNAGcQcyPfV0EXOJYwV27e/srXfTvETqzbbh4jzHBV2pDYiBz8rj5SyzX27aTbCK+qXR3x6g2WKokcrA==}
-    engines: {node: '>=20'}
+  '@antfu/ni@30.5.0':
+    resolution: {integrity: sha512-VwQoM9qF1dzDrye55b1qIBeLr4zQ1a5wZQMPCe496HTiquViBZqxtNBaq98WX3ze5kC9Yl7gKSU4W2vtLztxYw==}
+    engines: {node: '>=20.19.0'}
     hasBin: true
 
   '@asamuzakjp/css-color@6.0.7':
@@ -1107,13 +1107,13 @@ packages:
   '@sec-ant/readable-stream@0.4.1':
     resolution: {integrity: sha512-831qok9r2t8AlxLko40y2ebgSDhenenCatLVeW/uBtnHPyhHOvG0C7TvfgecV+wHzIm5KUICgzmVpWS+IMEAeg==}
 
-  '@seed-design/cli@1.6.1':
-    resolution: {integrity: sha512-aOB3V0lIPZon9bC6zeMzU5LihXO4diATStCVyfcFStYTv7ihcqDsyfcwXf6TvgGt9lQrL08xLOu7em73FrtIrQ==}
+  '@seed-design/cli@1.7.0':
+    resolution: {integrity: sha512-G2UCdr+wAkHiDvFCKGhcLCc6QrTxNermIRMkBZfUPcYO5sgXoW8T+auqEyTSBctrdgUlks4Yc65H4ndOzyQfhQ==}
     engines: {node: '>=20.19.0'}
     hasBin: true
 
-  '@seed-design/css@2.5.0':
-    resolution: {integrity: sha512-qvXwepTt3clKTYfbKF7t3me6C1RAkLy6T8a4cl3QyGKXAcnzELckdeIyubTMf3ZnMKK6J/tWxoRKma1MJRArpw==}
+  '@seed-design/css@2.7.0':
+    resolution: {integrity: sha512-aV3/kbiTRBaey5c9lc3e91/4cs7RzdbUqRL5Uq6xOpC42LHHtdNn9buJ+k6r4zXwHeXlvdG5YVoWHxYH0uCIHQ==}
 
   '@seed-design/dom-utils@2.1.0':
     resolution: {integrity: sha512-nbghUGIT02bKMD4JsTSjU8RamUlOVSZkWy/iK7I56B/zQu8ZN4aLtQCxmg51e/oog2p1aTikNww1WUJMTYstJA==}
@@ -1151,8 +1151,8 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@seed-design/react-date-picker@1.1.0':
-    resolution: {integrity: sha512-bxMJpmUW5zNJxFwihsN2lXp4ywZSFhA9RDGtMLQLS7D0YGqhXb5TkxdPedILhu6WOP0arGSvITzSs7ilzxPbMQ==}
+  '@seed-design/react-date-picker@1.2.0':
+    resolution: {integrity: sha512-OHgw7if83SybmCFOrpvd3M1j6vyftMrg6SThOoQ22qxSAXpwYOPT3vt5RM7XlYEKew4355Z/PDCzbSYh4ljbGw==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
@@ -1265,8 +1265,8 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@seed-design/react-pull-to-refresh@2.0.2':
-    resolution: {integrity: sha512-uy/8rWQzvAWLoqqm/Iz9iWiI01+yfO7U7YUDhhJbQ+HmVX/UQybrn6KWf81f+RvGeSEZa8Ix7ST/VVgReT4PVg==}
+  '@seed-design/react-pull-to-refresh@2.1.0':
+    resolution: {integrity: sha512-/HE3xQAApNkOyNUoh9soc1UjKrZRIn2kqst7wYw966AbAe1n466h41ZrOG6h2/IwpMEjxMZPBo4fVvton2+mCw==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
@@ -1280,6 +1280,13 @@ packages:
   '@seed-design/react-radio-group@2.0.1':
     resolution: {integrity: sha512-iiMIwhKVROLNuh9ieq5om2eQvG/9hzLESPL0YE0yxmyiGKaYQsz+Enobfi0MqCEk/+GX78+KTTeWQIuCt9Ukhg==}
     peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+
+  '@seed-design/react-scale-feedback@1.0.0':
+    resolution: {integrity: sha512-zkZRdH9jPifxJ98LQUz4Yr7LBdDI6lalnuotFiFEn9Q9gKVq84jdA0zuOzUH0HIWtSAKNZR1TLwpNAFE4E48PQ==}
+    peerDependencies:
+      '@seed-design/css': ^2.6.0
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
@@ -1361,21 +1368,21 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@seed-design/react-wheel-picker@1.0.0':
-    resolution: {integrity: sha512-t8Og4wUDajDbEMqos3DkAZN2UiduWBYZwfL8g/wEDIxWOv9g70ZSOUhHi1vfIiGvoEJFKOR7r2NvbCASk0SwIg==}
+  '@seed-design/react-wheel-picker@1.1.0':
+    resolution: {integrity: sha512-yPS77uBIjMOkcx+xWVm0HyTopq0RvivCUR4Ar2F3Z609DLl6bF1LCzJUja+ii0LzvfRcmPkE4B1Kw0Zxv4cnOg==}
     peerDependencies:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@seed-design/react@2.3.0':
-    resolution: {integrity: sha512-Z9ZpxVu4p7Qi5AjEiQWSnL/bLeQqVdM+/SyDIYz/SrNgOZ5ZWTg/FYZZTU0sMNLL0WAGGk2qrh4c530HLslS5Q==}
+  '@seed-design/react@2.4.1':
+    resolution: {integrity: sha512-LpM2KhUjPuD9t2ubLzX5WkRgrP3LzrL8qXKEQbTTVr8sC+ZdrJerz7O6ZfbTj0ghHGMwo17yr3HnopkEFIwfiw==}
     peerDependencies:
-      '@seed-design/css': ^2.5.0
+      '@seed-design/css': ^2.6.0
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@seed-design/tailwind4-theme@2.3.0':
-    resolution: {integrity: sha512-gJ1fJcuJ7JNKkBoBiQJr5+7csGlzVc9Y3B5iX3UTExHx3WezbrCpDMLFI+BDmmMw/TkokYK+S3qT2gg0NfXGkA==}
+  '@seed-design/tailwind4-theme@2.4.0':
+    resolution: {integrity: sha512-nEL9fKASgB3z58CKoL1djEq0PFmg0I7s0VgEgHOgwAzcXbTkeIkiBEIpIMNwoI8fPJzPTWLkts/abULtHzcA7A==}
     peerDependencies:
       '@seed-design/css': ^2.2.0
       tailwindcss: '4'
@@ -3834,9 +3841,8 @@ snapshots:
 
   '@adobe/css-tools@4.5.0': {}
 
-  '@antfu/ni@28.3.0':
+  '@antfu/ni@30.5.0':
     dependencies:
-      ansis: 4.3.1
       fzf: 0.5.2
       package-manager-detector: 1.8.0
       tinyexec: 1.3.0
@@ -4645,9 +4651,9 @@ snapshots:
 
   '@sec-ant/readable-stream@0.4.1': {}
 
-  '@seed-design/cli@1.6.1(supports-color@7.2.0)(typescript@5.9.3)':
+  '@seed-design/cli@1.7.0(supports-color@7.2.0)(typescript@5.9.3)':
     dependencies:
-      '@antfu/ni': 28.3.0
+      '@antfu/ni': 30.5.0
       '@babel/core': 7.29.7(supports-color@7.2.0)
       '@babel/parser': 7.29.8
       '@babel/plugin-transform-typescript': 7.29.7(@babel/core@7.29.7(supports-color@7.2.0))(supports-color@7.2.0)
@@ -4670,7 +4676,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@seed-design/css@2.5.0': {}
+  '@seed-design/css@2.7.0': {}
 
   '@seed-design/dom-utils@2.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
@@ -4737,7 +4743,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@seed-design/react-date-picker@1.1.0(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@seed-design/react-date-picker@1.2.0(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@internationalized/date': 3.12.3
       '@radix-ui/react-use-controllable-state': 1.2.2(@types/react@19.2.18)(react@19.2.8)
@@ -4943,7 +4949,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@seed-design/react-pull-to-refresh@2.0.2(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@seed-design/react-pull-to-refresh@2.1.0(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@radix-ui/react-compose-refs': 1.1.5(@types/react@19.2.18)(react@19.2.8)
       '@radix-ui/react-use-callback-ref': 1.1.4(@types/react@19.2.18)(react@19.2.8)
@@ -4972,6 +4978,16 @@ snapshots:
       '@seed-design/react-fieldset': 1.0.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-primitive': 2.0.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-supports': 1.0.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react: 19.2.8
+      react-dom: 19.2.8(react@19.2.8)
+    transitivePeerDependencies:
+      - '@types/react'
+
+  '@seed-design/react-scale-feedback@1.0.0(@seed-design/css@2.7.0)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@radix-ui/react-compose-refs': 1.1.5(@types/react@19.2.18)(react@19.2.8)
+      '@radix-ui/react-slot': 1.3.3(@types/react@19.2.18)(react@19.2.8)
+      '@seed-design/css': 2.7.0
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
     transitivePeerDependencies:
@@ -5125,7 +5141,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@seed-design/react-wheel-picker@1.0.0(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@seed-design/react-wheel-picker@1.1.0(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@radix-ui/react-compose-refs': 1.1.5(@types/react@19.2.18)(react@19.2.8)
       '@radix-ui/react-use-controllable-state': 1.2.2(@types/react@19.2.18)(react@19.2.8)
@@ -5137,20 +5153,20 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@seed-design/react@2.3.0(@seed-design/css@2.5.0)(@types/react-dom@19.2.7(@types/react@19.2.18))(@types/react@19.2.18)(embla-carousel@8.6.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@seed-design/react@2.4.1(@seed-design/css@2.7.0)(@types/react-dom@19.2.7(@types/react@19.2.18))(@types/react@19.2.18)(embla-carousel@8.6.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@radix-ui/react-compose-refs': 1.1.5(@types/react@19.2.18)(react@19.2.8)
       '@radix-ui/react-slot': 1.3.3(@types/react@19.2.18)(react@19.2.8)
       '@radix-ui/react-use-controllable-state': 1.2.2(@types/react@19.2.18)(react@19.2.8)
       '@radix-ui/react-use-layout-effect': 1.1.4(@types/react@19.2.18)(react@19.2.8)
-      '@seed-design/css': 2.5.0
+      '@seed-design/css': 2.7.0
       '@seed-design/dom-utils': 2.1.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-accordion': 1.0.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-attachment-display': 1.0.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-avatar': 2.0.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-checkbox': 2.0.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-collapsible': 1.0.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@seed-design/react-date-picker': 1.1.0(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@seed-design/react-date-picker': 1.2.0(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-dialog': 2.0.3(@types/react-dom@19.2.7(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-drawer': 2.0.6(@types/react-dom@19.2.7(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-field': 2.0.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -5165,9 +5181,10 @@ snapshots:
       '@seed-design/react-portal': 2.0.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-primitive': 2.0.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-progress': 2.0.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@seed-design/react-pull-to-refresh': 2.0.2(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@seed-design/react-pull-to-refresh': 2.1.0(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-quantity-picker': 1.0.0(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-radio-group': 2.0.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@seed-design/react-scale-feedback': 1.0.0(@seed-design/css@2.7.0)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-segmented-control': 2.0.2(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-select': 1.0.1(@types/react-dom@19.2.7(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-side-navigation': 1.0.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -5179,7 +5196,7 @@ snapshots:
       '@seed-design/react-time-picker': 1.0.0(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-toggle': 2.0.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@seed-design/react-tooltip': 1.0.1(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@seed-design/react-wheel-picker': 1.0.0(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@seed-design/react-wheel-picker': 1.1.0(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       clsx: 2.1.1
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
@@ -5189,14 +5206,14 @@ snapshots:
       - '@types/react-dom'
       - embla-carousel
 
-  '@seed-design/tailwind4-theme@2.3.0(@seed-design/css@2.5.0)(tailwindcss@4.3.3)':
+  '@seed-design/tailwind4-theme@2.4.0(@seed-design/css@2.7.0)(tailwindcss@4.3.3)':
     dependencies:
-      '@seed-design/css': 2.5.0
+      '@seed-design/css': 2.7.0
       tailwindcss: 4.3.3
 
-  '@seed-design/vite-plugin@2.1.0(@seed-design/css@2.5.0)(vite@8.2.2(@types/node@22.20.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0))':
+  '@seed-design/vite-plugin@2.1.0(@seed-design/css@2.7.0)(vite@8.2.2(@types/node@22.20.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0))':
     dependencies:
-      '@seed-design/css': 2.5.0
+      '@seed-design/css': 2.7.0
       vite: 8.2.2(@types/node@22.20.1)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.0)
 
   '@simple-libs/child-process-utils@2.0.0':
