@@ -10,6 +10,9 @@ updates:
       time: "09:00"
       timezone: Asia/Seoul
     open-pull-requests-limit: 6
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps)"
     groups:
       seed-design:
         patterns:
@@ -26,6 +29,8 @@ updates:
       day: monday
       time: "09:00"
       timezone: Asia/Seoul
+    commit-message:
+      prefix: "chore(deps)"
     groups:
       github-actions:
         patterns:

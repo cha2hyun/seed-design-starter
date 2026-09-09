@@ -4,7 +4,7 @@ Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/gettin
 
 @seed-design/cli 명령어를 안내해요.
 
-## 공통 동작 \[#공통-동작]
+## 공통 동작
 
 - `add`, `add-all`은 `seed-design.json` 설정 파일을 사용해요.
 - 설정 파일이 없거나 읽을 수 없으면 생성할지 먼저 물어봐요.
@@ -14,7 +14,7 @@ Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/gettin
 - `--on-diff` 옵션을 주면 충돌 처리 방식을 미리 고정할 수 있어요.
 - 실패 원인을 자세히 확인하려면 `--verbose` 옵션을 사용할 수 있어요.
 
-## init \[#init]
+## init
 
 `seed-design.json` 파일을 생성하는 명령어예요.
 
@@ -22,39 +22,33 @@ Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/gettin
   `seed-design.json` 파일에 대해 알아봅니다.
 </Card>
 
-<Steps>
-  <Step>
-    ### init 명령어 입력하기 \[#init-명령어-입력하기]
-  </Step>
+### init 명령어 입력하기
 
-  - npm: npx @seed-design/cli@latest init
-  - pnpm: pnpm dlx @seed-design/cli@latest init
-  - yarn: yarn dlx @seed-design/cli@latest init
-  - bun: bun x @seed-design/cli@latest init
+- npm: npx @seed-design/cli@latest init
+- pnpm: pnpm dlx @seed-design/cli@latest init
+- yarn: yarn dlx @seed-design/cli@latest init
+- bun: bun x @seed-design/cli@latest init
 
-  <Step>
-    ### seed-design 설정 \[#seed-design-설정]
+### seed-design 설정
 
-    ```sh
-    ◇  TypeScript를 사용중이신가요?
-    │  Yes
-    │
-    ◇  React Server Components를 사용중이신가요?
-    │  No
-    │
-    ◇  어떤 프레임워크를 사용하시나요?
-    │  React
-    │
-    ◇  seed-design 폴더 경로를 입력해주세요. (기본값은 프로젝트 루트에 생성됩니다.)
-    │  ./seed-design
-    │
-    ◇  개선을 위해 익명 사용 데이터를 수집할까요?
-    │  Yes
-    ```
-  </Step>
-</Steps>
+```sh
+◇  TypeScript를 사용중이신가요?
+│  Yes
+│
+◇  React Server Components를 사용중이신가요?
+│  No
+│
+◇  어떤 프레임워크를 사용하시나요?
+│  React
+│
+◇  seed-design 폴더 경로를 입력해주세요. (기본값은 프로젝트 루트에 생성됩니다.)
+│  ./seed-design
+│
+◇  개선을 위해 익명 사용 데이터를 수집할까요?
+│  Yes
+```
 
-### 옵션 \[#옵션]
+### 옵션
 
 | 옵션                | 설명                                 |
 | ----------------- | ---------------------------------- |
@@ -69,7 +63,7 @@ Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/gettin
 - yarn: yarn dlx @seed-design/cli@latest init --yes
 - bun: bun x @seed-design/cli@latest init --yes
 
-## add \[#add]
+## add
 
 스니펫을 다운로드하고 프로젝트에 추가하는 명령어예요.
 
@@ -110,7 +104,7 @@ Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/gettin
 - yarn: yarn dlx @seed-design/cli@latest add ui:action-button ui:alert-dialog
 - bun: bun x @seed-design/cli@latest add ui:action-button ui:alert-dialog
 
-### 옵션 \[#옵션-1]
+### 옵션
 
 | 옵션                               | 설명                                                                     |
 | -------------------------------- | ---------------------------------------------------------------------- |
@@ -123,7 +117,7 @@ Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/gettin
 | `--verbose`                      | 실패 시 stack trace 등 상세 오류 정보 출력                                         |
 | `-h, --help`                     | 도움말 출력                                                                 |
 
-### 버전에 맞는 스니펫 받기 \[#버전에-맞는-스니펫-받기]
+### 버전에 맞는 스니펫 받기
 
 프로젝트에 설치된 SEED 패키지 버전과 호환되는 스니펫이 필요하면 버전 옵션을 사용하세요. 해당 버전이 배포된 레지스트리 주소를 CLI가 자동으로 찾아줍니다.
 
@@ -134,7 +128,7 @@ Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/gettin
 
 버전 옵션은 base URL과 프레임워크(react)를 함께 결정하므로 `--baseUrl` / `--framework`보다 우선해요.
 
-#### baseUrl 직접 지정 \[#baseurl-직접-지정]
+#### baseUrl 직접 지정
 
 레지스트리 주소를 직접 지정하려면 `--baseUrl`을 사용하세요. 기본값은 배포 환경 기준 [`https://seed-design.io`](https://seed-design.io)입니다.
 
@@ -143,7 +137,7 @@ Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/gettin
 - yarn: yarn dlx @seed-design/cli@latest add --baseUrl https://v1-2.seed-design.io
 - bun: bun x @seed-design/cli@latest add --baseUrl https://v1-2.seed-design.io
 
-### 파일 충돌 처리 \[#파일-충돌-처리]
+### 파일 충돌 처리
 
 `--on-diff`를 지정하지 않으면, 기존 파일과 새 스니펫이 다를 때 아래 중 하나를 직접 고를 수 있어요.
 
@@ -151,7 +145,7 @@ Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/gettin
 - 기존 파일을 `legacy-<파일명>-<timestamp>`로 백업 후 교체
 - 건너뛰기
 
-## add-all \[#add-all]
+## add-all
 
 레지스트리 단위로 항목을 한 번에 추가하는 명령어예요.
 
@@ -183,7 +177,7 @@ deprecated 항목을 포함하려면 `--include-deprecated` 옵션을 사용하�
 
 레지스트리 ID와 `--all`을 모두 생략하면, 추가할 레지스트리를 인터랙티브하게 선택할 수 있어요.
 
-### 옵션 \[#옵션-2]
+### 옵션
 
 | 옵션                               | 설명                                                                     |
 | -------------------------------- | ---------------------------------------------------------------------- |
@@ -197,7 +191,7 @@ deprecated 항목을 포함하려면 `--include-deprecated` 옵션을 사용하�
 | `--verbose`                      | 실패 시 stack trace 등 상세 오류 정보 출력                                         |
 | `-h, --help`                     | 도움말 출력                                                                 |
 
-## compat \[#compat]
+## compat
 
 현재 프로젝트의 seed-design 패키지 버전과 스니펫 요구 버전이 호환되는지 검사해요. 플랫폼에 따라 검사 대상 패키지가 달라요. (React: `@seed-design/react`, `@seed-design/css` / Lynx: `@seed-design/lynx-react`, `@seed-design/lynx-css`)
 
@@ -231,7 +225,7 @@ deprecated 항목을 포함하려면 `--include-deprecated` 옵션을 사용하�
 - yarn: yarn dlx @seed-design/cli@latest compat --all
 - bun: bun x @seed-design/cli@latest compat --all
 
-### 옵션 \[#옵션-3]
+### 옵션
 
 | 옵션                            | 설명                                                       |
 | ----------------------------- | -------------------------------------------------------- |
@@ -244,7 +238,7 @@ deprecated 항목을 포함하려면 `--include-deprecated` 옵션을 사용하�
 | `--verbose`                   | 실패 시 stack trace 등 상세 오류 정보 출력                           |
 | `-h, --help`                  | 도움말 출력                                                   |
 
-## docs \[#docs]
+## docs
 
 문서 링크, llms.txt 링크, 스니펫 링크를 조회하는 명령어예요.
 
@@ -277,7 +271,7 @@ deprecated 항목을 포함하려면 `--include-deprecated` 옵션을 사용하�
 │
 ```
 
-### 직접 검색 \[#직접-검색]
+### 직접 검색
 
 항목 이름으로 직접 검색할 수 있어요.
 
@@ -286,7 +280,7 @@ deprecated 항목을 포함하려면 `--include-deprecated` 옵션을 사용하�
 - yarn: yarn dlx @seed-design/cli@latest docs action-button
 - bun: bun x @seed-design/cli@latest docs action-button
 
-### 경로 기반 검색 \[#경로-기반-검색]
+### 경로 기반 검색
 
 `카테고리/섹션/항목` 형태로 직접 경로를 지정할 수 있어요.
 
@@ -309,7 +303,7 @@ deprecated 항목을 포함하려면 `--include-deprecated` 옵션을 사용하�
 - yarn: yarn dlx @seed-design/cli@latest docs react/components
 - bun: bun x @seed-design/cli@latest docs react/components
 
-### 오타 제안 \[#오타-제안]
+### 오타 제안
 
 경로에 오타가 있으면 유사한 유효 경로를 제안해줘요.
 
@@ -320,7 +314,7 @@ react/component/action-buton: 문서를 찾을 수 없어요.
    - react/components/action-button
 ```
 
-### Raw 모드 \[#raw-모드]
+### Raw 모드
 
 `--raw` 옵션을 사용하면 UI 없이 llms.txt 내용을 순수 마크다운으로 출력해요. LLM 파이프나 스크립트에서 활용할 수 있어요.
 
@@ -336,7 +330,7 @@ react/component/action-buton: 문서를 찾을 수 없어요.
 - yarn: yarn dlx @seed-design/cli@latest docs react/updates/changelog/react/1.2.5 --raw
 - bun: bun x @seed-design/cli@latest docs react/updates/changelog/react/1.2.5 --raw
 
-### 옵션 \[#옵션-4]
+### 옵션
 
 | 옵션                        | 설명                              |
 | ------------------------- | ------------------------------- |

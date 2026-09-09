@@ -1,13 +1,15 @@
+export { createHttpProductRepository } from "./api/http-product-repository";
 export {
-  createHttpProductRepository,
   createMemoryProductRepository,
+  type MemoryProductRepositoryOptions,
+} from "./api/memory-product-repository";
+export {
   createProduct,
   createProductRepository,
   fetchProduct,
   fetchProducts,
-  type MemoryProductRepositoryOptions,
-  type ProductRepository,
 } from "./api/product-api";
+export type { ProductRepository } from "./api/product-repository";
 export { productDetailQuery, productListQuery, useCreateProductMutation } from "./model/queries";
 export {
   PRODUCT_CATEGORIES,

@@ -6,7 +6,7 @@ import { ActionButton } from "seed-design/ui/action-button";
 import { Checkbox } from "seed-design/ui/checkbox";
 import { TextField, TextFieldInput } from "seed-design/ui/text-field";
 
-import { useDocumentTitle } from "@/shared/lib";
+import { isValidEmail, useDocumentTitle } from "@/shared/lib";
 import { PageSection, StateMessage } from "@/shared/ui";
 
 import { WizardSteps } from "./wizard-steps";
@@ -20,9 +20,6 @@ interface WizardValues {
   notifications: boolean;
   terms: boolean;
 }
-
-/** Deliberately permissive: it exists to catch a typo, not to adjudicate RFC 5322. */
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const INITIAL_VALUES: WizardValues = {
   name: "",
@@ -45,7 +42,7 @@ export function WizardPage() {
   // validation on `type="email"` before dispatching submit, so a malformed address aborted
   // the submission and the handler never ran — Next simply did nothing. The form now opts out
   // of the native bubble and states the rule itself.
-  const emailValid = EMAIL_PATTERN.test(values.email.trim());
+  const emailValid = isValidEmail(values.email);
   const canAdvance =
     step === "account"
       ? values.name.trim() !== "" && emailValid

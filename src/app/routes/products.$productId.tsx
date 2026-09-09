@@ -9,11 +9,9 @@ import { productDetailQuery } from "@/entities/product";
 import { HttpError } from "@/shared/api";
 
 export const Route = createFileRoute("/products/$productId")({
-  loader: async ({ abortController, context, params }) => {
+  loader: async ({ context, params }) => {
     try {
-      return await context.queryClient.ensureQueryData(
-        productDetailQuery(params.productId, abortController.signal),
-      );
+      return await context.queryClient.ensureQueryData(productDetailQuery(params.productId));
     } catch (error) {
       if (error instanceof HttpError && error.status === 404) {
         // TanStack Router intentionally represents not-found as a branded object.

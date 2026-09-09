@@ -12,10 +12,11 @@ export function productListQuery(filter: ProductListFilter) {
   });
 }
 
-export function productDetailQuery(productId: string, requestSignal?: AbortSignal) {
+export function productDetailQuery(productId: string) {
   return queryOptions({
     queryKey: queryKeys.products.detail(productId),
-    queryFn: ({ signal }) => fetchProduct(productId, requestSignal ?? signal),
+    // Loaders and components share this request, so cancellation belongs to the query cache.
+    queryFn: ({ signal }) => fetchProduct(productId, signal),
   });
 }
 
