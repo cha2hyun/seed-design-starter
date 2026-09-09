@@ -50,6 +50,7 @@
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-i18next": "^17.0.12",
+    "unicode-segmenter": "0.17.3",
     "zustand": "^5.0.15"
   },
   "devDependencies": {

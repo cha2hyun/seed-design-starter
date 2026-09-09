@@ -10,10 +10,8 @@ import { TextField, TextFieldInput } from "seed-design/ui/text-field";
 
 import { useLoginMutation } from "@/entities/session";
 
-import { useDocumentTitle } from "@/shared/lib";
+import { isValidEmail, useDocumentTitle } from "@/shared/lib";
 import { Icon, IconShieldCheck, PageSection } from "@/shared/ui";
-
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function LoginPage() {
   const { t } = useTranslation("login");
@@ -28,7 +26,7 @@ export function LoginPage() {
   // SEED's `required` is aria-only — `useField` emits `aria-required` and deliberately never
   // the native attribute (its own test asserts this), so the browser enforces nothing here.
   const canSubmit = email.trim() !== "" && password !== "";
-  const emailValid = EMAIL_PATTERN.test(email.trim());
+  const emailValid = isValidEmail(email);
   const showEmailError = emailVisited && email.trim() !== "" && !emailValid;
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {

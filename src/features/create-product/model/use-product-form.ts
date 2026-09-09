@@ -1,28 +1,13 @@
 import { useCallback, useState } from "react";
 
-import { useTranslation } from "react-i18next";
+import type { NewProduct } from "@/entities/product";
 
-import type { NewProduct, ProductCategory } from "@/entities/product";
-
-export interface ProductFormValues {
-  title: string;
-  price: string;
-  description: string;
-  category: ProductCategory;
-  negotiable: boolean;
-}
-
-export type ProductFormErrors = Partial<Record<"title" | "price", string>>;
-
-const INITIAL_VALUES: ProductFormValues = {
-  title: "",
-  price: "",
-  description: "",
-  category: "digital",
-  negotiable: false,
-};
-
-const MAX_TITLE_LENGTH = 40;
+import {
+  INITIAL_PRODUCT_FORM_VALUES,
+  type ProductFormErrors,
+  type ProductFormValues,
+  validateProductForm,
+} from "./product-form";
 
 export interface UseProductFormResult {
   values: ProductFormValues;
@@ -33,50 +18,26 @@ export interface UseProductFormResult {
 }
 
 export function useProductForm(): UseProductFormResult {
-  const { t } = useTranslation("product");
-  const [values, setValues] = useState<ProductFormValues>(INITIAL_VALUES);
+  const [values, setValues] = useState<ProductFormValues>(INITIAL_PRODUCT_FORM_VALUES);
   const [errors, setErrors] = useState<ProductFormErrors>({});
 
   const setValue = useCallback<UseProductFormResult["setValue"]>((key, value) => {
     setValues((previous) => ({ ...previous, [key]: value }));
-    setErrors((previous) => ({ ...previous, [key]: undefined }));
+    if (key === "title" || key === "price") {
+      setErrors((previous) => ({ ...previous, [key]: undefined }));
+    }
   }, []);
 
   const reset = useCallback(() => {
-    setValues(INITIAL_VALUES);
+    setValues(INITIAL_PRODUCT_FORM_VALUES);
     setErrors({});
   }, []);
 
   const validate = useCallback((): NewProduct | null => {
-    const nextErrors: ProductFormErrors = {};
-    const title = values.title.trim();
-    const price = Number(values.price);
-
-    if (title.length === 0) {
-      nextErrors.title = t("validation.titleRequired");
-    } else if (title.length > MAX_TITLE_LENGTH) {
-      nextErrors.title = t("validation.titleTooLong");
-    }
-
-    if (values.price.trim().length === 0) {
-      nextErrors.price = t("validation.priceRequired");
-    } else if (!Number.isFinite(price) || price < 0) {
-      nextErrors.price = t("validation.priceInvalid");
-    }
-
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) {
-      return null;
-    }
-
-    return {
-      title,
-      price,
-      description: values.description.trim(),
-      category: values.category,
-      negotiable: values.negotiable,
-    };
-  }, [t, values]);
+    const result = validateProductForm(values);
+    setErrors(result.valid ? {} : result.errors);
+    return result.valid ? result.product : null;
+  }, [values]);
 
   return { values, errors, setValue, reset, validate };
 }
