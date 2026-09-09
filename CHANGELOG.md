@@ -30,6 +30,8 @@
 
 ### Security
 
+- `js-yaml` 4.3.2 갱신으로 빈 YAML 병합 자료의 과도한 CPU 사용 문제 수정
+  ([CVE-2026-84375](https://github.com/advisories/GHSA-2883-xcg3-v3hh))
 - `fast-uri` 3.1.6 갱신을 포함하여 URL 정규화 관련 알려진 취약점 수정 반영
 - GitHub Actions를 커밋 SHA로 고정하고 패키지 빌드 스크립트 허용 범위를 명시
 - 취약점의 비공개 제보 경로와 지원 버전을 안내하는 보안 정책 문서
