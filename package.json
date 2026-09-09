@@ -1,7 +1,7 @@
 {
   "name": "seed-design-starter",
   "private": true,
-  "version": "0.4.0",
+  "version": "0.4.1",
   "type": "module",
   "description": "AI-first Vite + React starter locked in to the SEED Design System, structured with Feature-Sliced Design.",
   "packageManager": "pnpm@11.23.0",
