@@ -12,14 +12,14 @@ AI 에이전트가 바로 일할 수 있도록 MCP·룰·커맨드가 레포에 
 git clone https://github.com/cha2hyun/seed-design-starter.git
 cd seed-design-starter
 corepack enable
-corepack prepare pnpm@10.33.0 --activate
+corepack prepare pnpm@11.23.0 --activate
 pnpm bootstrap
 pnpm dev
 ```
 
-Node 22.22.2 이상(22.x), 24.15.0 이상(24.x), 또는 26 이상과 **pnpm 10.33.0**이
+Node 22.22.2 이상(22.x), 24.15.0 이상(24.x), 또는 26 이상과 **pnpm 11.23.0**이
 필요합니다. `.nvmrc`가 있으니 `nvm use`로 지원되는 Node 22 버전에 맞출 수 있어요. Corepack이
-없는 Node 배포판이라면 사용하는 설치 방식으로 pnpm 10.33.0을 설치하세요. `bootstrap`은 버전이
+없는 Node 배포판이라면 사용하는 설치 방식으로 pnpm 11.23.0을 설치하세요. `bootstrap`은 버전이
 다르면 설치 전에 해결 방법과 함께 멈춥니다.
 
 ---
@@ -234,6 +234,9 @@ SPA fallback 설정을 켠 뒤 새 탭에서 하위 경로를 직접 열어 확�
 
 **상태** — 서버 상태는 TanStack Query, 클라이언트 상태는 Zustand. 서로 복사하지 않습니다.
 쿼리 키는 `src/shared/api/query-keys.ts` 한 곳에 모읍니다.
+
+구조 점검에서 반영한 개선과 제품화 시 이어갈 작업은
+[프로젝트 구조 점검 기록](./docs/architecture-review.md)에 정리돼 있습니다.
 
 **Import 정렬** — Prettier `@trivago/prettier-plugin-sort-imports`의 그룹이 FSD 레이어 순서를
 그대로 따릅니다. import 블록만 봐도 그 파일이 어느 레이어에 기대는지 드러납니다.
