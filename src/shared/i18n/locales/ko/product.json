@@ -42,7 +42,7 @@
   },
   "validation": {
     "titleRequired": "제목을 입력해 주세요.",
-    "titleTooLong": "제목은 40자 이내로 입력해 주세요.",
+    "titleTooLong": "제목은 {{max}}자 이내로 입력해 주세요.",
     "priceRequired": "가격을 입력해 주세요.",
     "priceInvalid": "0 이상의 숫자를 입력해 주세요."
   },

@@ -14,13 +14,9 @@ import {
 import { Switch } from "seed-design/ui/switch";
 import { TextField, TextFieldInput, TextFieldTextarea } from "seed-design/ui/text-field";
 
-import {
-  type Product,
-  PRODUCT_CATEGORIES,
-  type ProductCategory,
-  useCreateProductMutation,
-} from "@/entities/product";
+import { type Product, PRODUCT_CATEGORIES, useCreateProductMutation } from "@/entities/product";
 
+import { MAX_PRODUCT_TITLE_LENGTH } from "../model/product-form";
 import { useProductForm } from "../model/use-product-form";
 
 export interface CreateProductFormProps {
@@ -51,8 +47,10 @@ export function CreateProductForm({ onCreated }: CreateProductFormProps) {
       <TextField
         label={t("create.titleField")}
         invalid={Boolean(errors.title)}
-        errorMessage={errors.title}
-        maxGraphemeCount={40}
+        errorMessage={
+          errors.title && t(`validation.${errors.title}`, { max: MAX_PRODUCT_TITLE_LENGTH })
+        }
+        maxGraphemeCount={MAX_PRODUCT_TITLE_LENGTH}
         value={values.title}
         onValueChange={({ value }) => setValue("title", value)}
         showRequiredIndicator
@@ -64,7 +62,7 @@ export function CreateProductForm({ onCreated }: CreateProductFormProps) {
       <TextField
         label={t("create.priceField")}
         invalid={Boolean(errors.price)}
-        errorMessage={errors.price}
+        errorMessage={errors.price && t(`validation.${errors.price}`)}
         suffix={t("create.priceSuffix")}
         value={values.price}
         onValueChange={({ value }) => setValue("price", value)}
@@ -78,8 +76,8 @@ export function CreateProductForm({ onCreated }: CreateProductFormProps) {
         label={t("create.categoryField")}
         value={[values.category]}
         onValueChange={(value) => {
-          const [selected] = value;
-          if (selected) setValue("category", selected as ProductCategory);
+          const selected = PRODUCT_CATEGORIES.find((category) => category === value[0]);
+          if (selected) setValue("category", selected);
         }}
       >
         <SelectTrigger aria-label={t("create.categoryField")} />

@@ -42,7 +42,7 @@
   },
   "validation": {
     "titleRequired": "Enter a title.",
-    "titleTooLong": "Keep the title under 40 characters.",
+    "titleTooLong": "Use {{max}} characters or fewer.",
     "priceRequired": "Enter a price.",
     "priceInvalid": "Enter a number of 0 or more."
   },
