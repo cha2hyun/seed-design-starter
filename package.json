@@ -39,8 +39,8 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@seed-design/css": "^2.5.0",
-    "@seed-design/react": "^2.3.0",
+    "@seed-design/css": "^2.7.0",
+    "@seed-design/react": "^2.4.1",
     "@tanstack/react-query": "^5.102.8",
     "@tanstack/react-router": "^1.170.32",
     "clsx": "^2.1.1",
@@ -59,8 +59,8 @@
     "@eslint/js": "^10.0.1",
     "@feature-sliced/steiger-plugin": "^0.7.0",
     "@playwright/test": "^1.62.1",
-    "@seed-design/cli": "^1.6.1",
-    "@seed-design/tailwind4-theme": "^2.3.0",
+    "@seed-design/cli": "^1.7.0",
+    "@seed-design/tailwind4-theme": "^2.4.0",
     "@seed-design/vite-plugin": "^2.1.0",
     "@tailwindcss/vite": "^4.3.3",
     "@tanstack/devtools-vite": "^0.8.5",
