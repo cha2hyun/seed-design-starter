@@ -39,7 +39,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@seed-design/css": "^2.7.0",
+    "@seed-design/css": "^2.8.0",
     "@seed-design/react": "^2.4.1",
     "@tanstack/react-query": "^5.102.8",
     "@tanstack/react-router": "^1.170.32",
