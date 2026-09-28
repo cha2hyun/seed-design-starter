@@ -11,6 +11,7 @@
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "resolveJsonModule": true,
+    "types": ["node"],
     "isolatedModules": true,
     "noEmit": true,
     "skipLibCheck": true,
@@ -23,7 +24,6 @@
     "noUncheckedIndexedAccess": true,
     "erasableSyntaxOnly": true,
 
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "seed-design/*": ["./src/shared/seed/*"]
