@@ -10,6 +10,9 @@
 - [Overview (design-token)](https://seed-design.io/llms/foundations/design-token.txt): 디자인 토큰은 디자인 결정을 사람과 기계가 이해할 수 있는 방식으로 인코딩하는 방법입니다.
 - [Reference](https://seed-design.io/llms/foundations/design-token/reference.txt): SEED 디자인 토큰의 전체 목록을 제공합니다.
 - [Elevation](https://seed-design.io/llms/foundations/elevation.txt): UI 요소 간의 상대적인 깊이와 계층 구조를 시각적으로 표현하는 디자인 원칙입니다.
+- [Overview (feedback)](https://seed-design.io/llms/foundations/feedback.txt): 피드백은 사용자의 입력에 대한 즉각적인 반응입니다. 요소가 조작 가능하다는 사실과 입력이 전달되었다는 사실을 알려줍니다.
+- [Color](https://seed-design.io/llms/foundations/feedback/color.txt): 누를 수 있는 요소는 눌린 동안 표면 색이 바뀝니다. SEED는 눌린 상태의 색을 역할 색상 체계 안의 pressed 토큰으로 정의합니다.
+- [Scale](https://seed-design.io/llms/foundations/feedback/scale.txt): 누를 수 있는 요소는 눌린 동안 살짝 작아집니다. SEED는 모든 요소에서 눌린 느낌의 양이 같도록 축소량을 배율이 아닌 거리로 정의합니다.
 - [Gradient](https://seed-design.io/llms/foundations/gradient.txt): 그라디언트는 배경과 아이콘 등에서 입체감이나 AI 기능을 표현할 때 사용하는 색상 토큰입니다.
 - [Overview (iconography)](https://seed-design.io/llms/foundations/iconography.txt): 아이콘은 사용자가 복잡한 정보나 기능을 빠르게 이해할 수 있도록 도와주는 디자인 요소입니다.
 - [Library](https://seed-design.io/llms/foundations/iconography/library.txt)

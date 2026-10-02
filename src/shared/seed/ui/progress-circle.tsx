@@ -1,13 +1,15 @@
 /**
  * @file ui:progress-circle
- * @requires @seed-design/react@^2.0.0
- * @requires @seed-design/css@^2.0.0
+ * @requires @seed-design/react@^2.0.0 || ^3.0.0
  **/
 import * as React from "react";
 
 import { ProgressCircle as SeedProgressCircle } from "@seed-design/react";
 
-export interface ProgressCircleProps extends SeedProgressCircle.RootProps {}
+export interface ProgressCircleProps extends Omit<
+  SeedProgressCircle.RootProps,
+  "children" | "asChild"
+> {}
 
 /**
  * @see https://seed-design.io/react/components/progress-circle
