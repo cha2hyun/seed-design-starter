@@ -12,14 +12,14 @@ AI 에이전트가 바로 일할 수 있도록 MCP·룰·커맨드가 레포에 
 git clone https://github.com/cha2hyun/seed-design-starter.git
 cd seed-design-starter
 corepack enable
-corepack prepare pnpm@11.23.0 --activate
+corepack prepare pnpm@12.8.1 --activate
 pnpm bootstrap
 pnpm dev
 ```
 
-Node 22.22.2 이상(22.x), 24.15.0 이상(24.x), 또는 26 이상과 **pnpm 11.23.0**이
+Node 22.22.2 이상(22.x), 24.15.0 이상(24.x), 또는 26 이상과 **pnpm 12.8.1**이
 필요합니다. `.nvmrc`가 있으니 `nvm use`로 지원되는 Node 22 버전에 맞출 수 있어요. Corepack이
-없는 Node 배포판이라면 사용하는 설치 방식으로 pnpm 11.23.0을 설치하세요. `bootstrap`은 버전이
+없는 Node 배포판이라면 사용하는 설치 방식으로 pnpm 12.8.1을 설치하세요. `bootstrap`은 버전이
 다르면 설치 전에 해결 방법과 함께 멈춥니다.
 
 ---

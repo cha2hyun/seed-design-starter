@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { Badge } from "@seed-design/react";
+import { Badge } from "seed-design/ui/badge";
 
 import { cn } from "@/shared/lib";
 

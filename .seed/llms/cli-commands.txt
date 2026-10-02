@@ -107,25 +107,27 @@ Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/gettin
 
 ### 옵션
 
-| 옵션                               | 설명                                                                     |
-| -------------------------------- | ---------------------------------------------------------------------- |
-| `-c, --cwd <cwd>`                | 작업 디렉토리. 기본값은 현재 디렉토리                                                  |
-| `-u, --baseUrl <baseUrl>`        | 레지스트리 base URL                                                         |
-| `--seed-react-version <version>` | 지정한 SEED React 버전의 레지스트리 사용 (예: `1.2`). `--baseUrl`/`--framework`보다 우선 |
-| `-f, --framework <framework>`    | 대상 프레임워크 (`react` 또는 `lynx`). config의 `framework` 값을 덮어씀               |
-| `--on-diff <mode>`               | 파일 충돌 처리 방식 지정 (`overwrite` 또는 `backup`)                               |
-| `-a, --all`                      | **Deprecated**. 현재는 에러를 출력하고 `add-all` 사용을 안내                          |
-| `--verbose`                      | 실패 시 stack trace 등 상세 오류 정보 출력                                         |
-| `-h, --help`                     | 도움말 출력                                                                 |
+| 옵션                               | 설명                                                                                     |
+| -------------------------------- | -------------------------------------------------------------------------------------- |
+| `-c, --cwd <cwd>`                | 작업 디렉토리. 기본값은 현재 디렉토리                                                                  |
+| `-u, --baseUrl <baseUrl>`        | 레지스트리 base URL                                                                         |
+| `--seed-react-version <version>` | 지정한 SEED React 버전의 레지스트리 사용 (`1.0`, `1.1`, `1.2`, `2`). `--baseUrl`/`--framework`보다 우선 |
+| `-f, --framework <framework>`    | 대상 프레임워크 (`react` 또는 `lynx`). config의 `framework` 값을 덮어씀                               |
+| `--on-diff <mode>`               | 파일 충돌 처리 방식 지정 (`overwrite` 또는 `backup`)                                               |
+| `-a, --all`                      | **Deprecated**. 현재는 에러를 출력하고 `add-all` 사용을 안내                                          |
+| `--verbose`                      | 실패 시 stack trace 등 상세 오류 정보 출력                                                         |
+| `-h, --help`                     | 도움말 출력                                                                                 |
 
 ### 버전에 맞는 스니펫 받기
 
 프로젝트에 설치된 SEED 패키지 버전과 호환되는 스니펫이 필요하면 버전 옵션을 사용하세요. 해당 버전이 배포된 레지스트리 주소를 CLI가 자동으로 찾아줍니다.
 
-- npm: npx @seed-design/cli@latest add --seed-react-version 1.2 ui:action-button
-- pnpm: pnpm dlx @seed-design/cli@latest add --seed-react-version 1.2 ui:action-button
-- yarn: yarn dlx @seed-design/cli@latest add --seed-react-version 1.2 ui:action-button
-- bun: bun x @seed-design/cli@latest add --seed-react-version 1.2 ui:action-button
+- npm: npx @seed-design/cli@latest add --seed-react-version 2 ui:action-button
+- pnpm: pnpm dlx @seed-design/cli@latest add --seed-react-version 2 ui:action-button
+- yarn: yarn dlx @seed-design/cli@latest add --seed-react-version 2 ui:action-button
+- bun: bun x @seed-design/cli@latest add --seed-react-version 2 ui:action-button
+
+`2`는 React 2.x 아카이브 레지스트리(`https://seed-design.io/react/v2`)를 사용해요. 기존 `1.0`, `1.1`, `1.2` 옵션도 계속 사용할 수 있어요.
 
 버전 옵션은 base URL과 프레임워크(react)를 함께 결정하므로 `--baseUrl` / `--framework`보다 우선해요.
 
@@ -180,17 +182,17 @@ deprecated 항목을 포함하려면 `--include-deprecated` 옵션을 사용하�
 
 ### 옵션
 
-| 옵션                               | 설명                                                                     |
-| -------------------------------- | ---------------------------------------------------------------------- |
-| `-a, --all`                      | 모든 레지스트리의 모든 항목 추가                                                     |
-| `--include-deprecated`           | deprecated 항목 포함                                                       |
-| `-c, --cwd <cwd>`                | 작업 디렉토리. 기본값은 현재 디렉토리                                                  |
-| `-u, --baseUrl <baseUrl>`        | 레지스트리 base URL                                                         |
-| `--seed-react-version <version>` | 지정한 SEED React 버전의 레지스트리 사용 (예: `1.2`). `--baseUrl`/`--framework`보다 우선 |
-| `-f, --framework <framework>`    | 대상 프레임워크 (`react` 또는 `lynx`). config의 `framework` 값을 덮어씀               |
-| `--on-diff <mode>`               | 파일 충돌 처리 방식 지정 (`overwrite` 또는 `backup`)                               |
-| `--verbose`                      | 실패 시 stack trace 등 상세 오류 정보 출력                                         |
-| `-h, --help`                     | 도움말 출력                                                                 |
+| 옵션                               | 설명                                                                                     |
+| -------------------------------- | -------------------------------------------------------------------------------------- |
+| `-a, --all`                      | 모든 레지스트리의 모든 항목 추가                                                                     |
+| `--include-deprecated`           | deprecated 항목 포함                                                                       |
+| `-c, --cwd <cwd>`                | 작업 디렉토리. 기본값은 현재 디렉토리                                                                  |
+| `-u, --baseUrl <baseUrl>`        | 레지스트리 base URL                                                                         |
+| `--seed-react-version <version>` | 지정한 SEED React 버전의 레지스트리 사용 (`1.0`, `1.1`, `1.2`, `2`). `--baseUrl`/`--framework`보다 우선 |
+| `-f, --framework <framework>`    | 대상 프레임워크 (`react` 또는 `lynx`). config의 `framework` 값을 덮어씀                               |
+| `--on-diff <mode>`               | 파일 충돌 처리 방식 지정 (`overwrite` 또는 `backup`)                                               |
+| `--verbose`                      | 실패 시 stack trace 등 상세 오류 정보 출력                                                         |
+| `-h, --help`                     | 도움말 출력                                                                                 |
 
 ## compat
 

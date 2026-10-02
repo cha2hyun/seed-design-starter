@@ -1,7 +1,6 @@
 /**
  * @file ui:action-button
- * @requires @seed-design/react@^2.0.0
- * @requires @seed-design/css@^2.0.0
+ * @requires @seed-design/react@^2.0.0 || ^3.0.0
  **/
 import * as React from "react";
 
