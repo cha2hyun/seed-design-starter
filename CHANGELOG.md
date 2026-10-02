@@ -4,6 +4,25 @@
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)를 따르고, 버전은
 [SemVer](https://semver.org/)와 `package.json`을 따릅니다.
 
+## [0.4.2] - 2026-10-02
+
+SEED 3에 맞춰 공통 UI를 갱신하고, 설치·빌드·테스트 환경을 최신 지원 버전으로
+정리했습니다. 직전 릴리스 이후 변경이 의존성 갱신과 내부 호환성 개선에 해당하여 patch로
+올렸습니다.
+
+### Changed
+
+- SEED CSS·React 3.0.0과 Tailwind 테마 3.0.1로 갱신하고 토큰 카탈로그·캐시 문서 동기화
+- AlertDialog·Chip·List를 SEED 3 API에 맞추고 Badge 스니펫을 통한 공통 Tag 구성으로 정리
+- React 19.3, TanStack Query·Router, 번역·아이콘 패키지와 개발 도구 의존성 갱신
+- pnpm 12.8.1로 설치 버전을 통일하고 GitHub 의존성 분석이 가능한 단일 문서 lockfile 유지
+- TypeScript 7 네이티브 컴파일러를 도입하고 플러그인용 TypeScript 6 API 호환성 유지
+- Vitest 5로 전환하고 타입 설정·테스트 도구·CI의 pnpm 설치 액션 갱신
+
+### Security
+
+- `fast-uri` 3.1.8을 반영하여 기존 릴리스의 Dependabot 보안 경고 수정
+
 ## [0.4.1] - 2026-09-09
 
 상품 입력 검증과 조회 요청의 취소 처리를 수정하고, 데이터 접근 구조와 개발 환경을
