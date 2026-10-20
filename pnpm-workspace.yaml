@@ -8,15 +8,6 @@ allowBuilds:
   esbuild: true
   unrs-resolver: false
 
-minimumReleaseAgeExclude:
-  - "@seed-design/css@3.0.0"
-  - "@seed-design/react-date-picker@1.3.0"
-  - "@seed-design/react-drawer@3.0.0"
-  - "@seed-design/react-floating@1.1.0"
-  - "@seed-design/react-popover@3.0.0"
-  - "@seed-design/react-primitive@2.0.2"
-  - "@seed-design/react-scale-feedback@2.0.0"
-  - "@seed-design/react@3.0.0"
-  - "@seed-design/tailwind4-theme@3.0.1"
-  - "@seed-design/vite-plugin@2.1.1"
-  - "@types/node@22.20.5"
+overrides:
+  # boundaries pins 4.7.9; keep its template engine on the security-patched release.
+  handlebars@4.7.9: 4.7.10
