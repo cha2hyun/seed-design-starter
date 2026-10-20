@@ -4,6 +4,29 @@
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)를 따르고, 버전은
 [SemVer](https://semver.org/)와 `package.json`을 따릅니다.
 
+## [0.4.3] - 2026-10-21
+
+의존성과 개발 환경을 갱신하고 공개된 보안 수정 사항을 반영했습니다.
+직전 릴리스 이후 유지보수 변경만 포함하여 patch로 올렸습니다.
+
+### Changed
+
+- SEED CSS 3.0.3·Tailwind 테마 3.0.2·CLI 1.7.2로 갱신하고 토큰·캐시 문서 동기화
+- React 19.3.1, TanStack Query·Router, 번역·아이콘 패키지와 개발 도구 갱신
+- pnpm 12.14.0과 Node 22.23.3으로 개발·CI 실행 환경을 갱신하고 기존 Node 지원 범위 유지
+- GitHub Actions를 최신 안정 버전으로 갱신하고 커밋 SHA 고정 유지
+
+### Security
+
+- `handlebars`, `source-map-js`, `seroval`, `shell-quote`, Vite·`launch-editor` 보안 수정 반영
+- 개발 의존성을 포함한 보안 감사 경고를 14건에서 1건으로 줄이고 프로덕션 의존성은 0건 확인
+
+### Known issues
+
+- 개발 도구의 간접 의존성 `braces` 3.0.3에 높은 심각도의 서비스 거부 취약점 1건이
+  남아 있습니다. 2026-10-21 기준 수정 버전이 공개되지 않았습니다.
+  ([GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm))
+
 ## [0.4.2] - 2026-10-02
 
 SEED 3에 맞춰 공통 UI를 갱신하고, 설치·빌드·테스트 환경을 최신 지원 버전으로
