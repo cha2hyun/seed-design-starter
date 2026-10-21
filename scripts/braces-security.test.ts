@@ -14,13 +14,16 @@ const CONSUMERS = [
 ];
 
 // Isolate hostile inputs so a missing patch cannot exhaust the test runner's stack or heap.
-function probe(source: string, chain = CONSUMERS[0]) {
+function probe(
+  source: string,
+  { chain = CONSUMERS[0], kind, method }: { chain?: string[]; kind?: string; method?: string } = {},
+) {
   const setup = String.raw`
     const assert = require('node:assert/strict');
     const { createRequire } = require('node:module');
-    const { realpathSync } = require('node:fs');
+    const { readFileSync, realpathSync } = require('node:fs');
     const { resolve } = require('node:path');
-    const chain = ${JSON.stringify(chain)};
+    const { chain, kind, method } = JSON.parse(readFileSync(0, 'utf8'));
     let consumer = createRequire(realpathSync(resolve('node_modules', chain[0], 'package.json')));
     let entry;
     for (const name of chain.slice(1)) {
@@ -52,7 +55,13 @@ function probe(source: string, chain = CONSUMERS[0]) {
   const result = spawnSync(
     process.execPath,
     ["--max-old-space-size=128", "--input-type=commonjs", "-e", setup + source],
-    { cwd: ROOT, encoding: "utf8", timeout: 5000, maxBuffer: 64 * 1024 },
+    {
+      cwd: ROOT,
+      encoding: "utf8",
+      input: JSON.stringify({ chain, kind, method }),
+      timeout: 5000,
+      maxBuffer: 64 * 1024,
+    },
   );
   expect(result.error, result.stderr).toBeUndefined();
   expect(result.signal, result.stderr).toBeNull();
@@ -61,15 +70,18 @@ function probe(source: string, chain = CONSUMERS[0]) {
 
 describe("braces stack-exhaustion regression (GHSA-vfj7-8cjw-p6xm)", () => {
   it.each(["brace", "paren", "mixed"])("rejects deeply nested %s strings", (kind) => {
-    probe(`
-      const input = nested(4000, ${JSON.stringify(kind)});
+    probe(
+      `
+      const input = nested(4000, kind);
       for (const method of ['parse', 'compile', 'expand', 'stringify', 'create']) {
         reject(() => braces[method](input));
       }
       reject(() => braces(input));
       reject(() => braces(input, { expand: true }));
       reject(() => braces.parse(input, { maxDepth: Infinity }));
-    `);
+    `,
+      { kind },
+    );
   });
 
   it("rejects nesting before the parser's range fallback invokes stringify", () => {
@@ -77,15 +89,18 @@ describe("braces stack-exhaustion regression (GHSA-vfj7-8cjw-p6xm)", () => {
   });
 
   it.each(["compile", "expand", "stringify"])("guards direct AST input to %s", (method) => {
-    probe(`reject(() => braces[${JSON.stringify(method)}](ast(4000)));`);
+    probe(`reject(() => braces[method](ast(4000)));`, { method });
   });
 
   it.each(["compile", "expand", "stringify"])("rejects a child-node cycle in %s", (method) => {
-    probe(`
+    probe(
+      `
       const root = { type: 'root', nodes: [] };
       root.nodes.push(root);
-      reject(() => braces[${JSON.stringify(method)}](root));
-    `);
+      reject(() => braces[method](root));
+    `,
+      { method },
+    );
   });
 
   it("rejects cyclic parent links during expansion", () => {
@@ -97,14 +112,17 @@ describe("braces stack-exhaustion regression (GHSA-vfj7-8cjw-p6xm)", () => {
   });
 
   it.each(["brace", "paren", "mixed"])("allows 256 %s groups and rejects 257", (kind) => {
-    probe(`
-      const input = nested(256, ${JSON.stringify(kind)});
+    probe(
+      `
+      const input = nested(256, kind);
       for (const method of ['parse', 'compile', 'expand', 'stringify']) {
         assert.doesNotThrow(() => braces[method](input));
         reject(() => braces[method]('(' + input + ')'));
       }
       assert.equal(braces.stringify(input), input);
-    `);
+    `,
+      { kind },
+    );
   });
 
   it("applies the same boundary to direct ASTs without counting their text leaves", () => {
@@ -130,7 +148,7 @@ describe("braces stack-exhaustion regression (GHSA-vfj7-8cjw-p6xm)", () => {
           ]);
           assert.deepEqual(micromatch(['src/app/a.ts', 'src/app/a.js'], '**/*.ts'), ['src/app/a.ts']);
         `,
-        chain,
+        { chain },
       );
     },
   );
