@@ -4,6 +4,9 @@
 
 Security fixes are applied to the latest release on `main`. Older releases are not maintained.
 
+Local dependency mitigations and their scanner limitations are documented in
+[patches/README.md](../patches/README.md).
+
 ## Reporting a vulnerability
 
 Please use GitHub's **Report a vulnerability** form in the repository's Security tab. Do not open
