@@ -11,3 +11,5 @@ allowBuilds:
 overrides:
   # boundaries pins 4.7.9; keep its template engine on the security-patched release.
   handlebars@4.7.9: 4.7.10
+patchedDependencies:
+  braces@3.0.3: patches/braces@3.0.3.patch

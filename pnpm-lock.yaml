@@ -7,6 +7,9 @@ settings:
 overrides:
   handlebars@4.7.9: 4.7.10
 
+patchedDependencies:
+  braces@3.0.3: 231e3a1cd451be063c27ac73edecc6c063335fd3a2255e0c6b6d1a0d3451ea02
+
 importers:
 
   .:
@@ -6317,7 +6320,7 @@ snapshots:
     dependencies:
       balanced-match: 4.0.4
 
-  braces@3.0.3:
+  braces@3.0.3(patch_hash=231e3a1cd451be063c27ac73edecc6c063335fd3a2255e0c6b6d1a0d3451ea02):
     dependencies:
       fill-range: 7.1.1
 
@@ -7176,7 +7179,7 @@ snapshots:
 
   micromatch@4.0.8:
     dependencies:
-      braces: 3.0.3
+      braces: 3.0.3(patch_hash=231e3a1cd451be063c27ac73edecc6c063335fd3a2255e0c6b6d1a0d3451ea02)
       picomatch: 2.3.2
 
   min-indent@1.0.1: {}

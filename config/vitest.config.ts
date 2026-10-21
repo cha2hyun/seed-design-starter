@@ -23,7 +23,7 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     setupFiles: [resolve(ROOT, "config/vitest.setup.ts")],
-    include: [resolve(ROOT, "src/**/*.test.{ts,tsx}")],
+    include: [resolve(ROOT, "src/**/*.test.{ts,tsx}"), resolve(ROOT, "scripts/**/*.test.ts")],
     restoreMocks: true,
     server: {
       // SEED components import their own `.css`. Externalised, Node tries to `require` a
