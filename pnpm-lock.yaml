@@ -18,8 +18,8 @@ importers:
         specifier: ^3.0.3
         version: 3.0.3
       '@seed-design/react':
-        specifier: ^3.0.0
-        version: 3.0.0(@seed-design/css@3.0.3)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(embla-carousel@8.6.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        specifier: ^3.0.1
+        version: 3.0.1(@seed-design/css@3.0.3)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(embla-carousel@8.6.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@tanstack/react-query':
         specifier: ^5.104.5
         version: 5.104.5(@types/react@19.3.0)(react@19.3.1)
@@ -1416,8 +1416,8 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@seed-design/react@3.0.0':
-    resolution: {integrity: sha512-19vHA8d3mv8NUP+UUKEo1nLmctH8aM00wuef7A5twPAFkvcNT3TZDY8oxi8kAKeD+pn+XRI22uu4TrKZWbtMpQ==}
+  '@seed-design/react@3.0.1':
+    resolution: {integrity: sha512-zyCWKxDf+qT+h5blyKeq7N7c7QIvtO63vMVS8FLg+BJaDxes0QRrW02LLI3PHqjDDgEamCy/OKwwSfdqb9MeUQ==}
     peerDependencies:
       '@seed-design/css': ^3.0.0
       react: '>=18.0.0'
@@ -5462,7 +5462,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@seed-design/react@3.0.0(@seed-design/css@3.0.3)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(embla-carousel@8.6.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
+  '@seed-design/react@3.0.1(@seed-design/css@3.0.3)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(embla-carousel@8.6.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
     dependencies:
       '@radix-ui/react-compose-refs': 1.1.5(@types/react@19.3.0)(react@19.3.1)
       '@radix-ui/react-slot': 1.5.0(@types/react@19.3.0)(react@19.3.1)
