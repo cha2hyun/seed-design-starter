@@ -18,10 +18,11 @@ override once every consumer requests a fixed version itself; recheck consumer A
 
 ## `braces@3.0.3`
 
-The development tools resolve `braces` through `micromatch`. Version 3.0.3 is affected by
-[GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm): deeply nested patterns
-within the existing 10,000-character limit can exhaust the JavaScript call stack. As of
-2026-10-21, the package has no published upstream fix.
+The development tools resolve `braces` through `micromatch`. Deeply nested patterns in version
+3.0.3 can exhaust the JavaScript call stack within the existing 10,000-character limit.
+[GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm), which originally
+reported this behavior, was withdrawn on 2026-10-23. As of 2026-11-13, 3.0.3 remains the latest
+published version. The existing patch and regression checks are retained as defensive limits.
 
 This local patch rejects structural nesting beyond 256 levels with a `SyntaxError`:
 
@@ -46,9 +47,9 @@ direct AST callers. The original package name, version, and MIT license are reta
 consumer paths, including normal glob behavior and adversarial inputs in bounded child processes.
 These tests also run in `pnpm verify` and CI.
 
-`pnpm audit` reports package versions, not the patched source or its hash, so it continues to list
-this advisory for version 3.0.3. No advisory ignore is configured. Review the patch and regression
-results alongside the audit result; do not describe the raw audit as clean.
+The withdrawn advisory no longer appears in `pnpm audit`; the full audit reports zero
+vulnerabilities as of 2026-11-13. No advisory ignore is configured. An audit result does not verify
+the patched source, so retain the regression checks alongside the audit.
 
 When an upstream fixed release becomes available, update the dependency, remove its
 `patchedDependencies` entry and patch file, regenerate the lockfile, and rerun the regression suite
