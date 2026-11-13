@@ -6,11 +6,11 @@ Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/gettin
 
 ## 공통 동작
 
-- CLI 실행에는 Node.js 20.19.0 이상이 필요해요.
+- CLI 실행에는 Node.js 22.0.0 이상이 필요해요.
 - `add`, `add-all`은 `seed-design.json` 설정 파일을 사용해요.
 - 설정 파일이 없거나 읽을 수 없으면 생성할지 먼저 물어봐요.
 - 항목 추가 시 필요한 npm 패키지 의존성은 자동으로 설치돼요.
-- `add`, `add-all` 실행 시 스니펫이 요구하는 seed-design 패키지 버전과 현재 프로젝트 버전이 다르면 경고를 보여줘요. (React: `@seed-design/react`, `@seed-design/css` / Lynx: `@seed-design/lynx-react`, `@seed-design/lynx-css`)
+- `add`, `add-all` 실행 시 스니펫이 요구하는 seed-design 패키지 버전과 현재 프로젝트 버전이 다르면 경고를 보여줘요. (React: `@seed-design/react`, `@seed-design/css`, `@seed-design/stackflow` / Lynx: `@seed-design/lynx-react`, `@seed-design/lynx-css`)
 - 기존 파일과 내용이 다르면 기본적으로 `덮어쓰기 / 백업 후 교체 / 건너뛰기`를 선택할 수 있어요.
 - `--on-diff` 옵션을 주면 충돌 처리 방식을 미리 고정할 수 있어요.
 - 실패 원인을 자세히 확인하려면 `--verbose` 옵션을 사용할 수 있어요.
@@ -19,7 +19,7 @@ Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/gettin
 
 `seed-design.json` 파일을 생성하는 명령어예요.
 
-<Card icon="<IconFile />" title="Configuration" href="/react/getting-started/cli/configuration">
+<Card icon={<IconFile />} title="Configuration" href="/react/getting-started/cli/configuration">
   `seed-design.json` 파일에 대해 알아봅니다.
 </Card>
 
@@ -51,13 +51,13 @@ Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/gettin
 
 ### 옵션
 
-| 옵션                | 설명                                 |
-| ----------------- | ---------------------------------- |
-| `-c, --cwd <cwd>` | 작업 디렉토리. 기본값은 현재 디렉토리              |
-| `-y, --yes`       | 질문 없이 기본값으로 `seed-design.json` 생성  |
-| `--default`       | Deprecated. `--yes`와 동일하게 기본값으로 생성 |
-| `--verbose`       | 실패 시 stack trace 등 상세 오류 정보 출력     |
-| `-h, --help`      | 도움말 출력                             |
+| 옵션 | 설명 |
+|------|------|
+| `-c, --cwd <cwd>` | 작업 디렉토리. 기본값은 현재 디렉토리 |
+| `-y, --yes` | 질문 없이 기본값으로 `seed-design.json` 생성 |
+| `--default` | Deprecated. `--yes`와 동일하게 기본값으로 생성 |
+| `--verbose` | 실패 시 stack trace 등 상세 오류 정보 출력 |
+| `-h, --help` | 도움말 출력 |
 
 - npm: npx @seed-design/cli@latest init --yes
 - pnpm: pnpm dlx @seed-design/cli@latest init --yes
@@ -68,7 +68,7 @@ Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/gettin
 
 스니펫을 다운로드하고 프로젝트에 추가하는 명령어예요.
 
-<Card icon="<IconFile />" title="Snippet" href="/react/components/concepts/snippet">
+<Card icon={<IconFile />} title="Snippet" href="/react/components/concepts/snippet">
   자주 쓰이는 UI 패턴의 재사용을 돕는 스니펫에 대해 알아봅니다.
 </Card>
 
@@ -107,16 +107,16 @@ Source: https://github.com/daangn/seed-design/blob/dev/docs/content/react/gettin
 
 ### 옵션
 
-| 옵션                               | 설명                                                                                     |
-| -------------------------------- | -------------------------------------------------------------------------------------- |
-| `-c, --cwd <cwd>`                | 작업 디렉토리. 기본값은 현재 디렉토리                                                                  |
-| `-u, --baseUrl <baseUrl>`        | 레지스트리 base URL                                                                         |
+| 옵션 | 설명 |
+|------|------|
+| `-c, --cwd <cwd>` | 작업 디렉토리. 기본값은 현재 디렉토리 |
+| `-u, --baseUrl <baseUrl>` | 레지스트리 base URL |
 | `--seed-react-version <version>` | 지정한 SEED React 버전의 레지스트리 사용 (`1.0`, `1.1`, `1.2`, `2`). `--baseUrl`/`--framework`보다 우선 |
-| `-f, --framework <framework>`    | 대상 프레임워크 (`react` 또는 `lynx`). config의 `framework` 값을 덮어씀                               |
-| `--on-diff <mode>`               | 파일 충돌 처리 방식 지정 (`overwrite` 또는 `backup`)                                               |
-| `-a, --all`                      | **Deprecated**. 현재는 에러를 출력하고 `add-all` 사용을 안내                                          |
-| `--verbose`                      | 실패 시 stack trace 등 상세 오류 정보 출력                                                         |
-| `-h, --help`                     | 도움말 출력                                                                                 |
+| `-f, --framework <framework>` | 대상 프레임워크 (`react` 또는 `lynx`). config의 `framework` 값을 덮어씀 |
+| `--on-diff <mode>` | 파일 충돌 처리 방식 지정 (`overwrite` 또는 `backup`) |
+| `-a, --all` | **Deprecated**. 현재는 에러를 출력하고 `add-all` 사용을 안내 |
+| `--verbose` | 실패 시 stack trace 등 상세 오류 정보 출력 |
+| `-h, --help` | 도움말 출력 |
 
 ### 버전에 맞는 스니펫 받기
 
@@ -184,21 +184,21 @@ deprecated 항목을 포함하려면 `--include-deprecated` 옵션을 사용하�
 
 ### 옵션
 
-| 옵션                               | 설명                                                                                     |
-| -------------------------------- | -------------------------------------------------------------------------------------- |
-| `-a, --all`                      | 모든 레지스트리의 모든 항목 추가                                                                     |
-| `--include-deprecated`           | deprecated 항목 포함                                                                       |
-| `-c, --cwd <cwd>`                | 작업 디렉토리. 기본값은 현재 디렉토리                                                                  |
-| `-u, --baseUrl <baseUrl>`        | 레지스트리 base URL                                                                         |
+| 옵션 | 설명 |
+|------|------|
+| `-a, --all` | 모든 레지스트리의 모든 항목 추가 |
+| `--include-deprecated` | deprecated 항목 포함 |
+| `-c, --cwd <cwd>` | 작업 디렉토리. 기본값은 현재 디렉토리 |
+| `-u, --baseUrl <baseUrl>` | 레지스트리 base URL |
 | `--seed-react-version <version>` | 지정한 SEED React 버전의 레지스트리 사용 (`1.0`, `1.1`, `1.2`, `2`). `--baseUrl`/`--framework`보다 우선 |
-| `-f, --framework <framework>`    | 대상 프레임워크 (`react` 또는 `lynx`). config의 `framework` 값을 덮어씀                               |
-| `--on-diff <mode>`               | 파일 충돌 처리 방식 지정 (`overwrite` 또는 `backup`)                                               |
-| `--verbose`                      | 실패 시 stack trace 등 상세 오류 정보 출력                                                         |
-| `-h, --help`                     | 도움말 출력                                                                                 |
+| `-f, --framework <framework>` | 대상 프레임워크 (`react` 또는 `lynx`). config의 `framework` 값을 덮어씀 |
+| `--on-diff <mode>` | 파일 충돌 처리 방식 지정 (`overwrite` 또는 `backup`) |
+| `--verbose` | 실패 시 stack trace 등 상세 오류 정보 출력 |
+| `-h, --help` | 도움말 출력 |
 
 ## compat
 
-현재 프로젝트의 seed-design 패키지 버전과 스니펫 요구 버전이 호환되는지 검사해요. 플랫폼에 따라 검사 대상 패키지가 달라요. (React: `@seed-design/react`, `@seed-design/css` / Lynx: `@seed-design/lynx-react`, `@seed-design/lynx-css`)
+현재 프로젝트의 seed-design 패키지 버전과 스니펫 요구 버전이 호환되는지 검사해요. 플랫폼에 따라 검사 대상 패키지가 달라요. (React: `@seed-design/react`, `@seed-design/css`, `@seed-design/stackflow` / Lynx: `@seed-design/lynx-react`, `@seed-design/lynx-css`)
 
 - npm: npx @seed-design/cli@latest compat
 - pnpm: pnpm dlx @seed-design/cli@latest compat
@@ -232,16 +232,16 @@ deprecated 항목을 포함하려면 `--include-deprecated` 옵션을 사용하�
 
 ### 옵션
 
-| 옵션                            | 설명                                                       |
-| ----------------------------- | -------------------------------------------------------- |
-| `-c, --component <component>` | 검사할 컴포넌트 ID. 여러 번 또는 쉼표로 지정 가능                           |
-| `-r, --registry <registryId>` | `--component`에 shorthand를 사용할 때 기본 registry 지정           |
-| `-a, --all`                   | 모든 registry 항목 검사                                        |
-| `--cwd <cwd>`                 | 작업 디렉토리. 기본값은 현재 디렉토리                                    |
-| `-u, --baseUrl <baseUrl>`     | 레지스트리 base URL                                           |
+| 옵션 | 설명 |
+|------|------|
+| `-c, --component <component>` | 검사할 컴포넌트 ID. 여러 번 또는 쉼표로 지정 가능 |
+| `-r, --registry <registryId>` | `--component`에 shorthand를 사용할 때 기본 registry 지정 |
+| `-a, --all` | 모든 registry 항목 검사 |
+| `--cwd <cwd>` | 작업 디렉토리. 기본값은 현재 디렉토리 |
+| `-u, --baseUrl <baseUrl>` | 레지스트리 base URL |
 | `-f, --framework <framework>` | 대상 프레임워크 (`react` 또는 `lynx`). config의 `framework` 값을 덮어씀 |
-| `--verbose`                   | 실패 시 stack trace 등 상세 오류 정보 출력                           |
-| `-h, --help`                  | 도움말 출력                                                   |
+| `--verbose` | 실패 시 stack trace 등 상세 오류 정보 출력 |
+| `-h, --help` | 도움말 출력 |
 
 ## docs
 
@@ -337,11 +337,11 @@ react/component/action-buton: 문서를 찾을 수 없어요.
 
 ### 옵션
 
-| 옵션                        | 설명                              |
-| ------------------------- | ------------------------------- |
-| `--raw`                   | UI 없이 llms.txt 내용을 순수 마크다운으로 출력 |
-| `-u, --baseUrl <baseUrl>` | 레지스트리 base URL                  |
-| `--verbose`               | 실패 시 stack trace 등 상세 오류 정보 출력  |
-| `-h, --help`              | 도움말 출력                          |
+| 옵션 | 설명 |
+|------|------|
+| `--raw` | UI 없이 llms.txt 내용을 순수 마크다운으로 출력 |
+| `-u, --baseUrl <baseUrl>` | 레지스트리 base URL |
+| `--verbose` | 실패 시 stack trace 등 상세 오류 정보 출력 |
+| `-h, --help` | 도움말 출력 |
 
 React 보관 문서는 `docs --baseUrl https://seed-design.io/react/v1.2 react action-button`으로 조회할 수 있어요. `compat --baseUrl https://seed-design.io/react/v1.2`도 해당 버전의 registry를 사용해요.
