@@ -65,8 +65,8 @@ importers:
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.13.0(jiti@2.7.0)(supports-color@7.2.0))
       '@feature-sliced/steiger-plugin':
-        specifier: ^0.8.0
-        version: 0.8.0(@typescript/typescript6@6.0.2)
+        specifier: ^0.8.2
+        version: 0.8.2(@typescript/typescript6@6.0.2)
       '@playwright/test':
         specifier: ^1.64.1
         version: 1.64.1
@@ -693,11 +693,11 @@ packages:
   '@feature-sliced/filesystem@3.1.1':
     resolution: {integrity: sha512-P3WpHkOqdH4572ZhTfeg/Sbw0qkIuMw0QcLyTUygfwTZg1yd7hIv8QDYbhTddNTiFDgBRJTrYw/s6r2hnlo6Tw==}
 
-  '@feature-sliced/steiger-plugin@0.8.0':
-    resolution: {integrity: sha512-wACwEYLVxs6bziUDaZXlp6k43dantdU5MSBtO48MwonwrupdzYcLhs6+Ps9YoWDINccaAlqiMxlHmgLJubK5Ow==}
-
   '@feature-sliced/steiger-plugin@0.8.1':
     resolution: {integrity: sha512-hnRmnpGT7HoOv3Hy+et1xFq1IsCogp0SEfLlEC73kI74nlm0zQl8q1QN78iG0PEXyLZUAsqJIfG8rZHvva5vEg==}
+
+  '@feature-sliced/steiger-plugin@0.8.2':
+    resolution: {integrity: sha512-Gmc6b2GhjAT+Y+cQfHaCT+R1PnSuoOFcS6qsYtCnY8WjVH1FyT18FWJnhUjMyw4jN1Oqg0jSj5xeDDLs2InWoA==}
 
   '@floating-ui/core@1.8.0':
     resolution: {integrity: sha512-0CIZ5itps/8x7BG8dEIhs53BvCUH2PCoogtakwRTut+Arm58sJooJ0AuZhLw2HJYIR5cMLNPBSS728sPho2khQ==}
@@ -4623,18 +4623,17 @@ snapshots:
     dependencies:
       typescript: 5.9.3
 
-  '@feature-sliced/steiger-plugin@0.8.0(@typescript/typescript6@6.0.2)':
+  '@feature-sliced/steiger-plugin@0.8.1(@typescript/typescript6@6.0.2)':
     dependencies:
       '@feature-sliced/filesystem': 3.1.1
       fastest-levenshtein: 1.0.16
-      lodash-es: 4.18.1
       pluralize: 8.0.0
       tsconfck: 3.1.6(@typescript/typescript6@6.0.2)
       web-tree-sitter: 0.26.13
     transitivePeerDependencies:
       - typescript
 
-  '@feature-sliced/steiger-plugin@0.8.1(@typescript/typescript6@6.0.2)':
+  '@feature-sliced/steiger-plugin@0.8.2(@typescript/typescript6@6.0.2)':
     dependencies:
       '@feature-sliced/filesystem': 3.1.1
       fastest-levenshtein: 1.0.16
