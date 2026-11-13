@@ -4,6 +4,27 @@
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)를 따르고, 버전은
 [SemVer](https://semver.org/)와 `package.json`을 따릅니다.
 
+## [0.4.5] - 2026-11-13
+
+의존성을 갱신하고 개발 도구의 glob 패턴 증폭 취약점을 수정했습니다.
+기존 Node 지원 범위와 화면 동작을 유지하는 유지보수 변경으로 patch를 올렸습니다.
+
+### Changed
+
+- SEED CSS·React 3.3.0, Tailwind 테마 3.1.0, CLI 1.7.4로 갱신하고 토큰·캐시 문서 동기화
+- TanStack Query 5.107.1, Router·개발 도구, react-i18next 17.1.13과 FSD 검사 도구 갱신
+- pnpm 설치 액션을 6.1.1로 갱신하고 커밋 SHA 고정 유지
+- 최소 지원 환경인 Node 22에 타입을 맞추고 Dependabot의 Node 타입 메이저 자동 갱신 제외
+
+### Security
+
+- 개발 도구가 사용하는 minimatch 9.0.9·10.2.6을 수정판 11.0.1로 연결하여 패턴 증폭 취약점 해결
+  ([GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249))
+- 소비 패키지 5개 경로의 일반 glob 동작과 악성 입력 처리 회귀 검사 추가
+- upstream 수정이 반영된 Handlebars의 임시 버전 강제 설정 제거
+- 개발 의존성을 포함한 보안 감사 경고 0건 확인
+- 철회된 braces advisory 상태를 문서에 반영하고 기존 방어 패치와 회귀 검사 유지
+
 ## [0.4.4] - 2026-10-21
 
 개발 도구의 간접 의존성에 남아 있던 중첩 패턴 취약점을 로컬 패치로 차단했습니다.
