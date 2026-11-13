@@ -1,5 +1,21 @@
 # Dependency security patches
 
+## `minimatch` security override
+
+`pnpm-workspace.yaml` routes the installed `minimatch` versions (9.0.9 and 10.2.6) to 11.0.1 to fix
+[GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249), which can amplify
+glob patterns during optimization. Upstream has not published a fixed 9.x or 10.x version.
+
+Version 11 removes `makeRe`, the `AST` export, and regex-based internals. The installed consumers
+(ESLint, `@eslint/config-array`, `@typescript-eslint/typescript-estree`, `@ts-morph/common`, and
+the Prettier import sorter) use `minimatch()` or `Minimatch.match()`, including partial matches;
+they do not use those removed APIs. Node 22, 24, and 26 remain supported.
+
+`pnpm test scripts/minimatch-security.test.ts` checks the installed package through each consumer
+path, normal glob behavior, partial matches, and bounded optimization of adversarial input.
+CI additionally exercises lint, formatting, types, build, and browser smoke tests. Remove the
+override once every consumer requests a fixed version itself; recheck consumer APIs when upgrading.
+
 ## `braces@3.0.3`
 
 The development tools resolve `braces` through `micromatch`. Version 3.0.3 is affected by
